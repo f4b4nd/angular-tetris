@@ -21,18 +21,18 @@ App is now running on port localhost:4200 !!
 
 # 2 Hosting: github pages
 
-cf [Medium : How to Deploy (for Free) an Angular App to GitHub Pages Without Using Any Libraries](https://medium.com/swlh/how-to-deploy-an-angular-app-to-github-pages-without-using-any-libraries-step-by-step-guide-cfe96fb0c879)
+cf [Héberger une app Angular sur GitHub Pages
+](https://www.gaetanrouzies.com/github-pages-angular)
 
 How is it deployed ?
 
-1. Make sure your angular application is at the root of the project (not in a subdirectory)
-2. In angular.json, set the value of projects.architect.build.outputPath to "docs"
-3. On the repository, go to settings > github pages > 
+1. Build the production bundle.
+Note: Since angular 17, build are in a subfolder "browser".
+
+
 <code>
-ng new myApp --directory ./ 
-ng build
+(container) sh ./dist-builder.docker.entrypoint.sh
 </code>
 
 
-ng build --output-path ./docs/ && mv ./docs/browser/ ../docs/ && cp ../docs/index.html ../docs/404.html
-
+2. On the repository, go to settings > github pages > branches and set selectors to "main" and "/docs"
