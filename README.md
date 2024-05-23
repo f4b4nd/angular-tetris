@@ -31,7 +31,7 @@ Note: Since angular 17, build are in a subfolder "browser".
 
 
 <code>
-(container) sh ./n-dist-builder.sh
+(container) sh ./ng-dist-builder.sh
 </code>
 
 
