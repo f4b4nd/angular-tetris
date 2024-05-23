@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-
-import { appRoutingModule } from '../../app.routes'
 
 import { LoginComponent } from './'
-import { TopNavbarModule } from '../../components'
+import { TopNavbarModule, LoginFormComponent } from '../../components'
 
 
 
 @NgModule({
     declarations: [
         LoginComponent,
+        LoginFormComponent,
       ],
       imports: [
         TopNavbarModule,

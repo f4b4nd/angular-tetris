@@ -1,39 +1,44 @@
-# 1 Launch application on your own machine 
-Prerequisites: docker (tested with docker 25.0.3)
+## 1. Launch application on your own machine 
 
-Node Version : v20.9.0 (docker) 
+### Prerequisites :
 
-Angular Client Version : v17 (docker)
+Docker is the only prerequisite (tested with Docker v25.0.3)
 
-## 1.1 Install docker image
-<code>
-sh build-docker.sh
-</code>
+### Node environment :
 
-## 1.2 Run angular server
-<code>
-sh run-docker.sh
+- Node Version : v20.9.0
+- Angular Client Version : v17.3.0
 
-(container) sh ./ng-serve.sh
-</code>
 
-App is now running on port localhost:4200 !!
+### 1.1 Install docker image
 
-# 2 Hosting: github pages
+Run `$ sh build-docker.sh`
 
-cf [Héberger une app Angular sur GitHub Pages
-](https://www.gaetanrouzies.com/github-pages-angular)
+### 1.2 Run Angular server
+
+Run docker-image with :  `$ sh run-docker.sh`
+
+Then run (in the container)  `$ sh ./ng-serve.sh`
+
+App is now locally running on  [http://localhost:4200](http://localhost:4200)
+
+## 2. Hosting: github pages
+
+This application is deployed at url : [f4b4nd.github.io/angular-tetris/](f4b4nd.github.io/angular-tetris/)
+
 
 How is it deployed ?
 
-## 2.1 Build the production bundle.
+cf. [Héberger une app Angular sur GitHub Pages](https://www.gaetanrouzies.com/github-pages-angular)
+
+
+### 2.1 Build the production bundle.
+
 Note: Since angular 17, build are in a subfolder "browser".
 
-
-<code>
-(container) sh ./ng-dist-builder.sh
-</code>
+Run (in the container) `$ sh ./ng-dist-builder.sh`
 
 
+### 2.2 Set up github-pages on repository 
 
-## 2.2 On the repository, go to settings > github pages > branches and set selectors to "main" and "/docs"
+On the repository, go to `settings > github pages > branches`, then set selectors to "main" and "/docs"

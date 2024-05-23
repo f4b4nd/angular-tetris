@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core'
 
 @Component({
     template: `
-        <div>
-            <top-navbar></top-navbar>
-            <div> Login </div>
+        <top-navbar></top-navbar>
+
+        <div class="p-4">
+            <login-form></login-form>
         </div>
     `
 })
