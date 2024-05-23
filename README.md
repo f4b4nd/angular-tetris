@@ -10,11 +10,11 @@ Angular Client Version : v17 (docker)
 sh build-docker.sh
 </code>
 
-## 1.2 Install app (if not already) and run angular server
+## 1.2 Run angular server
 <code>
 sh run-docker.sh
 
-(container) sh ./docker-entrypoint.sh
+(container) sh ./ng-serve.sh
 </code>
 
 App is now running on port localhost:4200 !!
@@ -26,13 +26,14 @@ cf [Héberger une app Angular sur GitHub Pages
 
 How is it deployed ?
 
-1. Build the production bundle.
+## 2.1 Build the production bundle.
 Note: Since angular 17, build are in a subfolder "browser".
 
 
 <code>
-(container) sh ./dist-builder.docker.entrypoint.sh
+(container) sh ./n-dist-builder.sh
 </code>
 
 
-2. On the repository, go to settings > github pages > branches and set selectors to "main" and "/docs"
+
+## 2.2 On the repository, go to settings > github pages > branches and set selectors to "main" and "/docs"

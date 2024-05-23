@@ -1,3 +1,15 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-export const routes: Routes = [];
+import { HomeComponent } from './pages/home'
+import { LoginComponent } from './pages/login'
+
+
+export const routes: Routes = [ 
+    { path: '', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' }
+];
+
+export const appRoutingModule = RouterModule.forRoot(routes)
