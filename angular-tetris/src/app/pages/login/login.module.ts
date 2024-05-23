@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core'
 
 import { LoginComponent } from './'
-import { TopNavbarModule, LoginFormComponent } from '../../components'
-import { ReactiveFormsModule } from '@angular/forms'
-import { LoginFormModule } from '../../components/login-form/login-form.module'
+import { TopNavbarModule, LoginFormModule } from '../../components'
 
 
 
@@ -14,7 +12,6 @@ import { LoginFormModule } from '../../components/login-form/login-form.module'
       imports: [
         TopNavbarModule,
         LoginFormModule,
-        ReactiveFormsModule,
       ],
       providers: [],
       

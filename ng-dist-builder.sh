@@ -14,7 +14,7 @@ if [ -d "./dist" ]; then
 fi
 
 
-ng build --output-path ./dist/ --base-href /$REPO_NAME/ && \ 
+ng build --output-path ./dist/ --base-href /$REPO_NAME/ && \
     mv ./dist/browser/ ../docs/ && \
     rm -r ./dist/ && \
     cp ../docs/index.html ../docs/404.html

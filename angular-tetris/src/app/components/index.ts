@@ -4,4 +4,4 @@ export { TopNavbarComponent } from './top-navbar'
 
 export { TopNavbarModule } from './top-navbar'
 
-export { LoginFormComponent } from './login-form' 
+export { LoginFormComponent, LoginFormModule } from './login-form' 
