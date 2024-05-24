@@ -5,3 +5,5 @@ export { TopNavbarComponent } from './top-navbar'
 export { TopNavbarModule } from './top-navbar'
 
 export { LoginFormComponent, LoginFormModule } from './login-form' 
+
+export { GameboardModule, GameboardCellComponent, GameboardGridComponent } from './gameboard'

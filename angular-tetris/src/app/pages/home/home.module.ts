@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 
 import { HomeComponent } from './'
 import { TetriminoComponent, TopNavbarModule } from '../../components'
+import { GameboardModule } from '../../components/gameboard/'
 
 
 
@@ -12,12 +13,10 @@ import { TetriminoComponent, TopNavbarModule } from '../../components'
       ],
       imports: [
         TopNavbarModule,
+        GameboardModule,
       ],
       providers: [],
       
-      bootstrap: [
-      ],
-    
 })
 
 export class HomeModule {}

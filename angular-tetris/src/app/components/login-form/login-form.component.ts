@@ -4,12 +4,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'login-form',
-    //        
 
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-            <div class="border border-black min-h-md max-w-md mx-auto">
+            <div class="border border-black max-w-md mx-auto">
 
                 <div class="flex flex-col gap-4 p-4">
 
@@ -30,7 +29,12 @@ import { FormGroup, FormControl } from '@angular/forms';
 
                     <div class="flex justify-end">
 
-                        <button type="submit" class="border border-black rounded p-2" > 
+                        <button 
+                            type="submit" 
+                            [disabled]="!form.valid" 
+                    
+                            class="border border-black rounded p-2" 
+                        > 
                             Entrer 
                         </button>
 
@@ -49,21 +53,15 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class LoginFormComponent {
 
-    //@Input() firstname: string = "";
-
-
     form: FormGroup<{firstname: FormControl<string|null>}> = new FormGroup({
         firstname: new FormControl(''),
     })
+
+    isValid = false;
 
     onSubmit() {
         const formData = this.form.value
         console.log('on submit prenom est:', formData)
     }
-    /*
-    setFirstname(event: KeyboardEvent) {
-        const firstname = (event.target as HTMLInputElement).value
-        console.log('prenom est: ', firstname)
-        //this.firstname = firstname
-    }*/
+
 }

@@ -5,7 +5,9 @@ import { Component, OnInit } from '@angular/core'
     template: `
         <div>
             <top-navbar></top-navbar>
-            <div> Home </div>
+            <div class="flex justify-center">
+                <gameboard-grid></gameboard-grid>
+            </div>
         </div>
     `
 })

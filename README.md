@@ -7,7 +7,7 @@ Docker is the only prerequisite (tested with Docker v25.0.3)
 ### Node environment :
 
 - Node Version : v20.9.0
-- Angular Client Version : v17.3.0
+- Angular Client Version : v17.3.8
 
 
 ### 1.1 Install docker image
@@ -24,7 +24,7 @@ App is now locally running on  [http://localhost:4200](http://localhost:4200)
 
 ## 2. Hosting: github pages
 
-This application is deployed at url : [f4b4nd.github.io/angular-tetris/](f4b4nd.github.io/angular-tetris/)
+This application is deployed and is available here : [angular-tetris](https://f4b4nd.github.io/angular-tetris/)
 
 
 How is it deployed ?
