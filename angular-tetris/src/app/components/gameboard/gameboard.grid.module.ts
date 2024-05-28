@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
 
 import { GameboardGridComponent, GameboardCellComponent } from './'
 
@@ -9,7 +9,7 @@ import { GameboardGridComponent, GameboardCellComponent } from './'
         GameboardCellComponent,
     ],
     imports: [
-        CommonModule
+        CommonModule,
     ],
     providers: [],
       
@@ -20,4 +20,4 @@ import { GameboardGridComponent, GameboardCellComponent } from './'
     
 })
 
-export class GameboardModule {}
+export class GameboardGridModule {}

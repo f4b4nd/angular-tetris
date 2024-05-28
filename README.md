@@ -20,6 +20,8 @@ Run docker-image with :  `$ sh run-docker.sh`
 
 Then run (in the container)  `$ sh ./ng-serve.sh`
 
+This script automatically installs npm dependencies if there is no "node_modules" directory in the app level.
+
 App is now locally running on  [http://localhost:4200](http://localhost:4200)
 
 ## 2. Hosting: github pages
@@ -34,9 +36,12 @@ cf. [Héberger une app Angular sur GitHub Pages](https://www.gaetanrouzies.com/g
 
 ### 2.1 Build the production bundle.
 
-Note: Since angular 17, build are in a subfolder "browser".
 
 Run (in the container) `$ sh ./ng-dist-builder.sh`
+
+This script will create the bundle files with `ng build` command, then move its content in a folder named `docs` at the root of the project.
+
+Note: Since angular 17, `ng build` build dist in a subfolder named "browser".
 
 
 ### 2.2 Set up github-pages on repository 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 
 import { HomeComponent } from './'
 import { TetriminoComponent, TopNavbarModule } from '../../components'
-import { GameboardModule } from '../../components/gameboard/'
+import { GameConsoleModule } from '../../components'
 
 
 
@@ -10,12 +10,12 @@ import { GameboardModule } from '../../components/gameboard/'
     declarations: [
         HomeComponent,
         TetriminoComponent,
-      ],
-      imports: [
+    ],
+    imports: [
         TopNavbarModule,
-        GameboardModule,
-      ],
-      providers: [],
+        GameConsoleModule,
+    ],
+    providers: [],
       
 })
 

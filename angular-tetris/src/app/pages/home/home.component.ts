@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core'
         <div>
             <top-navbar></top-navbar>
             <div class="flex justify-center">
-                <gameboard-grid></gameboard-grid>
+                <game-console></game-console>
             </div>
         </div>
     `

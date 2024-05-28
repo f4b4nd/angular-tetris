@@ -38,9 +38,9 @@ export class GameboardGridComponent implements OnInit {
 
     ngOnInit() {
 
-        this.rows = Array.from(Array(this.nrows), (_, i) => i)
+        this.rows = Array(this.nrows).fill(0)
 
-        this.columns = Array.from(Array(this.ncolumns), (_, i) => i)
+        this.columns = Array(this.ncolumns).fill(0)
     
     }
 

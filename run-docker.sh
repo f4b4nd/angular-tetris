@@ -17,8 +17,3 @@ docker run --rm \
 docker exec -it $CONTAINER_NAME /bin/sh
 
 docker stop $CONTAINER_NAME
-
-
-  
-  
-  

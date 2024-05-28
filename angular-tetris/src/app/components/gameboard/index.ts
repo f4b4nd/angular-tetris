@@ -1,4 +1,4 @@
-export { GameboardModule } from './gameboard.module'
+export { GameboardGridModule } from './gameboard.grid.module'
 
 export { GameboardGridComponent } from './gameboard.grid.component'
 

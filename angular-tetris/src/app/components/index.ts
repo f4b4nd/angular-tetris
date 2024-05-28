@@ -1,9 +1,9 @@
 export { TetriminoComponent } from './tetrimino'
 
-export { TopNavbarComponent } from './top-navbar'
+export { TopNavbarComponent, TopNavbarModule } from './top-navbar'
 
-export { TopNavbarModule } from './top-navbar'
+export { LoginFormComponent, LoginFormModule } from './forms' 
 
-export { LoginFormComponent, LoginFormModule } from './login-form' 
+export { GameboardGridModule, GameboardCellComponent, GameboardGridComponent } from './gameboard'
 
-export { GameboardModule, GameboardCellComponent, GameboardGridComponent } from './gameboard'
+export { GameConsoleModule } from './game-console.module'
