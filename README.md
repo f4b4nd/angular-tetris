@@ -41,7 +41,7 @@ Run (in the container) `$ sh ./ng-dist-builder.sh`
 
 This script will create the bundle files with `ng build` command, then move its content in a folder named `docs` at the root of the project.
 
-Note: Since angular 17, `ng build` build dist in a subfolder named "browser".
+Note: Since angular 17, `ng build` create the bundle files in a subfolder named "browser".
 
 
 ### 2.2 Set up github-pages on repository 

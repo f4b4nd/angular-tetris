@@ -19,7 +19,7 @@ import { Component } from '@angular/core'
 
                 <drop-button></drop-button>
 
-                <div class="flex flex-col w-14">
+                <div id="directionnal-buttons" class="flex flex-col w-14">
 
                     <directionnal-button class="self-center" direction="up"></directionnal-button>
 

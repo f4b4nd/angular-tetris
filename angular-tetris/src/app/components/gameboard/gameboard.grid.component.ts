@@ -11,15 +11,16 @@ import { Component, OnInit } from '@angular/core'
             <div class="gameboard-grid__inner flex flex-col gap-0.5">
 
                 <div 
-                    *ngFor="let row of rows;" 
+                    *ngFor="let row of grid;" 
                     name="gameboard-row" 
                     class="flex gap-1"
                 >
 
-                    <gameboard-cell *ngFor="let col of columns;" [isActive]="true"></gameboard-cell>
+                    <div *ngFor="let cell of row;">
+                        <gameboard-cell [isActive]="cell === 1"></gameboard-cell>
+                    </div>
                     
                 </div>
-        
         
             </div>
 
@@ -34,14 +35,16 @@ export class GameboardGridComponent implements OnInit {
     ncolumns = 10
 
     rows: number[]|undefined
-    columns: number[]|undefined
 
+    grid: number[][]|undefined
+
+    
     ngOnInit() {
 
-        this.rows = Array(this.nrows).fill(0)
+        this.rows = Array(this.nrows).fill([])
 
-        this.columns = Array(this.ncolumns).fill(0)
-    
+        this.grid = this.rows.map(_ => Array(this.ncolumns).fill(0))
+
     }
 
 
