@@ -38,6 +38,4 @@ import { Component } from '@angular/core'
 })
 
 
-export class GameConsoleComponent {
-
-}
+export class GameConsoleComponent {}

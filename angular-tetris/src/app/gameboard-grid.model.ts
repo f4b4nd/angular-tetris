@@ -1,31 +1,28 @@
-import { createActionGroup } from "@ngrx/store"
+import { createAction } from "@ngrx/store"
 
-export type GameboardGridState = number[][]   
-
-
-const nrows = 21
-const ncolumns = 10
-
-const gameboardRows: number[] = Array(nrows).fill([])
+export type GameboardGridState =  number[][]
 
 
-const initialGridState: GameboardGridState = gameboardRows.map(_ => Array(ncolumns).fill(0))
+const numberOfRows = 21
+const rowSize = 10
+
+const gameboardRows: number[] = Array(numberOfRows).fill([])
+
+
+const initialGridState: GameboardGridState = gameboardRows.map(_ => Array(rowSize).fill(0))
 
 
 const grid = [[0, 0, 0], [0, 0, 0]]
 
 
 
-// tetrimino : observable 
+// grid : observable 
 
+// addition des matrices (grid + tetrimino). Ok si aucune valeur supérieure à 1.
 
 // newTetrimino : apparition du tetrimino
 // dropTetrimino : descendre les coordonnées du tetrimino
 // rotateTetrimino : rotation du tetrimino
 
-export const gridActions = createActionGroup({
-    events: {
+export const gridActions = createAction()
 
-    }
-
-})
