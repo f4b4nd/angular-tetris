@@ -1,4 +1,4 @@
-import { operateMatrixes } from "./utils/sumMatrixes";
+import { operateMatrixes } from "./utils/operateMatrixes";
 import { getTransposedMatrix, getReversedColumnsMatrix, getReversedRowsMatrix } from "./utils/rotateMatrix";
 
 describe('Pure function', () => {
@@ -32,7 +32,7 @@ describe('Pure function', () => {
 
     expect((operateMatrixes(M, T, Tcoords, '+') as any).toEqual(res))
 
-  })
+  });
 
   it('transpose matrix M with expected result', () => {
     const M = [
@@ -48,7 +48,7 @@ describe('Pure function', () => {
     expect((getTransposedMatrix(M) as any).toEqual(T))
     expect((getTransposedMatrix(T) as any).toEqual(M))
 
-  })
+  });
 
   it('should reverse M matrix columns  with expected result', () => {
     const M = [
@@ -64,7 +64,7 @@ describe('Pure function', () => {
 
     expect((getReversedColumnsMatrix(M) as any).toEqual(T))
 
-  })
+  });
 
   it('should reverse M matrix rows  with expected result', () => {
     const M = [
@@ -80,5 +80,6 @@ describe('Pure function', () => {
 
     expect((getReversedRowsMatrix(M) as any).toEqual(T))
 
-  })
+  });
+
 });

@@ -51,6 +51,8 @@ On the repository, go to `settings > github pages > branches`, then set selector
 
 ### Notes
 
-For playground purpose, you might need to manually run .ts scripts.
+For playground purpose, you might need to manually run `.ts` scripts.
+
 That's why `ts-node` in installed as dev-dependency.
+
 When inside the container, use the command `npx ts-node --compilerOptions '{ "module": "commonJS" }' my-script.ts`

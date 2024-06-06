@@ -33,7 +33,7 @@ export function getReversedRowsMatrix (matrix: number[][]): number[][] {
 }
 
 export function getReversedColumnsMatrix (matrix: number[][]): number[][] {
-    return matrix.map((row, i, ) => row.reverse())
+    return matrix.map(row => row.reverse())
 }
 
 const M = [

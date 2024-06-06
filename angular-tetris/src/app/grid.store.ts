@@ -2,7 +2,7 @@ import { Store, createFeature, createReducer, createActionGroup, props, emptyPro
 import { inject } from '@angular/core'
 
 import { Tetrimino, tetriminoModels } from "./tetrimino.model"
-import { operateMatrixes } from "./utils/sumMatrixes"
+import { operateMatrixes, sumMatrixesIsOutOfBounds } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 
 const numberOfColumns = 10
@@ -56,6 +56,13 @@ export const gridFeature = createFeature({
             
             if (!state.activeTetrimino) return state
             
+            if (sumMatrixesIsOutOfBounds(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates)) {
+                return {
+                    ...state,
+                    activeTetrimino: null,
+                }
+            }
+
             const activeTetriminoCoordinates = {
                 x: state.activeTetrimino.coordinates.x + action.Xoffset, 
                 y: state.activeTetrimino.coordinates.y + action.Yoffset, 
@@ -74,12 +81,12 @@ export const gridFeature = createFeature({
             }
         }),
 
-        on(gridActions.rotateTetrimino, (state, action) => {
+        on(gridActions.rotateTetrimino, (state) => {
             
             if (!state.activeTetrimino) return state
             
-            const clockwise = false
-            const activeTetriminoShape = getRotatedMatrix(state.activeTetrimino.shape, clockwise)
+            const clockwise = true
+            const activeTetriminoShape = getRotatedMatrix(state.activeTetrimino.shape, !clockwise)
 
             const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
             const grid = operateMatrixes(gridWithoutTetrimino, activeTetriminoShape, state.activeTetrimino.coordinates, '+')
