@@ -1,13 +1,35 @@
-export function sumMatrixes(M: number[][], T: number[][], Tcoords: {x: number, y: number}): number[][] {
+export function operateMatrixes(M: number[][], T: number[][], Tcoords: {x: number, y: number}, operation: '+' | '-'): number[][] {
 
     const checkSizes = true
 
+    function isWithinRows(x: number) {
+        return (x >= 0) && (x < T.length) 
+    }
+
+    function isWithinColumns(x: number, y: number) {
+        return (y >= 0) && (y < T[x].length)
+    }
+
+
     return M.map((row, i) => (
         row.map((_, j) => {
-            const tx = i - Tcoords.y
-            const ty = j - Tcoords.x
-            if (tx >= 0 && ty >=0 && tx < T.length && ty < T[tx].length) {
-                return M[i][j] + T[tx][ty]
+
+            const relativeCoords = {
+                x: i - Tcoords.y,
+                y: j - Tcoords.x,
+            }
+
+            const coordinAtesAreMatching = isWithinRows(relativeCoords.x) && isWithinColumns(relativeCoords.x, relativeCoords.y) 
+            
+            if (coordinAtesAreMatching) {
+                switch(operation) {
+                    case '+':
+                        return M[i][j] + T[relativeCoords.x][relativeCoords.y]
+                    case '-':
+                        return M[i][j] - T[relativeCoords.x][relativeCoords.y]
+                    default:
+                        throw Error('operation is not defined')
+                }
             }
             else {
                 return M[i][j]
@@ -16,6 +38,7 @@ export function sumMatrixes(M: number[][], T: number[][], Tcoords: {x: number, y
     ))
 
 }
+
 
 
 const M = [

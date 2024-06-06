@@ -1,24 +1,40 @@
-import { Component, Input } from '@angular/core'
-import { tetriminoModels } from '../../tetrimino.model'
+import { Component, Input, OnInit } from '@angular/core'
+import { injectGridFeature } from '../../grid.store'
+
+export type DirectionsOptions = 'up' | 'down' | 'left' | 'right'
+
+
 @Component({
     selector: 'directionnal-button',
     template: `
-        <button (click)="addTetrimino()" class="border border-black h-4 w-4">
+        <button
+            class="border border-black h-4 w-4"
+            (click)="handleClickButton(direction)"
+        >
         </button>
     `,
 })
 
 
-export class DirectionnalButtonComponent {
+export class DirectionnalButtonComponent implements OnInit {
 
-    @Input() direction: string | undefined
+    @Input() direction?: DirectionsOptions
 
-    //readonly gridFeature = injectGridFeature()
+    readonly gridFeature = injectGridFeature()
 
-    addTetrimino () {
-        const t = tetriminoModels[0]
-        console.log(t)
-       // this.gridFeature.addTetrimino(t)
+    handleClickButton (direction: DirectionsOptions | undefined) {
+
+        console.log(direction)
+        switch(direction) {
+            case 'down':
+                this.gridFeature.dropTetrimino()
+                console.log(this.gridFeature.activeTetrimino())
+            return
+        }
+    }   
+    
+    ngOnInit() {
+        console.log('direction >>', this.direction)
     }
 
 }

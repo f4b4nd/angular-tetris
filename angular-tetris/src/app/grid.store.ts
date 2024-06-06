@@ -2,7 +2,7 @@ import { Store, createFeature, createReducer, createActionGroup, props, emptyPro
 import { inject } from '@angular/core'
 
 import { Tetrimino, tetriminoModels } from "./tetrimino.model"
-import { sumMatrixes } from "./utils/sumMatrixes"
+import { operateMatrixes } from "./utils/sumMatrixes"
 
 const numberOfColumns = 10
 const numberOfRows = 21
@@ -29,7 +29,7 @@ export const gridActions = createActionGroup({
         loadGrid: emptyProps(),
 
         spawnTetrimino: props<{ tetriminos: Tetrimino[] }>(),
-        dropTetrimino: props<{ tetrimino: Tetrimino }>(),
+        dropTetrimino: emptyProps(),
         moveLeftTetrimino: props<{ tetrimino: Tetrimino }>(),
         moveRightTetrimino: props<{ tetrimino: Tetrimino }>(),
         rotateTetrimino: props<{ tetrimino: Tetrimino }>(),
@@ -50,10 +50,34 @@ export const gridFeature = createFeature({
             const randomTetrimino = action.tetriminos[randomIdx]
             return {
                 ...state,
-                grid: sumMatrixes(state.grid, randomTetrimino.shape, randomTetrimino.coordinates),
+                grid: operateMatrixes(state.grid, randomTetrimino.shape, randomTetrimino.coordinates, '+'),
                 activeTetrimino: randomTetrimino,
             }
         }),
+
+        on(gridActions.dropTetrimino, (state, action) => {
+            
+            if (!state.activeTetrimino) return state
+            
+            const activeTetriminoCoordinates = {
+                x: state.activeTetrimino.coordinates.x, 
+                y: state.activeTetrimino.coordinates.y + 1 
+            }
+
+            const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
+            const grid = operateMatrixes(gridWithoutTetrimino, state.activeTetrimino.shape, activeTetriminoCoordinates, '+')
+           
+            return {
+                ...state,
+                grid,
+                activeTetrimino: {
+                    ...state.activeTetrimino, 
+                    coordinates: activeTetriminoCoordinates,
+                },
+            }
+        }),
+
+        
 
     ),
 
@@ -71,7 +95,7 @@ export function injectGridFeature() {
         
         loadGrid: () => store.dispatch(gridActions.loadGrid()),
         spawnTetrimino: (tetriminos: Tetrimino[]) => store.dispatch(gridActions.spawnTetrimino({tetriminos})),
-
+        dropTetrimino: () => store.dispatch(gridActions.dropTetrimino())
 
     }
 }
