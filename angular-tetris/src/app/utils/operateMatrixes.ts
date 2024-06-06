@@ -50,29 +50,47 @@ function containsValueGreaterThanOne(matrix: number[][]): boolean {
 
 
 
-function matrixesWontCollide (M: number[][], T: number[][]) {
+function getNumberOfRows (matrix: number[][]): number {
+    return  matrix.length 
+}
     
+function getNumberOfColumns (matrix: number[][]): number {
+    return matrix[0] && matrix[0].length
 }
 
-export function sumMatrixesIsOutOfBounds (M: number[][], T: number[][], Tcoords: {x: number, y: number}): boolean {
-
-    const numberOfRows = (matrix: number[][]) => matrix.length
+export function isLeftCollision (M: number[][], T: number[][], Tcoords: {x: number, y: number}): boolean {
     
-    const numberOfColumns = (matrix: number[][]) => matrix[0] && matrix[0].length
+    if (getNumberOfColumns(M) < getNumberOfColumns(T)) return true
 
-    const bottomCollision = numberOfRows(M) <= Tcoords.y + numberOfRows(T)
-    const rightCollision = numberOfColumns(M) <= Tcoords.x + numberOfColumns(T)
-    const leftCollision = Tcoords.x <= 0
+    if (getNumberOfRows(M) < getNumberOfRows(T)) return true
 
-    if (numberOfColumns(M) < numberOfColumns(T)) return true
+    const isCollision = Tcoords.x <= 0
 
-    if (numberOfRows(M) < numberOfRows(T)) return true
+    return isCollision
+
+}
+
+export function isRightCollision (M: number[][], T: number[][], Tcoords: {x: number, y: number}): boolean {
+    
+    if (getNumberOfColumns(M) < getNumberOfColumns(T)) return true
+
+    if (getNumberOfRows(M) < getNumberOfRows(T)) return true
+
+    const isCollision = getNumberOfColumns(M) <= Tcoords.x + getNumberOfColumns(T)
+
+    return isCollision
+
+}
+
+export function isBottomCollision (M: number[][], T: number[][], Tcoords: {x: number, y: number}): boolean {
+
+    if (getNumberOfColumns(M) < getNumberOfColumns(T)) return true
+
+    if (getNumberOfRows(M) < getNumberOfRows(T)) return true
+
+    const bottomCollision = getNumberOfRows(M) <= Tcoords.y + getNumberOfRows(T)
 
     if (bottomCollision) return true
-
-    if (rightCollision) return true
-
-    if (leftCollision) return true
 
     return false
 

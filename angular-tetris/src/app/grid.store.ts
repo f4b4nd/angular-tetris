@@ -2,7 +2,7 @@ import { Store, createFeature, createReducer, createActionGroup, props, emptyPro
 import { inject } from '@angular/core'
 
 import { Tetrimino, tetriminoModels } from "./tetrimino.model"
-import { operateMatrixes, sumMatrixesIsOutOfBounds } from "./utils/operateMatrixes"
+import { operateMatrixes, isBottomCollision, isLeftCollision, isRightCollision } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 
 const numberOfColumns = 10
@@ -30,7 +30,8 @@ export const gridActions = createActionGroup({
         loadGrid: emptyProps(),
 
         spawnTetrimino: props<{ tetriminos: Tetrimino[] }>(),
-        moveTetrimino: props<{ Xoffset: 1 | -1 | 0, Yoffset: 1 | 0 }>(),
+        moveHorizontalTetrimino: props<{ Xoffset: 1 | -1 | 0}>(),
+        moveDownTetrimino: emptyProps(),
         rotateTetrimino:  emptyProps(),
     }
 })
@@ -52,11 +53,42 @@ export const gridFeature = createFeature({
             }
         }),
 
-        on(gridActions.moveTetrimino, (state, action) => {
+        on(gridActions.moveHorizontalTetrimino, (state, action) => {
             
             if (!state.activeTetrimino) return state
             
-            if (sumMatrixesIsOutOfBounds(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates)) {
+            if (action.Xoffset === -1 && isLeftCollision(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates)) {
+                return state
+            }
+
+            if (action.Xoffset === 1 && isRightCollision(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates)) {
+                return state
+            }
+
+            const activeTetriminoCoordinates = {
+                x: state.activeTetrimino.coordinates.x + action.Xoffset, 
+                y: state.activeTetrimino.coordinates.y, 
+            }
+
+            const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
+            const grid = operateMatrixes(gridWithoutTetrimino, state.activeTetrimino.shape, activeTetriminoCoordinates, '+')
+           
+            return {
+                ...state,
+                grid,
+                activeTetrimino: {
+                    ...state.activeTetrimino, 
+                    coordinates: activeTetriminoCoordinates,
+                },
+            }
+        }),
+
+        on(gridActions.moveDownTetrimino, (state) => {
+            
+            if (!state.activeTetrimino) return state
+            
+            if (isBottomCollision(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates)) {
+
                 return {
                     ...state,
                     activeTetrimino: null,
@@ -64,8 +96,8 @@ export const gridFeature = createFeature({
             }
 
             const activeTetriminoCoordinates = {
-                x: state.activeTetrimino.coordinates.x + action.Xoffset, 
-                y: state.activeTetrimino.coordinates.y + action.Yoffset, 
+                x: state.activeTetrimino.coordinates.x, 
+                y: state.activeTetrimino.coordinates.y + 1, 
             }
 
             const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
@@ -115,9 +147,9 @@ export function injectGridFeature() {
         
         loadGrid: () => store.dispatch(gridActions.loadGrid()),
         spawnTetrimino: (tetriminos: Tetrimino[]) => store.dispatch(gridActions.spawnTetrimino({tetriminos})),
-        moveDownTetrimino: () => store.dispatch(gridActions.moveTetrimino({Xoffset: 0, Yoffset:1})),
-        moveLeftTetrimino: () => store.dispatch(gridActions.moveTetrimino({Xoffset: -1, Yoffset:0})),
-        moveRightTetrimino: () => store.dispatch(gridActions.moveTetrimino({Xoffset: 1, Yoffset:0})),
+        moveDownTetrimino: () => store.dispatch(gridActions.moveDownTetrimino()),
+        moveLeftTetrimino: () => store.dispatch(gridActions.moveHorizontalTetrimino({Xoffset: -1})),
+        moveRightTetrimino: () => store.dispatch(gridActions.moveHorizontalTetrimino({Xoffset: 1})),
         rotateTetrimino: () => store.dispatch(gridActions.rotateTetrimino()),
     }
 }
