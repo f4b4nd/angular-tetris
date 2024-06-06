@@ -1,4 +1,11 @@
-import { Component } from '@angular/core'
+// user-list.component.ts
+import { Component } from '@angular/core';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
 @Component({
     selector: 'drop-button',

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
+import { Store, select } from '@ngrx/store'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { Observable } from 'rxjs'
+import { GridState } from '../../grid.store'
+import { injectGridFeature } from '../../grid.store'
 
 @Component({
     selector: 'gameboard-grid',
@@ -10,17 +15,15 @@ import { Component, OnInit } from '@angular/core'
 
             <div class="gameboard-grid__inner flex flex-col gap-0.5">
 
-                <div 
-                    *ngFor="let row of grid;" 
-                    name="gameboard-row" 
-                    class="flex gap-1"
-                >
 
-                    <div *ngFor="let cell of row;">
+            @for (row of gridFeature.grid(); track row) {
+                <div name="gameboard-row" class="flex gap-1">
+
+                    @for (cell of row; track cell) {
                         <gameboard-cell [isActive]="cell === 1"></gameboard-cell>
-                    </div>
-                    
+                    }
                 </div>
+            }
         
             </div>
 
@@ -31,20 +34,17 @@ import { Component, OnInit } from '@angular/core'
 
 export class GameboardGridComponent implements OnInit {
 
-    nrows = 21
-    ncolumns = 10
+    gridStore = inject(Store)
 
-    rows: number[]|undefined
+    gridFeature = injectGridFeature()
 
-    grid: number[][]|undefined
 
-    
+    constructor () {
+        console.log('grid>>', this.gridFeature.grid())
+
+    }
+
     ngOnInit() {
-
-        this.rows = Array(this.nrows).fill([])
-
-        this.grid = this.rows.map(_ => Array(this.ncolumns).fill(0))
-
     }
 
 

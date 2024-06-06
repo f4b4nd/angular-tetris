@@ -24,13 +24,11 @@ export const tetriminoModels: Array<Tetrimino> = [
         type: 'O',
         shape: initialShapes['O'],
         coordinates: initialCoordinates,
-
     },
     {
         type: 'S',
         shape: initialShapes['S'],
         coordinates: initialCoordinates,
-
     },
     {
         type: 'T',
