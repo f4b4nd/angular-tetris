@@ -1,10 +1,10 @@
 export type Tetrimino = {
     type: 'L'|'O'|'S'|'T',
     shape: number[][],
-    coordinates: number[],
+    coordinates: { x: number, y: number },
 }
 
-const initialCoordinates = [0, 0]
+const initialCoordinates: Tetrimino['coordinates'] = {x: 4, y: 0}
 
 const initialShapes = {
     'L':  [[1, 0], [1, 0], [1, 1]],

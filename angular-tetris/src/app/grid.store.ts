@@ -2,7 +2,7 @@ import { Store, createFeature, createReducer, createActionGroup, props, emptyPro
 import { inject } from '@angular/core'
 
 import { Tetrimino, tetriminoModels } from "./tetrimino.model"
-
+import { sumMatrixes } from "./utils/sumMatrixes"
 
 const numberOfColumns = 10
 const numberOfRows = 21
@@ -28,13 +28,12 @@ export const gridActions = createActionGroup({
     events: {
         loadGrid: emptyProps(),
 
-        spawnTetrimino: props<{ tetrimino: Tetrimino }>(),
+        spawnTetrimino: props<{ tetriminos: Tetrimino[] }>(),
         dropTetrimino: props<{ tetrimino: Tetrimino }>(),
         moveLeftTetrimino: props<{ tetrimino: Tetrimino }>(),
         moveRightTetrimino: props<{ tetrimino: Tetrimino }>(),
         rotateTetrimino: props<{ tetrimino: Tetrimino }>(),
 
-        // addTetrimino: props<{ tetrimino: Tetrimino }>(),
 
     }
 })
@@ -46,11 +45,15 @@ export const gridFeature = createFeature({
 
         initialGridState,
 
-        on(gridActions.spawnTetrimino, (state, action) => ({
-            ...state,
-            grid: state.grid,
-            activeTetrimino: action.tetrimino,
-        })),
+        on(gridActions.spawnTetrimino, (state, action) => {
+            const randomIdx = Math.floor(Math.random() * action.tetriminos.length)
+            const randomTetrimino = action.tetriminos[randomIdx]
+            return {
+                ...state,
+                grid: sumMatrixes(state.grid, randomTetrimino.shape, randomTetrimino.coordinates),
+                activeTetrimino: randomTetrimino,
+            }
+        }),
 
     ),
 
@@ -63,19 +66,20 @@ export function injectGridFeature() {
   
     return {
         grid: store.selectSignal(gridFeature.selectGrid),
-
-        addTetrimino: (tetrimino: Tetrimino) => store.dispatch(gridActions.spawnTetrimino({ tetrimino })),
+        activeTetrimino: store.selectSignal(gridFeature.selectActiveTetrimino),
+        
+        
         loadGrid: () => store.dispatch(gridActions.loadGrid()),
+        spawnTetrimino: (tetriminos: Tetrimino[]) => store.dispatch(gridActions.spawnTetrimino({tetriminos})),
+
+
     }
 }
 
 
-/*
-export const selectFeature = (state: GridState) => state
+/**
+ soit il faut les coordonnées de la partie non intégrée à la grille = tetrimino actif
+ 
 
-
-export const gridSelector = createSelector(
-    selectFeature, 
-    (state) => state.grid
-)
-*/
+ soit 
+ */
