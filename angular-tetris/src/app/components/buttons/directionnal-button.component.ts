@@ -27,8 +27,21 @@ export class DirectionnalButtonComponent implements OnInit {
         console.log(direction)
         switch(direction) {
             case 'down':
-                this.gridFeature.dropTetrimino()
+                this.gridFeature.moveDownTetrimino()
                 console.log(this.gridFeature.activeTetrimino())
+                break
+            case 'left':
+                this.gridFeature.moveLeftTetrimino()
+                console.log(this.gridFeature.activeTetrimino())
+                break
+            case 'right':
+                this.gridFeature.moveRightTetrimino()
+                console.log(this.gridFeature.activeTetrimino())
+                break
+            case 'up':
+                this.gridFeature.rotateTetrimino()
+                console.log(this.gridFeature.activeTetrimino())
+                break
             return
         }
     }   

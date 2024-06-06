@@ -47,3 +47,10 @@ Note: Since angular 17, `ng build` create the bundle files in a subfolder named 
 ### 2.2 Set up github-pages on repository 
 
 On the repository, go to `settings > github pages > branches`, then set selectors to "main" and "/docs"
+
+
+### Notes
+
+For playground purpose, you might need to manually run .ts scripts.
+That's why `ts-node` in installed as dev-dependency.
+When inside the container, use the command `npx ts-node --compilerOptions '{ "module": "commonJS" }' my-script.ts`

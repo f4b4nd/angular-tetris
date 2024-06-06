@@ -19,9 +19,9 @@ export function operateMatrixes(M: number[][], T: number[][], Tcoords: {x: numbe
                 y: j - Tcoords.x,
             }
 
-            const coordinAtesAreMatching = isWithinRows(relativeCoords.x) && isWithinColumns(relativeCoords.x, relativeCoords.y) 
+            const coordinatesAreMatching = isWithinRows(relativeCoords.x) && isWithinColumns(relativeCoords.x, relativeCoords.y) 
             
-            if (coordinAtesAreMatching) {
+            if (coordinatesAreMatching) {
                 switch(operation) {
                     case '+':
                         return M[i][j] + T[relativeCoords.x][relativeCoords.y]
