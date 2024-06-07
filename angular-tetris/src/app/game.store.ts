@@ -107,8 +107,8 @@ export const gameFeature = createFeature({
 
             if (hasFullRows) {
                 
-                let gridCleaned = getMatrixDeleteFullRows(state.grid)
-                gridCleaned = getMatrixApplyGravity(gridCleaned)
+                let gridCleaned = getMatrixApplyGravity(state.grid) 
+                gridCleaned = getMatrixDeleteFullRows(gridCleaned)
 
                 const score = state.score + 100 * getNumberOfFullRows(state.grid)
 
@@ -195,7 +195,8 @@ export function injectGameFeature() {
         grid: store.selectSignal(gameFeature.selectGrid),
         activeTetrimino: store.selectSignal(gameFeature.selectActiveTetrimino),
         score: store.selectSignal(gameFeature.selectScore),
-        
+        playerName: store.selectSignal(gameFeature.selectPlayerName),
+
         resetGame: () => store.dispatch(gameActions.resetGame()),
         spawnTetrimino: () => store.dispatch(gameActions.spawnTetrimino()),
         moveDownTetrimino: () => store.dispatch(gameActions.moveDownTetrimino()),

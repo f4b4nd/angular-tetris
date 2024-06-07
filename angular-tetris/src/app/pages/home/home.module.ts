@@ -6,7 +6,6 @@ import { TetriminoComponent, TopNavbarModule } from '../../components'
 import { GameConsoleModule } from '../../components'
 
 
-
 @NgModule({
     declarations: [
         HomeComponent,

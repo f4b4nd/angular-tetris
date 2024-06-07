@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { injectGameFeature } from '../../game.store'
+import { Observable, interval, map } from 'rxjs'
 
 @Component({
     selector: 'gameboard-info',
@@ -8,7 +9,8 @@ import { injectGameFeature } from '../../game.store'
 
             <gameboard-info-box title="score" [text]="gameFeature.score() | tostring"></gameboard-info-box>
             <gameboard-info-box title="next"></gameboard-info-box>
-            <gameboard-info-box title="firstname"></gameboard-info-box>
+            <gameboard-info-box [text]="gameFeature.playerName() ?? ''"></gameboard-info-box>
+            <gameboard-info-box [text]="currentDate$ | async | date:'HH:mm:ss' "></gameboard-info-box>
         </div>
     `,
 })
@@ -17,5 +19,7 @@ import { injectGameFeature } from '../../game.store'
 export class GameboardInfoComponent {
 
     gameFeature = injectGameFeature()
+    counter$ = interval(1000)
+    currentDate$: Observable<Date> = this.counter$.pipe(map(v => new Date()))
 
-}
+}   

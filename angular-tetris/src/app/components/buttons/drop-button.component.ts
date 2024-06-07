@@ -4,8 +4,8 @@ import { injectGameFeature } from '../../game.store';
 
 
 @Component({
-    selector: 'drop-button',
-    template: `
+  selector: 'drop-button',
+  template: `
         <button 
           class="border border-black h-16 w-16"
           (click)="handleClick()"
@@ -24,4 +24,5 @@ export class DropButtonComponent {
     this.gameFeature.spawnTetrimino()
     //console.log(this.gridFeature.grid())
   }
+  
 }

@@ -4,7 +4,6 @@ import { DirectionnalButtonComponent, DropButtonComponent, PauseButtonComponent,
 import { GameConsoleComponent } from './game-console.component'
 
 import { CommonModule } from '@angular/common'
-import { ToStringPipe } from '../pipes/to-string.pipe'
 
 @NgModule({
     declarations: [
