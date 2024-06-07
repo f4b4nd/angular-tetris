@@ -20,7 +20,7 @@ import { Component, Input } from '@angular/core'
 export class GameboardInfoBoxComponent {
 
     @Input() title?: string
-    @Input() text?: any
+    @Input() text?: string|null
 
 
 }

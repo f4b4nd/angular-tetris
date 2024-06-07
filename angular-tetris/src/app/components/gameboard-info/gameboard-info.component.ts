@@ -19,7 +19,9 @@ import { Observable, interval, map } from 'rxjs'
 export class GameboardInfoComponent {
 
     gameFeature = injectGameFeature()
+
     counter$ = interval(1000)
-    currentDate$: Observable<Date> = this.counter$.pipe(map(v => new Date()))
+
+    currentDate$: Observable<Date> = this.counter$.pipe(map(_ => new Date()))
 
 }   

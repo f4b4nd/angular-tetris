@@ -6,7 +6,7 @@ type Coordinates = {
 }
 
 type Tetrimino = {
-    type: 'I'|'L'|'O'|'S'|'T'|'Z',
+    type: 'I'|'J'|'L'|'O'|'S'|'T'|'Z',
     shape: Matrix,
     coordinates: Coordinates,
 }
