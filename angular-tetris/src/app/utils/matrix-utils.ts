@@ -1,4 +1,5 @@
 import { getTransposedMatrix } from "./rotateMatrix"
+import { GRID_WIDTH } from "./constants"
 
 export function getNumberOfRows (matrix: Matrix): number {
     return matrix.length 
@@ -27,15 +28,14 @@ function areAllValuesEqualOne (arr: number[]): boolean {
 }
 
 
-
-
 export function getMatrixDeleteFullRows (matrix: Matrix): Matrix {
 
     let cleanMatrix = matrix.filter(row => !areAllValuesEqualOne(row))
     
-    const emptyRow = Array(10).fill(0)
+    const deltaRows = matrix.length - cleanMatrix.length
 
-    for (let i = 0; i < getNumberOfFullRows(matrix); i++) {
+    for (let i = 0; i < deltaRows; i++) {
+        const emptyRow = Array(GRID_WIDTH).fill(0)
         cleanMatrix.unshift(emptyRow)
     }
 
@@ -80,7 +80,7 @@ export function isVerticalFull (M: Matrix): boolean {
     const transposedMatrix = getTransposedMatrix(M)
 
     const numberOfFullColumns = transposedMatrix.reduce((acc, curr) => (
-        curr.every(v => v === 1) ? acc+1 : acc
+        areAllValuesEqualOne(curr) ? acc+1 : acc
     ), 0)
 
     return numberOfFullColumns > 0

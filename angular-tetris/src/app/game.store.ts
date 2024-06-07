@@ -10,14 +10,13 @@ import { GRID_SIZE, GRID_WIDTH } from "./utils/constants"
 
 
 export const initialGameState: GameState = {
-    gridWidth: GRID_WIDTH,
-    gridSize: GRID_SIZE,
-    grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
-    activeTetrimino: null,
     isGameOver: false,
     isPaused: false,
     score: 0,
     playerName: null,
+
+    grid: null,
+    activeTetrimino: null,
     nextTetrimino: null,
 }
 
@@ -26,6 +25,7 @@ export const gameActions = createActionGroup({
     source: 'Game',
     events: {
 
+        resetGame: emptyProps(),
         spawnTetrimino: emptyProps(),
         moveHorizontalTetrimino: props<{ Xoffset: 1 | -1 }>(),
         moveDownTetrimino: emptyProps(),
@@ -40,9 +40,18 @@ export const gameFeature = createFeature({
 
         initialGameState,
 
+        on(gameActions.resetGame, (state) => {
+            return {
+                ...state,
+                initialGameState,
+                grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0))
+            }
+        }),
+
+
         on(gameActions.spawnTetrimino, (state) => {
 
-            if (state.activeTetrimino) return state
+            if (!state.grid || state.activeTetrimino) return state
 
             const randomIdx = Math.floor(Math.random() * tetriminoModels.length)
             const randomTetrimino = tetriminoModels[randomIdx]
@@ -56,7 +65,7 @@ export const gameFeature = createFeature({
 
         on(gameActions.moveHorizontalTetrimino, (state, action) => {
             
-            if (!state.activeTetrimino) return state
+            if (!state.grid || !state.activeTetrimino) return state
             
             if (action.Xoffset === -1 && isLeftCollision(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates)) {
                 return state
@@ -92,15 +101,20 @@ export const gameFeature = createFeature({
 
         on(gameActions.moveDownTetrimino, (state) => {
             
-            if (!state.activeTetrimino) return state
+            if (!state.grid || !state.activeTetrimino) return state
             
-            if (getNumberOfFullRows(state.grid) > 0) {
+            const hasFullRows = getNumberOfFullRows(state.grid) > 0
+
+            if (hasFullRows) {
                 
                 let gridCleaned = getMatrixDeleteFullRows(state.grid)
                 gridCleaned = getMatrixApplyGravity(gridCleaned)
 
+                const score = state.score + 100 * getNumberOfFullRows(state.grid)
+
                 return {
                     ...state,
+                    score: score,
                     grid: gridCleaned,
                     activeTetrimino: null,
                 }
@@ -143,7 +157,7 @@ export const gameFeature = createFeature({
 
         on(gameActions.rotateTetrimino, (state) => {
             
-            if (!state.activeTetrimino) return state
+            if (!state.grid || !state.activeTetrimino) return state
             
             const clockwise = true
             const activeTetriminoShape = getRotatedMatrix(state.activeTetrimino.shape, !clockwise)
@@ -180,7 +194,9 @@ export function injectGameFeature() {
     return {
         grid: store.selectSignal(gameFeature.selectGrid),
         activeTetrimino: store.selectSignal(gameFeature.selectActiveTetrimino),
+        score: store.selectSignal(gameFeature.selectScore),
         
+        resetGame: () => store.dispatch(gameActions.resetGame()),
         spawnTetrimino: () => store.dispatch(gameActions.spawnTetrimino()),
         moveDownTetrimino: () => store.dispatch(gameActions.moveDownTetrimino()),
         moveLeftTetrimino: () => store.dispatch(gameActions.moveHorizontalTetrimino({Xoffset: -1})),

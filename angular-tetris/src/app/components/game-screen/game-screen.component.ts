@@ -10,8 +10,7 @@ import { Component } from '@angular/core'
 
             <gameboard-grid></gameboard-grid>
 
-            <gameboard-info 
-                class="border border-black"></gameboard-info>
+            <gameboard-info class="border border-black"></gameboard-info>
 
         </div>
     `,

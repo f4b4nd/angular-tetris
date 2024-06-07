@@ -14,9 +14,8 @@ type Tetrimino = {
 type Direction = 'up' | 'down' | 'left' | 'right'
 
 type GameState = {
-    gridWidth: number,
-    gridSize: number,
-    grid: Matrix,
+
+    grid: Matrix|null,
     activeTetrimino: Tetrimino|null,
     isGameOver: boolean,
     isPaused: boolean,

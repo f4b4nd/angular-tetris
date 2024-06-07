@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { injectGameFeature } from '../game.store'
 
 @Component({
     selector: 'game-console',
@@ -38,4 +39,11 @@ import { Component } from '@angular/core'
 })
 
 
-export class GameConsoleComponent {}
+export class GameConsoleComponent implements OnInit {
+
+    game = injectGameFeature()
+
+    ngOnInit() {
+        this.game.resetGame()
+    }
+}

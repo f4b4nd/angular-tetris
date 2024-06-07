@@ -6,11 +6,11 @@ import { Component, Input } from '@angular/core'
         <div class="border border-black w-14 flex flex-col">
 
             <div class="">
-                {{text}}
+                {{title}}
             </div>
 
             <div class="">
-                {{title}}
+                {{text}}
             </div>
         </div>
     `,

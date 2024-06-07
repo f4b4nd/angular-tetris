@@ -73,7 +73,7 @@ describe('Pure function', () => {
       [5, 6],
     ]
     const T = [
-      [5, 6],    
+      [5, 6],
       [3, 4],
       [1, 2],
     ]

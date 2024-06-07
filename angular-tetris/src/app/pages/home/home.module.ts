@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common'
 import { HomeComponent } from './'
 import { TetriminoComponent, TopNavbarModule } from '../../components'
 import { GameConsoleModule } from '../../components'
-import { TestFetchComponent } from '../../components/playground/test-fetch.component'
-import ProductsRoute from '../../components/playground/test-product.component'
 
 
 
@@ -13,8 +11,6 @@ import ProductsRoute from '../../components/playground/test-product.component'
     declarations: [
         HomeComponent,
         TetriminoComponent,
-        TestFetchComponent,
-        ProductsRoute,
     ],
     imports: [
         CommonModule,

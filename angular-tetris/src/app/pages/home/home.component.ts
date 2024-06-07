@@ -8,8 +8,6 @@ import { Component, OnInit } from '@angular/core'
             <div class="flex justify-center">
                 <game-console></game-console>
             </div>
-            <app-products></app-products>
-            <test-fetch></test-fetch>
         </div>
     `
 })

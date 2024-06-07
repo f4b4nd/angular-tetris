@@ -4,10 +4,12 @@ import { GameboardInfoComponent } from '../gameboard-info/gameboard-info.compone
 import { GameboardGridModule } from '../gameboard'
 import { GameScreenComponent } from './game-screen.component'
 import { GameboardInfoBoxComponent } from '../gameboard-info/gameboard-info-box.component'
+import { ToStringPipe } from '../../pipes/to-string.pipe'
 
 
 @NgModule({
     declarations: [
+        ToStringPipe,
         GameScreenComponent,
         GameboardInfoBoxComponent,
         GameboardInfoComponent,

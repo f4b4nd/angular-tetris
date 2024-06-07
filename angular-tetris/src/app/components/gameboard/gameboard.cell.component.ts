@@ -19,6 +19,6 @@ import { Component, Input } from '@angular/core'
 
 export class GameboardCellComponent {
     
-    @Input() isActive: boolean|undefined
+    @Input() isActive?: boolean
 
 }
