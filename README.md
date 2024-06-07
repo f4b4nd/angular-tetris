@@ -48,7 +48,7 @@ Note: Since angular 17, `ng build` create the bundle files in a subfolder named 
 
 On the repository, go to `settings > github pages > branches`, then set selectors to "main" and "/docs"
 
-
+---
 ### Notes
 
 For playground purpose, you might need to manually run `.ts` scripts.

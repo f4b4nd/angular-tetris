@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { injectGridFeature } from '../../grid.store'
+import { injectGameFeature } from '../../game.store'
 
 
 @Component({
@@ -18,27 +18,26 @@ export class DirectionnalButtonComponent implements OnInit {
 
     @Input() direction?: Direction
 
-    readonly gridFeature = injectGridFeature()
+    readonly gameFeature = injectGameFeature()
 
     handleClickButton (direction: Direction | undefined) {
 
-        console.log(direction)
         switch(direction) {
             case 'down':
-                this.gridFeature.moveDownTetrimino()
-                console.log(this.gridFeature.activeTetrimino())
+                this.gameFeature.moveDownTetrimino()
+                console.log(this.gameFeature.activeTetrimino())
                 break
             case 'left':
-                this.gridFeature.moveLeftTetrimino()
-                console.log(this.gridFeature.activeTetrimino())
+                this.gameFeature.moveLeftTetrimino()
+                console.log(this.gameFeature.activeTetrimino())
                 break
             case 'right':
-                this.gridFeature.moveRightTetrimino()
-                console.log(this.gridFeature.activeTetrimino())
+                this.gameFeature.moveRightTetrimino()
+                console.log(this.gameFeature.activeTetrimino())
                 break
             case 'up':
-                this.gridFeature.rotateTetrimino()
-                console.log(this.gridFeature.activeTetrimino())
+                this.gameFeature.rotateTetrimino()
+                console.log(this.gameFeature.activeTetrimino())
                 break
             default:
                 return

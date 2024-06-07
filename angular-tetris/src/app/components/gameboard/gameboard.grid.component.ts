@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { injectGridFeature } from '../../grid.store'
+import { injectGameFeature } from '../../game.store'
 
 @Component({
     selector: 'gameboard-grid',
@@ -11,7 +11,7 @@ import { injectGridFeature } from '../../grid.store'
 
             <div class="gameboard-grid__inner flex flex-col gap-0.5">
 
-                @for (row of gridFeature.grid(); track row) {
+                @for (row of gameFeature.grid(); track row) {
 
                     <div name="gameboard-row" class="flex gap-1">
 
@@ -31,13 +31,13 @@ import { injectGridFeature } from '../../grid.store'
 
 export class GameboardGridComponent implements OnInit {
 
-    gridFeature = injectGridFeature()
+    gameFeature = injectGameFeature()
 
     ngOnInit() {
 
-        this.gridFeature.spawnTetrimino()
+        this.gameFeature.spawnTetrimino()
 
-        console.log('active>>', this.gridFeature.activeTetrimino())
+        console.log('active>>', this.gameFeature.activeTetrimino())
 
     }
 

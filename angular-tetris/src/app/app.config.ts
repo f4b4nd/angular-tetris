@@ -6,14 +6,14 @@ import { provideState, provideStore } from '@ngrx/store'
 
 import { provideHttpClient } from '@angular/common/http';
 import { productsFeature } from './components/playground/test-product.store'
-import { gridFeature } from './grid.store';
+import { gameFeature } from './game.store';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes), 
         provideStore(),
         provideHttpClient(),
-        provideState(gridFeature),
+        provideState(gameFeature),
         provideState(productsFeature),
     ]
 }

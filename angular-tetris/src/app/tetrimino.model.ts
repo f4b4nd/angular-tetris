@@ -1,5 +1,5 @@
 import { GRID_WIDTH } from "./utils/constants"
-import { getNumberOfColumns } from "./utils/operateMatrixes"
+import { getNumberOfColumns } from "./utils/matrix-utils"
 
 
 const initialShapes = {

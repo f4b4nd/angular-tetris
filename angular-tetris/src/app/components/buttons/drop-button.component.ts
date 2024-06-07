@@ -1,6 +1,6 @@
 // user-list.component.ts
 import { Component } from '@angular/core';
-import { injectGridFeature } from '../../grid.store';
+import { injectGameFeature } from '../../game.store';
 
 
 @Component({
@@ -17,11 +17,11 @@ import { injectGridFeature } from '../../grid.store';
 
 export class DropButtonComponent {
 
-  gridFeature = injectGridFeature()
+  gameFeature = injectGameFeature()
 
 
   handleClick () {
-    this.gridFeature.spawnTetrimino()
+    this.gameFeature.spawnTetrimino()
     //console.log(this.gridFeature.grid())
   }
 }
