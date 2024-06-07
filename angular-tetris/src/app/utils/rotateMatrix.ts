@@ -1,8 +1,17 @@
-export function getRotatedMatrix (matrix: Matrix, clockwise: boolean = true): Matrix {
+export function getRotatedMatrix (matrix: Matrix, degrees: '90deg' | '-90deg'): Matrix {
 
-    const transposedMatrix = getTransposedMatrix(matrix)
-
-    return clockwise ? getReversedColumnsMatrix(transposedMatrix) : getReversedRowsMatrix(transposedMatrix)
+    switch (degrees) {
+        case '90deg': {
+            const transposedMatrix = getTransposedMatrix(matrix)
+            return getReversedColumnsMatrix(transposedMatrix)
+        }
+        case '-90deg': {
+            const transposedMatrix = getTransposedMatrix(matrix)
+            return getReversedRowsMatrix(transposedMatrix)
+        }
+        default:
+            throw Error('rotation not supported')
+    }
 
 }
 

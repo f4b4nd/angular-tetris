@@ -6,10 +6,9 @@ import { Observable, interval, map } from 'rxjs'
     selector: 'gameboard-info',
     template: `
         <div class="border border-black w-14">
-
-            <gameboard-info-box title="score" [text]="gameFeature.score() | tostring"></gameboard-info-box>
+            <gameboard-info-box *ngIf="gameFeature.score() >= 0" title="score" [text]="gameFeature.score() | tostring"></gameboard-info-box>
             <gameboard-info-box title="next"></gameboard-info-box>
-            <gameboard-info-box [text]="gameFeature.playerName() ?? ''"></gameboard-info-box>
+            <gameboard-info-box *ngIf="gameFeature.playerName()" [text]="gameFeature.playerName() ?? ''"></gameboard-info-box>
             <gameboard-info-box [text]="currentDate$ | async | date:'HH:mm:ss' "></gameboard-info-box>
         </div>
     `,

@@ -1,12 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { injectGameFeature } from '../../game.store'
 
 @Component({
-    selector: 'gameboard-grid',
+    selector: 'gameboard-info-box-grid',
     template: `
         <div 
-            id="gameboard-grid" 
-            class="border-2 border-black m-4 p-0.5"
+            id="gameboard-info-box-grid" 
+            class="border-2 border-black"
         >
 
             <div class="gameboard-grid__inner flex flex-col gap-0.5">
@@ -25,17 +25,15 @@ import { injectGameFeature } from '../../game.store'
             </div>
 
         </div>
-    `
+    `,
 })
 
 
-export class GameboardGridComponent implements OnInit {
+export class GameboardInfoBoxGridComponent {
+
+    @Input() title?: string
+    @Input() text?: string | null
 
     gameFeature = injectGameFeature()
-
-    ngOnInit() {
-
-    }
-
-
+    
 }

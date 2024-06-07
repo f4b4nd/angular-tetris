@@ -25,19 +25,19 @@ export class DirectionnalButtonComponent implements OnInit {
         switch(direction) {
             case 'down':
                 this.gameFeature.moveDownTetrimino()
-                console.log(this.gameFeature.activeTetrimino())
+                console.log(this.gameFeature.currentTetrimino())
                 break
             case 'left':
                 this.gameFeature.moveLeftTetrimino()
-                console.log(this.gameFeature.activeTetrimino())
+                console.log(this.gameFeature.currentTetrimino())
                 break
             case 'right':
                 this.gameFeature.moveRightTetrimino()
-                console.log(this.gameFeature.activeTetrimino())
+                console.log(this.gameFeature.currentTetrimino())
                 break
             case 'up':
                 this.gameFeature.rotateTetrimino()
-                console.log(this.gameFeature.activeTetrimino())
+                console.log(this.gameFeature.currentTetrimino())
                 break
             default:
                 return

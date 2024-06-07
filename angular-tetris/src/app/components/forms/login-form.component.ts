@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core'
 
 import { FormGroup, FormControl } from '@angular/forms';
+import { injectGameFeature } from '../../game.store';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'login-form',
@@ -14,14 +16,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 
                     <div class="flex flex-col">
 
-                        <label>Votre prénom :</label>
+                        <label>Your name :</label>
 
                         <input
                             type="text"
-                            formControlName="firstname"               
+                            formControlName="playerName"               
                             
                             class="border-2 border-black"
-                            name="firstname"
+                            name="playerName"
                             required
                         />
 
@@ -35,7 +37,7 @@ import { FormGroup, FormControl } from '@angular/forms';
                     
                             class="border border-black rounded p-2" 
                         > 
-                            Entrer 
+                            Play ! 
                         </button>
 
                     </div>
@@ -53,15 +55,23 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class LoginFormComponent {
 
-    form: FormGroup<{firstname: FormControl<string|null>}> = new FormGroup({
-        firstname: new FormControl(''),
+    gameFeature = injectGameFeature()
+
+    form: FormGroup<{playerName: FormControl<string|null>}> = new FormGroup({
+        playerName: new FormControl(''),
     })
 
-    isValid = false;
+    constructor(private router: Router) {}
 
     onSubmit() {
-        const formData = this.form.value
-        console.log('on submit prenom est:', formData)
+
+        const formData = this.form.value 
+
+        if (!formData.playerName) return
+
+        this.gameFeature.setPlayerName(formData.playerName)
+
+        this.router.navigate([''])
     }
 
 }
