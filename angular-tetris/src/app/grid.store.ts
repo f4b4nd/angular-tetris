@@ -1,19 +1,12 @@
-import { Store, createFeature, createReducer, createActionGroup, props, emptyProps, on, createSelector } from "@ngrx/store"
+import { Store, createFeature, createReducer, createActionGroup, props, emptyProps, on } from "@ngrx/store"
 import { inject } from '@angular/core'
 
 import { tetriminoModels } from "./tetrimino.model"
-import { operateMatrixes, isBottomCollision, isLeftCollision, isRightCollision, containsValueGreaterThanOne, numberOfFullRows, getMatrixDeleteFullRows } from "./utils/operateMatrixes"
+import { operateMatrixes, isBottomCollision, isLeftCollision, isRightCollision, containsValueGreaterThanOne, numberOfFullRows, getMatrixDeleteFullRows, getMatrixApplyGravity } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 
 const numberOfColumns = 10
 const numberOfRows = 21
-
-export type GridState = {
-    numberOfColumns: number,
-    numberOfRows: number,
-    grid: Matrix,
-    activeTetrimino: Tetrimino|null,
-}
 
 
 export const initialGridState: GridState = {
@@ -95,10 +88,11 @@ export const gridFeature = createFeature({
             if (!state.activeTetrimino) return state
             
             if (numberOfFullRows(state.grid) > 0) {
+                console.log('deleteFullRows!', numberOfFullRows(state.grid))
                 return {
                     ...state,
-                    grid: getMatrixDeleteFullRows(state.grid),
-                    activeTetrimino: null
+                    grid: getMatrixApplyGravity(getMatrixDeleteFullRows(state.grid)),
+                    activeTetrimino: null,
                 }
             }
 

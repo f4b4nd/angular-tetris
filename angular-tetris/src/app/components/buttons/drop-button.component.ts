@@ -2,11 +2,6 @@
 import { Component } from '@angular/core';
 import { injectGridFeature } from '../../grid.store';
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
 
 @Component({
     selector: 'drop-button',

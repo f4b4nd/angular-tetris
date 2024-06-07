@@ -1,3 +1,4 @@
+import { getTransposedMatrix } from "./rotateMatrix"
 
 export function operateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates, operation: '+' | '-'): Matrix {
 
@@ -46,21 +47,20 @@ export function containsValueGreaterThanOne(matrix: Matrix): boolean {
     return false
 }
 
-export function isFullRow (row: number[]): boolean {
-    return row.reduce((_, curr) => curr === 1, true)
+function areAllValuesEqualOne (arr: number[]): boolean {
+    return arr.every(v => v === 1)
 }
 
 export function numberOfFullRows (matrix: Matrix): number {
     return matrix.reduce((acc, curr) => {
-        return isFullRow(curr) ? acc +=1 : acc
+        return areAllValuesEqualOne(curr) ? acc +=1 : acc
     }, 0)
-
 }
 
 
 export function getMatrixDeleteFullRows (matrix: Matrix): Matrix {
 
-    let cleanMatrix = matrix.filter((row) => !isFullRow(row))
+    let cleanMatrix = matrix.filter(row => !areAllValuesEqualOne(row))
     
     const emptyRow = Array(10).fill(0)
 
@@ -76,7 +76,7 @@ function getNumberOfRows (matrix: Matrix): number {
 }
     
 function getNumberOfColumns (matrix: Matrix): number {
-    // supposing all subarrays have same length
+    // all subarrays should have same length
     return matrix.reduce((acc, curr) => {
 
         if (acc > 0 && acc !== curr.length) {
@@ -128,15 +128,25 @@ export function isBottomCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): 
 
 }
 
+export function getMatrixApplyGravity (M: Matrix): Matrix {
+    // Move down "floating" non-empty cells to the bottom of the matrix. 
+
+    let transposedMatrix = getTransposedMatrix(M)
+
+    transposedMatrix = transposedMatrix.map(row => row.sort((a, b) => a <= b ? -1 : 1))
+
+    return getTransposedMatrix(transposedMatrix)
+    
+}
 
 const M = [
     [0, 0, 1, 0],
     [0, 0, 1, 0],
+    [1, 1, 1, 1],
+    [0, 0, 0, 0],   
+    [0, 0, 0, 1],
     [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
+    [1, 1, 0, 1],
 ]
 
 const M2 = [
@@ -192,3 +202,7 @@ const T2 = [
     [1, 2, 3, 4, 5],
 ]
 
+const a = numberOfFullRows(M)
+const b = numberOfFullRows(res)
+const c = getMatrixApplyGravity(M)
+console.log(M ,'c>>>>', c)

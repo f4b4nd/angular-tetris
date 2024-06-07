@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { injectGridFeature } from '../../grid.store'
 
-export type DirectionsOptions = 'up' | 'down' | 'left' | 'right'
-
 
 @Component({
     selector: 'directionnal-button',
@@ -18,11 +16,11 @@ export type DirectionsOptions = 'up' | 'down' | 'left' | 'right'
 
 export class DirectionnalButtonComponent implements OnInit {
 
-    @Input() direction?: DirectionsOptions
+    @Input() direction?: Direction
 
     readonly gridFeature = injectGridFeature()
 
-    handleClickButton (direction: DirectionsOptions | undefined) {
+    handleClickButton (direction: Direction | undefined) {
 
         console.log(direction)
         switch(direction) {
@@ -42,7 +40,8 @@ export class DirectionnalButtonComponent implements OnInit {
                 this.gridFeature.rotateTetrimino()
                 console.log(this.gridFeature.activeTetrimino())
                 break
-            return
+            default:
+                return
         }
     }   
     
