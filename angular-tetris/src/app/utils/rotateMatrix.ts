@@ -27,6 +27,9 @@ export function getTransposedMatrix(matrix: Matrix): Matrix {
 }
 
 export function getReversedRowsMatrix (matrix: Matrix): Matrix {
+
+    if (!(matrix.length > 0)) return matrix
+
     return matrix.map((_, i, T) => {
         return T[T.length - 1 - i]
     })

@@ -6,7 +6,7 @@ type Coordinates = {
 }
 
 type Tetrimino = {
-    type: 'L'|'O'|'S'|'T',
+    type: 'I'|'L'|'O'|'S'|'T'|'Z',
     shape: Matrix,
     coordinates: Coordinates,
 }
@@ -14,8 +14,10 @@ type Tetrimino = {
 type Direction = 'up' | 'down' | 'left' | 'right'
 
 type GridState = {
-    numberOfColumns: number,
-    numberOfRows: number,
+    grid_width: number,
+    grid_size: number,
     grid: Matrix,
     activeTetrimino: Tetrimino|null,
+    isGameOver: boolean,
+    isPaused: boolean,
 }

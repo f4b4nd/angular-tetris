@@ -1,6 +1,26 @@
 import { getTransposedMatrix } from "./rotateMatrix"
 
+
+export function canOperateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
+   
+    const relativeNumberOfRows = getNumberOfRows(T) + Tcoords.y
+    const relativeNumberOfColumns = getNumberOfColumns(T) + Tcoords.x
+
+    const canOperateVertical = relativeNumberOfRows >= 0 && relativeNumberOfRows <= getNumberOfRows(M)
+    const canOperateHorizontal = relativeNumberOfColumns >= 0 && relativeNumberOfColumns <= getNumberOfColumns(M)
+
+    return canOperateVertical && canOperateHorizontal
+
+}
+
 export function operateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates, operation: '+' | '-'): Matrix {
+
+    const allowOperate = canOperateMatrixes(M, T, Tcoords)
+
+    if (!allowOperate) {
+        throw Error("cannot operate matrixes")
+    }
+
 
     function isWithinRows(x: number) {
         return (x >= 0) && (x < T.length) 
@@ -71,11 +91,11 @@ export function getMatrixDeleteFullRows (matrix: Matrix): Matrix {
     return cleanMatrix
 }
 
-function getNumberOfRows (matrix: Matrix): number {
+export function getNumberOfRows (matrix: Matrix): number {
     return  matrix.length 
 }
     
-function getNumberOfColumns (matrix: Matrix): number {
+export function getNumberOfColumns (matrix: Matrix): number {
     // all subarrays should have same length
     return matrix.reduce((acc, curr) => {
 
@@ -139,70 +159,38 @@ export function getMatrixApplyGravity (M: Matrix): Matrix {
     
 }
 
+export function isVerticalFull (M: Matrix): boolean {
+
+    const transposedMatrix = getTransposedMatrix(M)
+
+    const numberOfFullColumns = transposedMatrix.reduce((acc, curr) => (
+        curr.every(v => v === 1) ? acc+1 : acc
+    ), 0)
+
+    return numberOfFullColumns > 0
+}
+
 const M = [
-    [0, 0, 1, 0],
-    [0, 0, 1, 0],
-    [1, 1, 1, 1],
-    [0, 0, 0, 0],   
-    [0, 0, 0, 1],
-    [0, 0, 0, 0],
-    [1, 1, 0, 1],
+    [0, 0, 1],
+    [0, 0, 1],
+    [0, 0, 1],
 ]
 
-const M2 = [
-    [0, 0],
-]
 const T = [
-    [1, 0],
-    [1, 0],
-    [1, 1],
+    [1, 1, 1],
+    [1, 1, 1],
 ]
 
-/*
-isOutOfBounds
 
-oui si M.ncols < T.ncols 
-oui si M.nrows < T.nrows
-oui si Ty + T.ncols < M.ncols
-oui si Tx + T.nrows < M.nrows
+const c1_ok = {x: 1, y: 1}
+const c2_ko = {x: 1, y: 2}
+const c3_ko = {x: 2, y: 1}
+
+/**
+M_L=4 et M_C=3
+T_L=2 et T_C=3
+
+T_L + X <= M_L
+T_C + Y <= M_C
 
 */
-const Tcoords = { x: 1, y: 2 }
-
-
-/*
-(i=2; j=1) ----> M[i][j] + T[i-y = 0][j-x = 0]
-(i=2; j=2) ----> M[i][j] + T[i-y = 0][j-x = 1]
-
-(i=3; j=1) ----> M[i][j] + T[i-y = 1][j-x = 0]
-M[3, 2] + T[1][1]
-
-M[4][1] + T[2][0]
-M[4][2] + T[2][1]
-*/
-
-const res : Matrix = [
-    [0, 0, 1, 0],
-    [0, 0, 1, 0],
-    [0, 1, 0, 0],
-    [0, 1, 0, 0],
-    [0, 1, 1, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-]
-
-const M3 = [
-    [1,  2,  3,  4],
-    [5,  6,  7,  8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 16],
-]
-
-const T2 = [
-    [1, 2, 3, 4, 5],
-]
-
-const a = numberOfFullRows(M)
-const b = numberOfFullRows(res)
-const c = getMatrixApplyGravity(M)
-console.log(M ,'c>>>>', c)

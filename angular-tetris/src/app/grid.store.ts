@@ -2,18 +2,19 @@ import { Store, createFeature, createReducer, createActionGroup, props, emptyPro
 import { inject } from '@angular/core'
 
 import { tetriminoModels } from "./tetrimino.model"
-import { operateMatrixes, isBottomCollision, isLeftCollision, isRightCollision, containsValueGreaterThanOne, numberOfFullRows, getMatrixDeleteFullRows, getMatrixApplyGravity } from "./utils/operateMatrixes"
+import { operateMatrixes, isBottomCollision, isLeftCollision, isRightCollision, containsValueGreaterThanOne, numberOfFullRows, getMatrixDeleteFullRows, getMatrixApplyGravity, canOperateMatrixes } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 
-const numberOfColumns = 10
-const numberOfRows = 21
+import { GRID_SIZE, GRID_WIDTH } from "./utils/constants"
 
 
 export const initialGridState: GridState = {
-    numberOfColumns,
-    numberOfRows,
-    grid: Array(numberOfRows).fill(Array(numberOfColumns).fill(0)),
+    grid_width: GRID_WIDTH,
+    grid_size: GRID_SIZE,
+    grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
     activeTetrimino: null,
+    isGameOver: false,
+    isPaused: false,
 }
 
 
@@ -88,10 +89,13 @@ export const gridFeature = createFeature({
             if (!state.activeTetrimino) return state
             
             if (numberOfFullRows(state.grid) > 0) {
-                console.log('deleteFullRows!', numberOfFullRows(state.grid))
+                
+                let gridCleaned = getMatrixDeleteFullRows(state.grid)
+                gridCleaned = getMatrixApplyGravity(gridCleaned)
+
                 return {
                     ...state,
-                    grid: getMatrixApplyGravity(getMatrixDeleteFullRows(state.grid)),
+                    grid: gridCleaned,
                     activeTetrimino: null,
                 }
             }
@@ -138,7 +142,15 @@ export const gridFeature = createFeature({
             const clockwise = true
             const activeTetriminoShape = getRotatedMatrix(state.activeTetrimino.shape, !clockwise)
 
+
             const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
+            
+            const allowOperate = canOperateMatrixes(gridWithoutTetrimino, activeTetriminoShape, state.activeTetrimino.coordinates)
+            
+            if (!allowOperate) {
+                return state
+            }
+
             const grid = operateMatrixes(gridWithoutTetrimino, activeTetriminoShape, state.activeTetrimino.coordinates, '+')
 
             return {
