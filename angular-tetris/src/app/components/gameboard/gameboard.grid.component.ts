@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core'
 import { injectGridFeature } from '../../grid.store'
-import { tetriminoModels } from '../../tetrimino.model'
 
 @Component({
     selector: 'gameboard-grid',
@@ -36,7 +35,7 @@ export class GameboardGridComponent implements OnInit {
 
     ngOnInit() {
 
-        this.gridFeature.spawnTetrimino(tetriminoModels)
+        this.gridFeature.spawnTetrimino()
 
         console.log('active>>', this.gridFeature.activeTetrimino())
 

@@ -4,7 +4,7 @@ import { getTransposedMatrix, getReversedColumnsMatrix, getReversedRowsMatrix } 
 describe('Pure function', () => {
 
   it('should sum two matrices M and T from a Tcoords origin, with expected result', () => {
-    const M: number[][] = [
+    const M: Matrix = [
       [0, 0, 1, 0],
       [0, 0, 1, 0],
       [0, 0, 0, 0],
@@ -13,14 +13,14 @@ describe('Pure function', () => {
       [0, 0, 0, 0],
       [0, 0, 0, 0],
     ]
-    const T: number[][] = [
+    const T: Matrix = [
       [1, 0],
       [1, 0],
       [1, 1],
     ]
     const Tcoords = { x: 1, y: 2 }
 
-    const res: number[][] = [
+    const res: Matrix = [
       [0, 0, 1, 0],
       [0, 0, 1, 0],
       [0, 1, 0, 0],

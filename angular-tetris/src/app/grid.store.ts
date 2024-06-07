@@ -1,8 +1,8 @@
 import { Store, createFeature, createReducer, createActionGroup, props, emptyProps, on, createSelector } from "@ngrx/store"
 import { inject } from '@angular/core'
 
-import { Tetrimino, tetriminoModels } from "./tetrimino.model"
-import { operateMatrixes, isBottomCollision, isLeftCollision, isRightCollision } from "./utils/operateMatrixes"
+import { tetriminoModels } from "./tetrimino.model"
+import { operateMatrixes, isBottomCollision, isLeftCollision, isRightCollision, containsValueGreaterThanOne, numberOfFullRows, getMatrixDeleteFullRows } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 
 const numberOfColumns = 10
@@ -11,7 +11,7 @@ const numberOfRows = 21
 export type GridState = {
     numberOfColumns: number,
     numberOfRows: number,
-    grid: number[][],
+    grid: Matrix,
     activeTetrimino: Tetrimino|null,
 }
 
@@ -27,10 +27,9 @@ export const initialGridState: GridState = {
 export const gridActions = createActionGroup({
     source: 'Grid',
     events: {
-        loadGrid: emptyProps(),
 
-        spawnTetrimino: props<{ tetriminos: Tetrimino[] }>(),
-        moveHorizontalTetrimino: props<{ Xoffset: 1 | -1 | 0}>(),
+        spawnTetrimino: emptyProps(),
+        moveHorizontalTetrimino: props<{ Xoffset: 1 | -1 }>(),
         moveDownTetrimino: emptyProps(),
         rotateTetrimino:  emptyProps(),
     }
@@ -43,9 +42,13 @@ export const gridFeature = createFeature({
 
         initialGridState,
 
-        on(gridActions.spawnTetrimino, (state, action) => {
-            const randomIdx = Math.floor(Math.random() * action.tetriminos.length)
-            const randomTetrimino = action.tetriminos[randomIdx]
+        on(gridActions.spawnTetrimino, (state) => {
+
+            if (state.activeTetrimino) return state
+
+            const randomIdx = Math.floor(Math.random() * tetriminoModels.length)
+            const randomTetrimino = tetriminoModels[randomIdx]
+
             return {
                 ...state,
                 grid: operateMatrixes(state.grid, randomTetrimino.shape, randomTetrimino.coordinates, '+'),
@@ -72,7 +75,11 @@ export const gridFeature = createFeature({
 
             const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
             const grid = operateMatrixes(gridWithoutTetrimino, state.activeTetrimino.shape, activeTetriminoCoordinates, '+')
-           
+
+            if (containsValueGreaterThanOne(grid)) {
+                return state
+            }
+
             return {
                 ...state,
                 grid,
@@ -87,6 +94,15 @@ export const gridFeature = createFeature({
             
             if (!state.activeTetrimino) return state
             
+            if (numberOfFullRows(state.grid) > 0) {
+                return {
+                    ...state,
+                    grid: getMatrixDeleteFullRows(state.grid),
+                    activeTetrimino: null
+                }
+            }
+
+
             if (isBottomCollision(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates)) {
 
                 return {
@@ -103,6 +119,14 @@ export const gridFeature = createFeature({
             const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
             const grid = operateMatrixes(gridWithoutTetrimino, state.activeTetrimino.shape, activeTetriminoCoordinates, '+')
            
+            if (containsValueGreaterThanOne(grid)) {
+                return {
+                    ...state,
+                    activeTetrimino: null
+                }
+            }
+
+ 
             return {
                 ...state,
                 grid,
@@ -122,7 +146,7 @@ export const gridFeature = createFeature({
 
             const gridWithoutTetrimino = operateMatrixes(state.grid, state.activeTetrimino.shape, state.activeTetrimino.coordinates, '-')
             const grid = operateMatrixes(gridWithoutTetrimino, activeTetriminoShape, state.activeTetrimino.coordinates, '+')
-           
+
             return {
                 ...state,
                 grid,
@@ -145,19 +169,10 @@ export function injectGridFeature() {
         grid: store.selectSignal(gridFeature.selectGrid),
         activeTetrimino: store.selectSignal(gridFeature.selectActiveTetrimino),
         
-        loadGrid: () => store.dispatch(gridActions.loadGrid()),
-        spawnTetrimino: (tetriminos: Tetrimino[]) => store.dispatch(gridActions.spawnTetrimino({tetriminos})),
+        spawnTetrimino: () => store.dispatch(gridActions.spawnTetrimino()),
         moveDownTetrimino: () => store.dispatch(gridActions.moveDownTetrimino()),
         moveLeftTetrimino: () => store.dispatch(gridActions.moveHorizontalTetrimino({Xoffset: -1})),
         moveRightTetrimino: () => store.dispatch(gridActions.moveHorizontalTetrimino({Xoffset: 1})),
         rotateTetrimino: () => store.dispatch(gridActions.rotateTetrimino()),
     }
 }
-
-
-/**
- soit il faut les coordonnées de la partie non intégrée à la grille = tetrimino actif
- 
-
- soit 
- */

@@ -1,6 +1,5 @@
-import { booleanAttribute } from "@angular/core"
 
-export function operateMatrixes(M: number[][], T: number[][], Tcoords: {x: number, y: number}, operation: '+' | '-'): number[][] {
+export function operateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates, operation: '+' | '-'): Matrix {
 
     function isWithinRows(x: number) {
         return (x >= 0) && (x < T.length) 
@@ -10,9 +9,8 @@ export function operateMatrixes(M: number[][], T: number[][], Tcoords: {x: numbe
         return (y >= 0) && (y < T[x].length)
     }
 
-
     return M.map((row, i) => (
-        row.map((cell, j) => {
+        row.map((_, j) => {
 
             const relativeCoords = {
                 x: i - Tcoords.y,
@@ -24,22 +22,22 @@ export function operateMatrixes(M: number[][], T: number[][], Tcoords: {x: numbe
             if (coordinatesAreMatching) {
                 switch(operation) {
                     case '+':
-                        return cell + T[relativeCoords.x][relativeCoords.y]
+                        return M[i][j] + T[relativeCoords.x][relativeCoords.y]
                     case '-':
-                        return cell - T[relativeCoords.x][relativeCoords.y]
+                        return M[i][j] - T[relativeCoords.x][relativeCoords.y]
                     default:
                         throw Error('operation is not defined')
                 }
             }
             else {
-                return cell
+                return M[i][j]
             }
         })
     ))
 
 }
 
-function containsValueGreaterThanOne(matrix: number[][]): boolean {
+export function containsValueGreaterThanOne(matrix: Matrix): boolean {
     for (let row of matrix) {
         for (let value of row) {
             if (value > 1) return true
@@ -48,21 +46,59 @@ function containsValueGreaterThanOne(matrix: number[][]): boolean {
     return false
 }
 
+export function isFullRow (row: number[]): boolean {
+    return row.reduce((_, curr) => curr === 1, true)
+}
+
+export function numberOfFullRows (matrix: Matrix): number {
+    return matrix.reduce((acc, curr) => {
+        return isFullRow(curr) ? acc +=1 : acc
+    }, 0)
+
+}
 
 
-function getNumberOfRows (matrix: number[][]): number {
+export function getMatrixDeleteFullRows (matrix: Matrix): Matrix {
+
+    let cleanMatrix = matrix.filter((row) => !isFullRow(row))
+    
+    const emptyRow = Array(10).fill(0)
+
+    for (let i = 0; i < numberOfFullRows(matrix); i++) {
+        cleanMatrix.unshift(emptyRow)
+    }
+
+    return cleanMatrix
+}
+
+function getNumberOfRows (matrix: Matrix): number {
     return  matrix.length 
 }
     
-function getNumberOfColumns (matrix: number[][]): number {
-    return matrix[0] && matrix[0].length
+function getNumberOfColumns (matrix: Matrix): number {
+    // supposing all subarrays have same length
+    return matrix.reduce((acc, curr) => {
+
+        if (acc > 0 && acc !== curr.length) {
+            throw Error("all subarrays don't have same length !")
+        }
+        return curr.length
+
+    }, 0)
 }
 
-export function isLeftCollision (M: number[][], T: number[][], Tcoords: {x: number, y: number}): boolean {
-    
-    if (getNumberOfColumns(M) < getNumberOfColumns(T)) return true
+function checkMatrixesDimensions (M: Matrix, T: Matrix) : boolean {
 
-    if (getNumberOfRows(M) < getNumberOfRows(T)) return true
+    const checkColumns = getNumberOfColumns(M) >= getNumberOfColumns(T)
+    const checkRows = getNumberOfRows(M) >= getNumberOfRows(T)
+
+    return checkColumns && checkRows
+}
+
+
+export function isLeftCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
+    
+    if (!checkMatrixesDimensions(M, T)) return true
 
     const isCollision = Tcoords.x <= 0
 
@@ -70,11 +106,9 @@ export function isLeftCollision (M: number[][], T: number[][], Tcoords: {x: numb
 
 }
 
-export function isRightCollision (M: number[][], T: number[][], Tcoords: {x: number, y: number}): boolean {
+export function isRightCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
     
-    if (getNumberOfColumns(M) < getNumberOfColumns(T)) return true
-
-    if (getNumberOfRows(M) < getNumberOfRows(T)) return true
+    if (!checkMatrixesDimensions(M, T)) return true
 
     const isCollision = getNumberOfColumns(M) <= Tcoords.x + getNumberOfColumns(T)
 
@@ -82,11 +116,9 @@ export function isRightCollision (M: number[][], T: number[][], Tcoords: {x: num
 
 }
 
-export function isBottomCollision (M: number[][], T: number[][], Tcoords: {x: number, y: number}): boolean {
+export function isBottomCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
 
-    if (getNumberOfColumns(M) < getNumberOfColumns(T)) return true
-
-    if (getNumberOfRows(M) < getNumberOfRows(T)) return true
+    if (!checkMatrixesDimensions(M, T)) return true
 
     const bottomCollision = getNumberOfRows(M) <= Tcoords.y + getNumberOfRows(T)
 
@@ -139,7 +171,7 @@ M[4][1] + T[2][0]
 M[4][2] + T[2][1]
 */
 
-const res : number[][] = [
+const res : Matrix = [
     [0, 0, 1, 0],
     [0, 0, 1, 0],
     [0, 1, 0, 0],

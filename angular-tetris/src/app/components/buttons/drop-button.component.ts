@@ -1,5 +1,6 @@
 // user-list.component.ts
 import { Component } from '@angular/core';
+import { injectGridFeature } from '../../grid.store';
 
 interface User {
   id: number;
@@ -10,7 +11,10 @@ interface User {
 @Component({
     selector: 'drop-button',
     template: `
-        <button class="border border-black h-16 w-16">
+        <button 
+          class="border border-black h-16 w-16"
+          (click)="handleClick()"
+        >
         </button>
     `,
 })
@@ -18,4 +22,11 @@ interface User {
 
 export class DropButtonComponent {
 
+  gridFeature = injectGridFeature()
+
+
+  handleClick () {
+    this.gridFeature.spawnTetrimino()
+    //console.log(this.gridFeature.grid())
+  }
 }

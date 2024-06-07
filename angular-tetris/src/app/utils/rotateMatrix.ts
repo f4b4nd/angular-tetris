@@ -1,4 +1,4 @@
-export function getRotatedMatrix (matrix: number[][], clockwise: boolean = true): number[][] {
+export function getRotatedMatrix (matrix: Matrix, clockwise: boolean = true): Matrix {
 
     const transposedMatrix = getTransposedMatrix(matrix)
 
@@ -6,7 +6,7 @@ export function getRotatedMatrix (matrix: number[][], clockwise: boolean = true)
 
 }
 
-export function getTransposedMatrix(matrix: number[][] ): number[][] {
+export function getTransposedMatrix(matrix: Matrix ): Matrix {
 
     return matrix.reduce((acc, row) => {
         
@@ -22,17 +22,17 @@ export function getTransposedMatrix(matrix: number[][] ): number[][] {
 
         return acc
 
-    }, [] as number[][])
+    }, [] as Matrix)
 
 }
 
-export function getReversedRowsMatrix (matrix: number[][]): number[][] {
+export function getReversedRowsMatrix (matrix: Matrix): Matrix {
     return matrix.map((_, i, T) => {
         return T[T.length - 1 - i]
     })
 }
 
-export function getReversedColumnsMatrix (matrix: number[][]): number[][] {
+export function getReversedColumnsMatrix (matrix: Matrix): Matrix {
     return matrix.map(row => row.reverse())
 }
 
