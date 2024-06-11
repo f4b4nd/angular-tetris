@@ -2,13 +2,20 @@ import { Component, OnInit } from '@angular/core'
 
 @Component({
     selector: 'game-console',
-    styles: [
-        `.game-console {
+    host: {
+        class: 'basis-full',
+    },
+    styles: 
+        `
+        .game-console {
+            width: 100%;
+            max-width: 500px;
             background-color: #efcc19;
-        }`,
-    ],
+            height: 100%;
+        }
+    `,
     template: `
-        <div class="game-console border border-black flex flex-col">
+        <div class="game-console mx-auto flex flex-col rounded-xl p-2">
 
             <div class="flex justify-end">
                 <power-switch-button></power-switch-button>

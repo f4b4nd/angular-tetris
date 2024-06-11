@@ -5,3 +5,11 @@
 
 
 $grey: #522e2e;
+
+body, html{
+    height:100%;
+}
+
+body > * {
+    height: 100%;
+}

@@ -10,7 +10,7 @@ import { StoreModule } from '@ngrx/store'
       StoreModule,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 
 
