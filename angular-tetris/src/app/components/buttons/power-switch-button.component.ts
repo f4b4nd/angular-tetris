@@ -31,7 +31,7 @@ import { Component } from '@angular/core'
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: $grey;
+            background-color: $black;
             -webkit-transition: .4s;
             transition: .4s;
 

@@ -5,12 +5,14 @@ import { TetrisEngineService } from '../../tetris-engine.service'
     selector: 'pause-button',
     styles: `
         .pause-button {
-            background-color: grey;
+            background-color: black;
+            height: 15px;
+            width: 60px;
         }
     `,
     template: `
         <button 
-            class="pause-button rounded h-2 w-7" 
+            class="pause-button rounded-lg" 
             (click)="handleClick()"
         >
         </button>

@@ -10,12 +10,12 @@ import { Component } from '@angular/core'
     template: `
         <div 
             id="game-screen" 
-            class="game-screen border border-black flex items-stretch"
+            class="game-screen border border-black inline-flex mx-auto justify-between h-full"
         >
 
-            <gameboard-grid></gameboard-grid>
+            <gameboard-grid class="p-2"></gameboard-grid>
 
-            <gameboard-info class="border border-black"></gameboard-info>
+            <gameboard-info class="p-2 border border-black"></gameboard-info>
 
         </div>
     `,

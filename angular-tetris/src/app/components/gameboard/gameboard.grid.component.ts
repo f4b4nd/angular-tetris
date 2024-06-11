@@ -6,14 +6,14 @@ import { TetrisEngineService } from '../../tetris-engine.service'
     template: `
         <div 
             id="gameboard-grid" 
-            class="border-2 border-black m-4 p-0.5"
+            class="border-2 border-black p-0.5"
         >
 
             <div class="gameboard-grid__inner flex flex-col gap-0.5">
 
                 @for (row of tetrisEngineService.grid; track row) {
 
-                    <div name="gameboard-row" class="flex gap-1">
+                    <div name="gameboard-row border border-black" class="flex gap-1">
 
                         @for (cell of row; track cell) {
                             <gameboard-cell [isActive]="cell === 1"></gameboard-cell>

@@ -2,12 +2,18 @@ import { Component, Input } from '@angular/core'
 
 @Component({
     selector: 'gameboard-cell',
+    styles: `
+        [name='gameboard-cell-inner'] {
+            height: 0.9rem;
+            width: 0.9rem;
+        }
+    `,
     template: `
         <div name="gameboard-cell" class="border border-black">
 
             <div 
                 name="gameboard-cell-inner" 
-                [ngClass]="['w-2', 'h-2', isActive ? 'bg-black' : '' ]"
+                [ngClass]="[ isActive ? 'bg-black' : '' ]"
             >
 
             </div>

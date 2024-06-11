@@ -5,14 +5,15 @@ import { TetrisEngineService } from '../../tetris-engine.service';
 
 @Component({
   selector: 'drop-button',
-  styles: [
-    `.drop-button {
-        background-color: blue;
-    }`,
-  ],
+  styles: 
+    `
+    .drop-button {
+        background-color: grey;
+    }
+  `,
   template: `
         <button 
-          class="drop-button h-16 w-16 rounded-full"
+          class="drop-button h-20 w-20 rounded-full"
           (click)="handleClick()"
         >
         </button>
