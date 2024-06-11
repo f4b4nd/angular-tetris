@@ -45,11 +45,6 @@ export class TetrisEngineService {
     }
 
 
-    setCurrentTetrimino (tetrimino: Tetrimino | null) {
-        this.store.dispatch(gameActions.setCurrentTetrimino({tetrimino}))
-    }
-
-
     setPlayerName (playerName: string) {
         this.store.dispatch(gameActions.setPlayerName({playerName}))
     }
@@ -78,9 +73,9 @@ export class TetrisEngineService {
     }
 
     spawnTetrimino () {
-        const randomIdx = Math.floor(Math.random() * tetriminoModels.length)
-        const randomTetrimino = tetriminoModels[randomIdx]
-        this.store.dispatch(gameActions.spawnTetrimino({tetrimino: randomTetrimino}))
+        this.store.dispatch(gameActions.setRandomNextTetrimino())
+        this.store.dispatch(gameActions.setCurrentTetrimino())
+        this.store.dispatch(gameActions.setRandomNextTetrimino())
     }
 
 }

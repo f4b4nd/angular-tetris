@@ -3,9 +3,14 @@ import { TetrisEngineService } from '../../tetris-engine.service'
 
 @Component({
     selector: 'directionnal-button',
+    styles: [
+        `.directionnal-button {
+            background-color: blue;
+        }`,
+    ],
     template: `
         <button
-            class="border border-black h-4 w-4"
+            class="directionnal-button h-6 w-6 rounded-full"
             (click)="handleClickButton(direction)"
         >
         </button>
@@ -17,8 +22,6 @@ export class DirectionnalButtonComponent implements OnInit {
 
     @Input() direction?: Direction
     #tetrisEngineService = inject(TetrisEngineService)
-
-    //readonly gameFeature = injectGameFeature()
 
     handleClickButton (direction: Direction | undefined) {
 

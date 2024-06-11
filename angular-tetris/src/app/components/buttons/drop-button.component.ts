@@ -5,9 +5,14 @@ import { TetrisEngineService } from '../../tetris-engine.service';
 
 @Component({
   selector: 'drop-button',
+  styles: [
+    `.drop-button {
+        background-color: blue;
+    }`,
+  ],
   template: `
         <button 
-          class="border border-black h-16 w-16"
+          class="drop-button h-16 w-16 rounded-full"
           (click)="handleClick()"
         >
         </button>
@@ -18,11 +23,8 @@ import { TetrisEngineService } from '../../tetris-engine.service';
 export class DropButtonComponent {
 
   #tetrisEngine = inject(TetrisEngineService)
-  //constructor (private tetrisEngine: TetrisEngineService) {}
 
   handleClick () {
-    this.#tetrisEngine.spawnTetrimino()
-    console.log(this.#tetrisEngine.grid)
   }
   
 }

@@ -2,24 +2,29 @@ import { Component, OnInit } from '@angular/core'
 
 @Component({
     selector: 'game-console',
+    styles: [
+        `.game-console {
+            background-color: #efcc19;
+        }`,
+    ],
     template: `
-        <div class="border border-black flex flex-col">
+        <div class="game-console border border-black flex flex-col">
 
             <div class="flex justify-end">
                 <power-switch-button></power-switch-button>
             </div>
 
-            <game-screen></game-screen>
+            <game-screen class="px-3 py-1"></game-screen>
             
             <div class="flex justify-center">
                 <pause-button></pause-button>
             </div>
 
-            <div class="flex justify-between">
+            <div class="flex justify-between px-4 border border-black">
 
-                <drop-button></drop-button>
+                <drop-button class="self-center" ></drop-button>
 
-                <div id="directionnal-buttons" class="flex flex-col w-14">
+                <div id="directionnal-buttons" class="flex flex-col align-end self-center basis-2/5">
 
                     <directionnal-button class="self-center" direction="up"></directionnal-button>
 
