@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, inject} from '@angular/core'
 
 import { FormGroup, FormControl } from '@angular/forms';
-import { injectGameFeature } from '../../game.store';
 import { Router } from '@angular/router';
+import { TetrisEngineService } from '../../tetris-engine.service';
 
 @Component({
     selector: 'login-form',
@@ -55,7 +55,7 @@ import { Router } from '@angular/router';
 
 export class LoginFormComponent {
 
-    gameFeature = injectGameFeature()
+    #tetrisEngineService = inject(TetrisEngineService)
 
     form: FormGroup<{playerName: FormControl<string|null>}> = new FormGroup({
         playerName: new FormControl(''),
@@ -69,7 +69,7 @@ export class LoginFormComponent {
 
         if (!formData.playerName) return
 
-        this.gameFeature.setPlayerName(formData.playerName)
+        this.#tetrisEngineService.setPlayerName(formData.playerName)
 
         this.router.navigate([''])
     }

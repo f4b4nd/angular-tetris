@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { injectGameFeature } from '../../game.store'
-
+import { Component, Input, OnInit, inject } from '@angular/core'
+import { TetrisEngineService } from '../../tetris-engine.service'
 
 @Component({
     selector: 'directionnal-button',
@@ -17,27 +16,28 @@ import { injectGameFeature } from '../../game.store'
 export class DirectionnalButtonComponent implements OnInit {
 
     @Input() direction?: Direction
+    #tetrisEngineService = inject(TetrisEngineService)
 
-    readonly gameFeature = injectGameFeature()
+    //readonly gameFeature = injectGameFeature()
 
     handleClickButton (direction: Direction | undefined) {
 
         switch(direction) {
             case 'down':
-                this.gameFeature.moveDownTetrimino()
-                console.log(this.gameFeature.currentTetrimino())
+                this.#tetrisEngineService.moveDownTetrimino()
+                console.log(this.#tetrisEngineService.currentTetrimino)
                 break
             case 'left':
-                this.gameFeature.moveLeftTetrimino()
-                console.log(this.gameFeature.currentTetrimino())
+                this.#tetrisEngineService.moveHorizontalTetrimino('left')
+                console.log(this.#tetrisEngineService.currentTetrimino)
                 break
             case 'right':
-                this.gameFeature.moveRightTetrimino()
-                console.log(this.gameFeature.currentTetrimino())
+                this.#tetrisEngineService.moveHorizontalTetrimino('right')
+                console.log(this.#tetrisEngineService.currentTetrimino)
                 break
             case 'up':
-                this.gameFeature.rotateTetrimino()
-                console.log(this.gameFeature.currentTetrimino())
+                this.#tetrisEngineService.rotateTetrimino()
+                console.log(this.#tetrisEngineService.currentTetrimino)
                 break
             default:
                 return

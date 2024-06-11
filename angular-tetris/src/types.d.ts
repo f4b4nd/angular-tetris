@@ -5,6 +5,12 @@ type Coordinates = {
     y: number,
 }
 
+type OffsetCoordinates = {
+    Xoffset: number,
+    Yoffset: number,
+}
+
+
 type Tetrimino = {
     type: 'I'|'J'|'L'|'O'|'S'|'T'|'Z',
     shape: Matrix,

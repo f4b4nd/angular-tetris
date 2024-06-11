@@ -85,3 +85,4 @@ export function isVerticalFull (M: Matrix): boolean {
 
     return numberOfFullColumns > 0
 }
+

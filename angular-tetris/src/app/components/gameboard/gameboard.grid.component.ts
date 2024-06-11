@@ -1,5 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core'
-import { injectGameFeature } from '../../game.store'
+import { Component, OnInit, inject, Inject } from '@angular/core'
+import { TetrisEngineService } from '../../tetris-engine.service'
 
 @Component({
     selector: 'gameboard-grid',
@@ -11,7 +11,7 @@ import { injectGameFeature } from '../../game.store'
 
             <div class="gameboard-grid__inner flex flex-col gap-0.5">
 
-                @for (row of gameFeature.grid(); track row) {
+                @for (row of tetrisEngineService.grid; track row) {
 
                     <div name="gameboard-row" class="flex gap-1">
 
@@ -31,11 +31,12 @@ import { injectGameFeature } from '../../game.store'
 
 export class GameboardGridComponent implements OnInit {
 
-    gameFeature = injectGameFeature()
+    tetrisEngineService = inject(TetrisEngineService)
 
+    //constructor (@Inject(TetrisEngineService) private tetrisEngine: TetrisEngineService) {}
+    
     ngOnInit() {
-
+        this.tetrisEngineService.resetGame()
     }
-
 
 }

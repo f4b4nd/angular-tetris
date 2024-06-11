@@ -1,6 +1,6 @@
 // user-list.component.ts
-import { Component } from '@angular/core';
-import { injectGameFeature } from '../../game.store';
+import { Component, inject } from '@angular/core';
+import { TetrisEngineService } from '../../tetris-engine.service';
 
 
 @Component({
@@ -17,12 +17,12 @@ import { injectGameFeature } from '../../game.store';
 
 export class DropButtonComponent {
 
-  gameFeature = injectGameFeature()
-
+  #tetrisEngine = inject(TetrisEngineService)
+  //constructor (private tetrisEngine: TetrisEngineService) {}
 
   handleClick () {
-    this.gameFeature.spawnTetrimino()
-    //console.log(this.gridFeature.grid())
+    this.#tetrisEngine.spawnTetrimino()
+    console.log(this.#tetrisEngine.grid)
   }
   
 }

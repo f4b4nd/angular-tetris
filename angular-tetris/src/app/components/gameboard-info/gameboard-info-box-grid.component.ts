@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core'
-import { injectGameFeature } from '../../game.store'
+import { Component, Input, inject } from '@angular/core'
+import { TetrisEngineService } from '../../tetris-engine.service'
 
 @Component({
     selector: 'gameboard-info-box-grid',
@@ -11,7 +11,7 @@ import { injectGameFeature } from '../../game.store'
 
             <div class="gameboard-grid__inner flex flex-col gap-0.5">
 
-                @for (row of gameFeature.grid(); track row) {
+                @for (row of tetrisEngineService.grid; track row) {
 
                     <div name="gameboard-row" class="flex gap-1">
 
@@ -34,6 +34,6 @@ export class GameboardInfoBoxGridComponent {
     @Input() title?: string
     @Input() text?: string | null
 
-    gameFeature = injectGameFeature()
+    tetrisEngineService = inject(TetrisEngineService)
     
 }
