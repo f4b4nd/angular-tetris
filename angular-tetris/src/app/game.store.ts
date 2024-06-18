@@ -11,7 +11,7 @@ import { GRID_SIZE, GRID_WIDTH } from "./utils/constants"
 
 export const initialGameState: GameState = {
     isGameOver: false,
-    isPaused: false,
+    isPaused: true,
     score: 0,
     playerName: null,
 
@@ -24,7 +24,6 @@ export const initialGameState: GameState = {
 export const gameActions = createActionGroup({
     source: 'Game',
     events: {
-
         resetGame: emptyProps(),
         spawnTetrimino: emptyProps(),
         setRandomNextTetrimino: emptyProps(),
@@ -35,7 +34,7 @@ export const gameActions = createActionGroup({
         setGrid: props<{grid: Matrix}>(),
         setScore: props<{score: number}>(),
         setCurrentTetrimino: emptyProps(),
-
+        setIsPaused: props<{isPaused: boolean}>(),
     }
 })
 
@@ -50,6 +49,13 @@ export const gameFeature = createFeature({
             return {
                 ...initialGameState,
                 grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
+            }
+        }),
+
+        on(gameActions.setIsPaused, (state, action) => {
+            return {
+                ...state,
+                isPaused: action.isPaused,
             }
         }),
 

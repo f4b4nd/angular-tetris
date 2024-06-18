@@ -25,8 +25,13 @@ export class PauseButtonComponent {
     #tetrisEngine = inject(TetrisEngineService)
 
     handleClick () {
-      this.#tetrisEngine.spawnTetrimino()
-      console.log(this.#tetrisEngine.grid)
+
+        this.#tetrisEngine.toggleIsPaused()
+
+        if (!this.#tetrisEngine.isPaused) {
+            this.#tetrisEngine.runGame()
+        }
+
     }
     
 }

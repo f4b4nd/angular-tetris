@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core'
 
 import { GameboardInfoComponent } from '../gameboard-info/gameboard-info.component'
-import { GameboardGridModule } from '../gameboard'
+import { GridModule } from '../grid/grid.module'
 import { GameScreenComponent } from './game-screen.component'
-import { GameboardInfoBoxComponent } from '../gameboard-info/gameboard-info-box.component'
+import { GameboardInfoSectionComponent } from '../gameboard-info/gameboard-info-section.component'
 import { ToStringPipe } from '../../pipes/to-string.pipe'
 import { CommonModule, DatePipe } from '@angular/common'
+import { NextTetriminoSectionComponent } from '../next-tetrimino-section.component'
 
 @NgModule({
     declarations: [
         ToStringPipe,
         GameScreenComponent,
         GameboardInfoComponent,
-        GameboardInfoBoxComponent,
+        GameboardInfoSectionComponent,
+        NextTetriminoSectionComponent,
     ],
     imports: [
-        GameboardGridModule,
+        GridModule,
         CommonModule,
     ],
     providers: [
@@ -23,7 +25,7 @@ import { CommonModule, DatePipe } from '@angular/common'
     ],
     exports: [
         GameScreenComponent,
-        GameboardInfoBoxComponent,
+        GameboardInfoSectionComponent,
         GameboardInfoComponent,
     ]
     

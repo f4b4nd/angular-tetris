@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
+import { TetrisEngineService } from '../../tetris-engine.service'
 
 @Component({
     selector: 'game-screen',
@@ -9,20 +10,34 @@ import { Component } from '@angular/core'
     `,
     template: `
         <div 
-            id="game-screen" 
-            class="game-screen border border-black inline-flex mx-auto justify-between h-full"
+            class="game-screen border border-black  inline-flex mx-auto justify-between h-full"
         >
 
-            <gameboard-grid class="p-2"></gameboard-grid>
+            <grid
+                *ngIf="tetrisEngineService.grid"
+                gridSize="grid-lg" 
+                tileSize="tile-lg" 
+                [grid]="tetrisEngineService.grid" 
+                class="p-2"
+                classNames="border-2 border-black p-0.5"
+            />
 
-            <gameboard-info class="p-2 border border-black"></gameboard-info>
+            <gameboard-info 
+                class="p-2"
+            />
 
         </div>
     `,
 })
 
 
-export class GameScreenComponent {
+export class GameScreenComponent implements OnInit {
 
+    tetrisEngineService = inject(TetrisEngineService)
+
+
+    ngOnInit() {
+        this.tetrisEngineService.resetGame()
+    }
 
 }

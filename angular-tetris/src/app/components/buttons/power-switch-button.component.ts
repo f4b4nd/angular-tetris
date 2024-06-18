@@ -42,7 +42,7 @@ import { Component } from '@angular/core'
                 width: 26px;
                 left: 4px;
                 bottom: 4px;
-                background-color: $white;
+                background-color: $grey;
                 -webkit-transition: .4s;
                 transition: .4s;
             }

@@ -23,9 +23,11 @@ import { TetrisEngineService } from '../../tetris-engine.service';
 
 export class DropButtonComponent {
 
-  #tetrisEngine = inject(TetrisEngineService)
+    #tetrisEngine = inject(TetrisEngineService)
 
-  handleClick () {
-  }
+    handleClick () {
+
+        this.#tetrisEngine.dropdownTetrimino()
+    }
   
 }

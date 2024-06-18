@@ -31,6 +31,8 @@ This application is deployed and is available here : [angular-tetris](https://f4
 
 How is it deployed ?
 
+This project is configured to use Github-pages from bundles files in `main/docs`.
+
 cf. [Héberger une app Angular sur GitHub Pages](https://www.gaetanrouzies.com/github-pages-angular)
 
 

@@ -1,1 +1,0 @@
-export { TetriminoComponent } from './tetrimino.component'
