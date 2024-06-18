@@ -3,15 +3,14 @@ import { Component, OnInit } from '@angular/core'
 
 @Component({
     template: `
-        <top-navbar></top-navbar>
+        <div class="flex items-center h-full">
 
-        <div class="flex">
-
-            <login-form classNames="bg-white" />
+            <login-form 
+                class="grow" 
+                classNames="bg-white max-w-md mx-auto" 
+            />
 
         </div>
-
-
     `
 })
 

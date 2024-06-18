@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
-import { GameScreenModule } from './game-screen/game-screen.module'
-import { DirectionnalButtonComponent, DropButtonComponent, PauseButtonComponent, PowerSwitchButtonComponent } from './buttons'
+import { GameScreenModule } from '../game-screen/game-screen.module'
+import { DirectionnalButtonComponent, DropButtonComponent, PauseButtonComponent, PowerSwitchButtonComponent } from '../buttons'
 import { GameConsoleComponent } from './game-console.component'
 
 import { CommonModule } from '@angular/common'

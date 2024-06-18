@@ -22,14 +22,14 @@ import { GameStateService } from '../../game-state.service'
 
 export class PauseButtonComponent {
 
-    #tetrisEngine = inject(GameStateService)
+    #gameStateService = inject(GameStateService)
 
     handleClick () {
 
-        this.#tetrisEngine.toggleIsPaused()
+        this.#gameStateService.toggleIsPaused()
 
-        if (!this.#tetrisEngine.isPaused) {
-            this.#tetrisEngine.runGame()
+        if (!this.#gameStateService.isPaused) {
+            this.#gameStateService.runGame()
         }
 
     }

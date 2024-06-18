@@ -10,7 +10,7 @@ import { GameStateService } from '../../game-state.service'
     `,
     template: `
         <div 
-            class="game-screen border border-black  inline-flex mx-auto justify-between h-full"
+            class="game-screen border border-black inline-flex mx-auto justify-between h-full"
         >
 
             <grid
@@ -31,13 +31,9 @@ import { GameStateService } from '../../game-state.service'
 })
 
 
-export class GameScreenComponent implements OnInit {
+export class GameScreenComponent {
 
     gameStateService = inject(GameStateService)
 
-
-    ngOnInit() {
-        this.gameStateService.resetGame()
-    }
 
 }

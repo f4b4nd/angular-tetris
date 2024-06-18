@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { Observable, interval, map } from 'rxjs'
-import { GameStateService } from '../../game-state.service'
+import { Observable, delay, interval, map, startWith } from 'rxjs'
+import { GameStateService } from '../game-state.service'
 
 @Component({
     selector: 'gameboard-info',
@@ -41,6 +41,14 @@ export class GameboardInfoComponent {
 
     counter$ = interval(1000)
 
-    currentDate$: Observable<Date> = this.counter$.pipe(map(_ => new Date()))
+    currentDate$: Observable<Date>
+
+    constructor () {
+        this.currentDate$ = this.counter$.pipe(
+            map(_ => new Date()),
+            startWith(new Date()), 
+            delay(0),
+        )
+    }
 
 }

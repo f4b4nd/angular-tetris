@@ -23,11 +23,11 @@ import { GameStateService } from '../../game-state.service';
 
 export class DropButtonComponent {
 
-    #tetrisEngine = inject(GameStateService)
+    #gameStateService = inject(GameStateService)
 
     handleClick () {
 
-        this.#tetrisEngine.dropdownTetrimino()
+        this.#gameStateService.dropdownTetrimino()
     }
   
 }

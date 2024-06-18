@@ -6,11 +6,22 @@ import { isAuthenticatedGuard } from './is-authenticated.guard';
 
 
 export const routes: Routes = [ 
-    { path: '', component: HomeComponent, canActivate: [isAuthenticatedGuard]},
-    { path: 'login', component: LoginComponent },
 
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
-];
+    { 
+        path: '', 
+        component: HomeComponent, 
+        canActivate: [isAuthenticatedGuard]
+    },
+    { 
+        path: 'login',
+        component: LoginComponent 
+    },
+
+    { 
+        path: '**', 
+        redirectTo: '' 
+    },
+
+]
 
 export const appRoutingModule = RouterModule.forRoot(routes)

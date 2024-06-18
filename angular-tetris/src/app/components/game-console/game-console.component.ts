@@ -56,7 +56,7 @@ import { Component, OnInit } from '@angular/core'
 
             <game-screen class="py-4 self-center" />
     
-            <div name="game-controls" class="">
+            <div name="game-controls" >
 
                 <div name="commands" class="flex justify-between px-4 ">
 
@@ -64,7 +64,11 @@ import { Component, OnInit } from '@angular/core'
 
                     <div id="directionnal-buttons" class="flex flex-col align-end self-center basis-2/5">
 
-                        <directionnal-button bgColor="blue" class="self-center" direction="up" />
+                        <directionnal-button 
+                            bgColor="blue" 
+                            class="self-center" 
+                            direction="up" 
+                        />
 
                         <div class="flex justify-between">
                             <directionnal-button bgColor="green" direction="left" />
@@ -92,11 +96,6 @@ import { Component, OnInit } from '@angular/core'
 })
 
 
-export class GameConsoleComponent implements OnInit {
-
-
-    ngOnInit() {
-        //this.game.resetGame()
-    }
+export class GameConsoleComponent {
 
 }

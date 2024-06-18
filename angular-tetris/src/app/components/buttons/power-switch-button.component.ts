@@ -93,7 +93,12 @@ export class PowerSwitchButtonComponent {
         const isChecked = ($event.target as HTMLInputElement).checked
 
         if (!isChecked) {
-            this.gameStateService.resetGame()
+            if (confirm("You're having a good time. Are you sure you want to turn-off ?")) {
+                this.gameStateService.resetGame()
+            } else {
+                
+            }
+        
         }
 
     }

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
     template: `
         <div class="h-full">
             <div class="flex justify-center h-full px-1 py-2">
-                <game-console></game-console>
+                <game-console />
             </div>
         </div>
     `,

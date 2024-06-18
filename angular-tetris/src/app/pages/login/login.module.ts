@@ -1,25 +1,21 @@
 import { NgModule } from '@angular/core'
 
-import { LoginComponent } from './'
-import { TopNavbarModule } from '../../components/top-navbar'
+import { LoginComponent } from './login.component'
 import { LoginFormModule } from '../../components/forms/login-form.module'
-import { CommonModule } from '@angular/common'
 
 
 
 @NgModule({
     declarations: [
         LoginComponent,
-      ],
-      imports: [
-        TopNavbarModule,
+    ],
+    imports: [
         LoginFormModule,
-      ],
-      providers: [],
-      
-      bootstrap: [
-      ],
-    
+    ],
+    providers: [
+    ],
+    bootstrap: [
+    ],
 })
 
 export class LoginModule {}
