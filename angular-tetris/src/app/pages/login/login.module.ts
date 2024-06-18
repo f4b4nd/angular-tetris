@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core'
 
 import { LoginComponent } from './'
-import { TopNavbarModule, LoginFormModule } from '../../components'
+import { TopNavbarModule } from '../../components/top-navbar'
+import { LoginFormModule } from '../../components/forms/login-form.module'
+import { CommonModule } from '@angular/common'
 
 
 

@@ -1,19 +1,15 @@
 import { Injectable, computed, effect, inject } from "@angular/core";
-import { isBottomCollision, isLeftCollision, isRightCollision } from "./utils/collisions"
-import { canOperateMatrixes, operateMatrixes } from "./utils/operateMatrixes";
-import { containsValueGreaterThanOne, getMatrixDeleteFullRows, getNumberOfFullRows } from "./utils/matrix-utils";
 import { tetriminoModels } from "./tetrimino.model";
 import { toObservable } from '@angular/core/rxjs-interop';
 import { interval, BehaviorSubject } from "rxjs";
 import { Store } from "@ngrx/store";
 import { gameFeature, gameActions} from "./game.store";
-import { getRotatedMatrix } from "./utils/rotateMatrix";
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class TetrisEngineService {
+export class GameStateService {
 
     store = inject(Store)
 

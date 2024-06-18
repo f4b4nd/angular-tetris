@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core'
 import { Observable, interval, map } from 'rxjs'
-import { TetrisEngineService } from '../../tetris-engine.service'
+import { GameStateService } from '../../game-state.service'
 
 @Component({
     selector: 'gameboard-info',
@@ -8,27 +8,26 @@ import { TetrisEngineService } from '../../tetris-engine.service'
         <div class="flex flex-col gap-8 h-full w-14">
 
             <gameboard-info-section
-                *ngIf="tetrisEngineService.score >= 0" 
+                [text]="gameStateService.playerName || ''"
+                classNames=""
+            />
+        
+            <gameboard-info-section
+                *ngIf="gameStateService.score >= 0" 
                 title="Score"
-                [text]="tetrisEngineService.score | tostring" 
+                [text]="gameStateService.score | tostring" 
                 classNames="items-center"
             />
             
             <next-tetrimino-section
-                [tetrimino]="tetrisEngineService.nextTetrimino"
-                classNames=""
+                [tetrimino]="gameStateService.nextTetrimino"
+                classNames="flex flex-col gap-1"
             />
-            
+ 
             <gameboard-info-section
-                *ngIf="tetrisEngineService.playerName" 
-                [text]="tetrisEngineService.playerName"
-                classNames=""
-            />
-            
-            <gameboard-info-section
-                [text]="currentDate$ | async | date:'HH:mm:ss' " 
+                [text]="currentDate$ | async | date:'HH : mm' " 
+                classNames="border border-black items-center"
                 class="align-self-end mt-auto"
-                classNames="border border-black"
             />
 
         </div>
@@ -38,7 +37,7 @@ import { TetrisEngineService } from '../../tetris-engine.service'
 
 export class GameboardInfoComponent {
 
-    tetrisEngineService = inject(TetrisEngineService)
+    gameStateService = inject(GameStateService)
 
     counter$ = interval(1000)
 

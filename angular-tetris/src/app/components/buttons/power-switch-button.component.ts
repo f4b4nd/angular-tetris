@@ -1,10 +1,11 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
+import { GameStateService } from '../../game-state.service'
 
 @Component({
     selector: 'power-switch-button',
     styles: 
         `
-        $grey: #ccc;
+        $grey: #696969;
         $blue: #2196F3;
         $red: red;
         $black: black;
@@ -73,9 +74,9 @@ import { Component } from '@angular/core'
     template: `
         <label class="switch">
             <input 
-                checked
                 type="checkbox"
                 class="h-4 w-4"
+                (change)="onChange($event)"
             >
             <span class="slider round"></span>
         </label>
@@ -84,5 +85,17 @@ import { Component } from '@angular/core'
 
 
 export class PowerSwitchButtonComponent {
+
+    gameStateService = inject(GameStateService)
+
+    onChange ($event: Event) {
+
+        const isChecked = ($event.target as HTMLInputElement).checked
+
+        if (!isChecked) {
+            this.gameStateService.resetGame()
+        }
+
+    }
 
 }

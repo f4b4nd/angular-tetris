@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { TetrisEngineService } from '../../tetris-engine.service'
+import { GameStateService } from '../../game-state.service'
 
 @Component({
     selector: 'game-screen',
@@ -14,10 +14,10 @@ import { TetrisEngineService } from '../../tetris-engine.service'
         >
 
             <grid
-                *ngIf="tetrisEngineService.grid"
+                *ngIf="gameStateService.grid"
                 gridSize="grid-lg" 
                 tileSize="tile-lg" 
-                [grid]="tetrisEngineService.grid" 
+                [grid]="gameStateService.grid" 
                 class="p-2"
                 classNames="border-2 border-black p-0.5"
             />
@@ -33,11 +33,11 @@ import { TetrisEngineService } from '../../tetris-engine.service'
 
 export class GameScreenComponent implements OnInit {
 
-    tetrisEngineService = inject(TetrisEngineService)
+    gameStateService = inject(GameStateService)
 
 
     ngOnInit() {
-        this.tetrisEngineService.resetGame()
+        this.gameStateService.resetGame()
     }
 
 }

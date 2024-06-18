@@ -1,16 +1,16 @@
 import { Component, Input, inject} from '@angular/core'
 
-import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TetrisEngineService } from '../../tetris-engine.service';
+import { FormGroup, FormControl } from '@angular/forms'
+import { Router } from '@angular/router'
+import { GameStateService } from '../../game-state.service'
 
 @Component({
     selector: 'login-form',
 
     template: `
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" [ngClass]=[classNames]>
 
-            <div class="border border-black max-w-md mx-auto">
+            <div class="border border-black max-w-md mx-auto" >
 
                 <div class="flex flex-col gap-4 p-4">
 
@@ -55,8 +55,10 @@ import { TetrisEngineService } from '../../tetris-engine.service';
 
 export class LoginFormComponent {
 
-    #tetrisEngineService = inject(TetrisEngineService)
+    @Input() classNames: string = ""
 
+    #gameStateService = inject(GameStateService)
+    
     form: FormGroup<{playerName: FormControl<string|null>}> = new FormGroup({
         playerName: new FormControl(''),
     })
@@ -69,7 +71,7 @@ export class LoginFormComponent {
 
         if (!formData.playerName) return
 
-        this.#tetrisEngineService.setPlayerName(formData.playerName)
+        this.#gameStateService.setPlayerName(formData.playerName)
 
         this.router.navigate([''])
     }

@@ -1,6 +1,6 @@
 // user-list.component.ts
 import { Component, inject } from '@angular/core';
-import { TetrisEngineService } from '../../tetris-engine.service';
+import { GameStateService } from '../../game-state.service';
 
 
 @Component({
@@ -23,7 +23,7 @@ import { TetrisEngineService } from '../../tetris-engine.service';
 
 export class DropButtonComponent {
 
-    #tetrisEngine = inject(TetrisEngineService)
+    #tetrisEngine = inject(GameStateService)
 
     handleClick () {
 

@@ -51,34 +51,38 @@ import { Component, OnInit } from '@angular/core'
         <div class="game-console flex flex-col mx-auto rounded-xl p-2">
 
             <div class="flex justify-end">
-                <power-switch-button></power-switch-button>
+                <power-switch-button />
             </div>
 
-            <game-screen class="py-4 self-center"></game-screen>
+            <game-screen class="py-4 self-center" />
     
             <div name="game-controls" class="">
 
                 <div name="commands" class="flex justify-between px-4 ">
 
-                    <drop-button class="self-center" ></drop-button>
+                    <drop-button class="self-center" />
 
                     <div id="directionnal-buttons" class="flex flex-col align-end self-center basis-2/5">
 
-                        <directionnal-button bgColor="blue" class="self-center" direction="up"></directionnal-button>
+                        <directionnal-button bgColor="blue" class="self-center" direction="up" />
 
                         <div class="flex justify-between">
-                            <directionnal-button bgColor="green" direction="left"></directionnal-button>
-                            <directionnal-button bgColor="red" direction="right"></directionnal-button>
+                            <directionnal-button bgColor="green" direction="left" />
+                            <directionnal-button bgColor="red" direction="right" />
                         </div>
 
-                        <directionnal-button bgColor="yellow" class="self-center" direction="down"></directionnal-button>
+                        <directionnal-button 
+                            bgColor="yellow" 
+                            class="self-center" 
+                            direction="down" 
+                        />
 
                     </div>
 
                 </div>
 
                 <div class="flex justify-center">
-                    <pause-button></pause-button>
+                    <pause-button />
                 </div>
 
             </div>

@@ -5,9 +5,13 @@ import { Component, OnInit } from '@angular/core'
     template: `
         <top-navbar></top-navbar>
 
-        <div class="p-4">
-            <login-form></login-form>
+        <div class="flex">
+
+            <login-form classNames="bg-white" />
+
         </div>
+
+
     `
 })
 

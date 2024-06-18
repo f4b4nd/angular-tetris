@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core'
-import { TetrisEngineService } from '../../tetris-engine.service'
+import { GameStateService } from '../../game-state.service'
 
 @Component({
     selector: 'directionnal-button',
@@ -24,26 +24,26 @@ export class DirectionnalButtonComponent implements OnInit {
     @Input() direction?: Direction
     @Input() bgColor?: string
 
-    #tetrisEngineService = inject(TetrisEngineService)
+    #gameStateService = inject(GameStateService)
 
     handleClickButton (direction: Direction | undefined) {
 
         switch(direction) {
             case 'down':
-                this.#tetrisEngineService.moveDownTetrimino()
-                console.log(this.#tetrisEngineService.currentTetrimino)
+                this.#gameStateService.moveDownTetrimino()
+                console.log(this.#gameStateService.currentTetrimino)
                 break
             case 'left':
-                this.#tetrisEngineService.moveHorizontalTetrimino('left')
-                console.log(this.#tetrisEngineService.currentTetrimino)
+                this.#gameStateService.moveHorizontalTetrimino('left')
+                console.log(this.#gameStateService.currentTetrimino)
                 break
             case 'right':
-                this.#tetrisEngineService.moveHorizontalTetrimino('right')
-                console.log(this.#tetrisEngineService.currentTetrimino)
+                this.#gameStateService.moveHorizontalTetrimino('right')
+                console.log(this.#gameStateService.currentTetrimino)
                 break
             case 'up':
-                this.#tetrisEngineService.rotateTetrimino()
-                console.log(this.#tetrisEngineService.currentTetrimino)
+                this.#gameStateService.rotateTetrimino()
+                console.log(this.#gameStateService.currentTetrimino)
                 break
             default:
                 return

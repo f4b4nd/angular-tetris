@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core'
-import { TetrisEngineService } from '../../tetris-engine.service'
+import { GameStateService } from '../../game-state.service'
 
 @Component({
     selector: 'pause-button',
@@ -22,7 +22,7 @@ import { TetrisEngineService } from '../../tetris-engine.service'
 
 export class PauseButtonComponent {
 
-    #tetrisEngine = inject(TetrisEngineService)
+    #tetrisEngine = inject(GameStateService)
 
     handleClick () {
 

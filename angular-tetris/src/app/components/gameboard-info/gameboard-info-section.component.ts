@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core'
     template: `
         <div class="gameboard-info-section__wrapper flex flex-col" [ngClass]=[classNames]>
 
-            <div class="gameboard-info-section__title">
+            <div *ngIf="title" class="gameboard-info-section__title">
                 {{title}}
             </div>
 
@@ -23,6 +23,5 @@ export class GameboardInfoSectionComponent {
     @Input() title?: string
     @Input() text?: string|null
     @Input() classNames: string = ''
-
 
 }
