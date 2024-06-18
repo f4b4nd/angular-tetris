@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core'
 @Component({
     selector: 'gameboard-info-section',
     template: `
-        <div class="gameboard-info-section__wrapper border border-black flex flex-col">
+        <div class="gameboard-info-section__wrapper flex flex-col" [ngClass]=[classNames]>
 
             <div class="gameboard-info-section__title">
                 {{title}}
@@ -22,6 +22,7 @@ export class GameboardInfoSectionComponent {
 
     @Input() title?: string
     @Input() text?: string|null
+    @Input() classNames: string = ''
 
 
 }
