@@ -9,13 +9,20 @@ import { GameService } from '../../game.service'
             height: 15px;
             width: 60px;
         }
+
+        .button-wrapper {
+            transform: rotate(-15deg);
+        }
+
     `,
     template: `
-        <button 
-            class="pause-button rounded-lg" 
-            (click)="handleClick()"
-        >
-        </button>
+        <div class="button-wrapper">
+            <button 
+                class="pause-button rounded-lg" 
+                (click)="handleClick()"
+            >
+            </button>
+        </div>
     `,
 })
 

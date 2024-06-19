@@ -1,5 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core'
-import { Observable, delay, interval, map, startWith, timer, merge } from 'rxjs'
+import { Component, inject } from '@angular/core'
+import { Observable, map, timer, merge } from 'rxjs'
 import { GameService } from '../game.service'
 
 @Component({
@@ -30,6 +30,7 @@ import { GameService } from '../game.service'
                 <clock-blink 
                     [time]="currentTime$ | async" 
                     [blinker]="blinker$ | async"
+                    class="font-bold"
                 />
                 
             </div>
@@ -44,17 +45,15 @@ export class GameboardInfoComponent {
     gameService = inject(GameService)
 
     counter$ = timer(0, 1000)
+    currentTime$: Observable<Date>
 
     show$ = timer(0, 2000)
     hide$ = timer(1000, 2000)
-    
     blinker$: Observable<string>
-    currentTime$: Observable<Date>
 
     constructor () {
 
         this.currentTime$ = this.counter$.pipe(map(_ => new Date()))
-
 
         this.blinker$ = merge(
             this.show$.pipe(map(_ => 'show')),
