@@ -13,9 +13,10 @@ export const initialGameState: GameState = {
     isGameOver: false,
     isPaused: true,
     score: 0,
+    speed: 1,
     playerName: null,
 
-    grid: null,
+    grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
     currentTetrimino: null,
     nextTetrimino: null,
 }
@@ -35,6 +36,7 @@ export const gameActions = createActionGroup({
         setScore: props<{score: number}>(),
         setCurrentTetrimino: emptyProps(),
         setIsPaused: props<{isPaused: boolean}>(),
+        setSpeed: props<{speed: number}>(),
     }
 })
 
@@ -48,7 +50,13 @@ export const gameFeature = createFeature({
         on(gameActions.resetGame, () => {
             return {
                 ...initialGameState,
-                grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
+            }
+        }),
+
+        on(gameActions.setSpeed, (state, action) => {
+            return {
+                ...state,
+                speed: action.speed,
             }
         }),
 

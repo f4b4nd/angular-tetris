@@ -9,21 +9,21 @@ import { gameFeature, gameActions} from "./game.store";
     providedIn: 'root'
 })
 
-export class GameStateService {
+export class GameService {
 
     store = inject(Store)
 
-    _grid = this.store.selectSignal(gameFeature.selectGrid)
-    _currentTetrimino = this.store.selectSignal(gameFeature.selectCurrentTetrimino)
-    _nextTetrimino = this.store.selectSignal(gameFeature.selectNextTetrimino)
+    private _grid = this.store.selectSignal(gameFeature.selectGrid)
+    private _currentTetrimino = this.store.selectSignal(gameFeature.selectCurrentTetrimino)
+    private _nextTetrimino = this.store.selectSignal(gameFeature.selectNextTetrimino)
 
-    _isPaused = this.store.selectSignal(gameFeature.selectIsPaused)
-    _score = this.store.selectSignal(gameFeature.selectScore)
-    _playerName = this.store.selectSignal(gameFeature.selectPlayerName)
-    
+    private _isPaused = this.store.selectSignal(gameFeature.selectIsPaused)
+    private _score = this.store.selectSignal(gameFeature.selectScore)
+    private _playerName = this.store.selectSignal(gameFeature.selectPlayerName)
+    private _speed = this.store.selectSignal(gameFeature.selectSpeed)
     
     constructor() {
-        effect(() => {
+        /*effect(() => {
             if (!this.currentTetrimino && !this.isPaused) {
                 console.log(`effect`)
                 //this.runGame()
@@ -33,17 +33,17 @@ export class GameStateService {
                 while (this.currentTetrimino) {
                     this.dropdownTetrimino()
                 }
-            }*/
+            }
             
-        })
+        })*/
     }
 
     get grid () {
         return this._grid()
     }
 
-    get score2 () {
-        return this._score() * 100;
+    get speed () {
+        return this._speed()
     }
 
     get currentTetrimino () {
@@ -76,11 +76,11 @@ export class GameStateService {
     }
 
     dropdownTetrimino () {
-        this.moveDownTetrimino()
+        this.store.dispatch(gameActions.setSpeed({speed: 10}))
+        //this.store.dispatch(gameActions.setSpeed({speed: 1}))
     }
 
     moveDownTetrimino () {
-        // repeter l'action tant que currentTetrimino n'est pas nul
         this.store.dispatch(gameActions.moveDownTetrimino())
     }
 
@@ -106,13 +106,21 @@ export class GameStateService {
         this.store.dispatch(gameActions.setIsPaused({isPaused: !this.isPaused}))
     }
 
-    runGame () {
+
+    startGame () {
+
+        this.store.dispatch(gameActions.resetGame())
+        this.store.dispatch(gameActions.setIsPaused({isPaused: false}))
+
+        const speedInterval = this._speed() >= 1 ? 1000 / this._speed() : 1000
 
         this.spawnTetrimino()
 
         setInterval(() => {
-            this.moveDownTetrimino()
-        }, 1000)
+            if (!this.isPaused) {
+                this.moveDownTetrimino()
+            }
+        }, 100)
 
     }
 

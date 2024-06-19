@@ -2,7 +2,7 @@ import { Component, Input, inject} from '@angular/core'
 
 import { FormGroup, FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
-import { GameStateService } from '../../game-state.service'
+import { GameService } from '../../game.service'
 
 @Component({
     selector: 'login-form',
@@ -52,7 +52,7 @@ export class LoginFormComponent {
 
     @Input() classNames: string = ""
 
-    #gameStateService = inject(GameStateService)
+    #gameservice = inject(GameService)
     
     form: FormGroup<{playerName: FormControl<string|null>}> = new FormGroup({
         playerName: new FormControl(''),
@@ -66,7 +66,7 @@ export class LoginFormComponent {
 
         if (!formData.playerName) return
 
-        this.#gameStateService.setPlayerName(formData.playerName)
+        this.#gameservice.setPlayerName(formData.playerName)
 
         this.router.navigate([''])
     }

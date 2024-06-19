@@ -24,7 +24,8 @@ type GameState = {
     isPaused: boolean,
     score: number,
     playerName: string | null,
-    grid: Matrix|null,
+    grid: Matrix,
     currentTetrimino: Tetrimino|null,
     nextTetrimino: Tetrimino | null,
+    speed: number,
 }

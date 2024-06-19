@@ -5,7 +5,7 @@ import { Component, Input } from "@angular/core"
     template: `
         <div class="next-box__wrapper" [ngClass]=[classNames]>
 
-            <div class="next-tetrimino-section__title text-center">
+            <div class="next-tetrimino-section__title text-center font-bold">
                 Next
             </div>
     

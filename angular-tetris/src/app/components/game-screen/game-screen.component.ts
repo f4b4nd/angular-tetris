@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { GameStateService } from '../../game-state.service'
+import { GameService } from '../../game.service'
 
 @Component({
     selector: 'game-screen',
@@ -14,10 +14,9 @@ import { GameStateService } from '../../game-state.service'
         >
 
             <grid
-                *ngIf="gameStateService.grid"
+                [grid]="gameService.grid" 
                 gridSize="grid-lg" 
                 tileSize="tile-lg" 
-                [grid]="gameStateService.grid" 
                 class="p-2"
                 classNames="border-2 border-black p-0.5"
             />
@@ -33,7 +32,7 @@ import { GameStateService } from '../../game-state.service'
 
 export class GameScreenComponent {
 
-    gameStateService = inject(GameStateService)
+    gameService = inject(GameService)
 
 
 }

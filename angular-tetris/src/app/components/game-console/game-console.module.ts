@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common'
         CommonModule,
     ],
     providers: [
-
     ],
     exports: [
         GameConsoleComponent,

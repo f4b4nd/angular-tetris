@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core'
-import { GameStateService } from '../../game-state.service'
+import { GameService } from '../../game.service'
 
 @Component({
     selector: 'directionnal-button',
@@ -19,39 +19,36 @@ import { GameStateService } from '../../game-state.service'
 })
 
 
-export class DirectionnalButtonComponent implements OnInit {
+export class DirectionnalButtonComponent {
 
     @Input() direction?: Direction
     @Input() bgColor?: string
 
-    #gameStateService = inject(GameStateService)
-
+    #gameService = inject(GameService)
+    
     handleClickButton (direction: Direction | undefined) {
 
         switch(direction) {
             case 'down':
-                this.#gameStateService.moveDownTetrimino()
-                console.log(this.#gameStateService.currentTetrimino)
+                this.#gameService.moveDownTetrimino()
+                console.log(this.#gameService.currentTetrimino)
                 break
             case 'left':
-                this.#gameStateService.moveHorizontalTetrimino('left')
-                console.log(this.#gameStateService.currentTetrimino)
+                this.#gameService.moveHorizontalTetrimino('left')
+                console.log(this.#gameService.currentTetrimino)
                 break
             case 'right':
-                this.#gameStateService.moveHorizontalTetrimino('right')
-                console.log(this.#gameStateService.currentTetrimino)
+                this.#gameService.moveHorizontalTetrimino('right')
+                console.log(this.#gameService.currentTetrimino)
                 break
             case 'up':
-                this.#gameStateService.rotateTetrimino()
-                console.log(this.#gameStateService.currentTetrimino)
+                this.#gameService.rotateTetrimino()
+                console.log(this.#gameService.currentTetrimino)
                 break
             default:
                 return
         }
     }   
     
-    ngOnInit() {
-        console.log('direction >>', this.direction)
-    }
 
 }

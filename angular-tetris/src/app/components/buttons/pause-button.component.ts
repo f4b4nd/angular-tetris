@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core'
-import { GameStateService } from '../../game-state.service'
+import { GameService } from '../../game.service'
 
 @Component({
     selector: 'pause-button',
@@ -22,15 +22,11 @@ import { GameStateService } from '../../game-state.service'
 
 export class PauseButtonComponent {
 
-    #gameStateService = inject(GameStateService)
+    #gameservice = inject(GameService)
 
     handleClick () {
 
-        this.#gameStateService.toggleIsPaused()
-
-        if (!this.#gameStateService.isPaused) {
-            this.#gameStateService.runGame()
-        }
+        this.#gameservice.toggleIsPaused()
 
     }
     

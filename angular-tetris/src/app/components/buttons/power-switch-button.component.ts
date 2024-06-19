@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core'
-import { GameStateService } from '../../game-state.service'
+import { GameService } from '../../game.service'
 
 @Component({
     selector: 'power-switch-button',
@@ -86,7 +86,7 @@ import { GameStateService } from '../../game-state.service'
 
 export class PowerSwitchButtonComponent {
 
-    gameStateService = inject(GameStateService)
+    #gameService = inject(GameService)
 
     onChange ($event: Event) {
 
@@ -94,12 +94,12 @@ export class PowerSwitchButtonComponent {
 
         if (!isChecked) {
             if (confirm("You're having a good time. Are you sure you want to turn-off ?")) {
-                this.gameStateService.resetGame()
-            } else {
-                
+                this.#gameService.resetGame()
             }
-        
+            return
         }
+
+        this.#gameService.startGame()
 
     }
 

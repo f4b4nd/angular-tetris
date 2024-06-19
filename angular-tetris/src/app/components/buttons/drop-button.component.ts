@@ -1,17 +1,16 @@
 // user-list.component.ts
 import { Component, inject } from '@angular/core';
-import { GameStateService } from '../../game-state.service';
+import { GameService } from '../../game.service';
 
 
 @Component({
-  selector: 'drop-button',
-  styles: 
-    `
-    .drop-button {
-        background-color: grey;
-    }
-  `,
-  template: `
+    selector: 'drop-button',
+      styles: `
+      .drop-button {
+          background-color: grey;
+      }
+    `,
+    template: `
         <button 
           class="drop-button h-20 w-20 rounded-full"
           (click)="handleClick()"
@@ -23,11 +22,11 @@ import { GameStateService } from '../../game-state.service';
 
 export class DropButtonComponent {
 
-    #gameStateService = inject(GameStateService)
+    #gameService = inject(GameService)
 
     handleClick () {
 
-        this.#gameStateService.dropdownTetrimino()
+        this.#gameService.toggleIsPaused()
     }
   
 }

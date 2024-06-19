@@ -1,15 +1,15 @@
 import { Injectable, inject } from "@angular/core"
-import { GameStateService } from "./game-state.service"
+import { GameService } from "./game.service"
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
 
-    gameStateService = inject(GameStateService)
+    GameService = inject(GameService)
 
     isAuthenticated (): boolean {
-        return this.gameStateService.playerName !== null
+        return this.GameService.playerName !== null
     }
 
 }

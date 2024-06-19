@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
+import { GameService } from '../../game.service'
 
 @Component({
     selector: 'game-console',
@@ -62,7 +63,9 @@ import { Component, OnInit } from '@angular/core'
 
                     <drop-button class="self-center" />
 
-                    <div id="directionnal-buttons" class="flex flex-col align-end self-center basis-2/5">
+                    <div id="directionnal-buttons" 
+                        class="flex flex-col align-end self-center basis-2/5"
+                    >
 
                         <directionnal-button 
                             bgColor="blue" 
