@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core'
 import { Observable, delay, interval, map, startWith, timer, merge } from 'rxjs'
 import { GameService } from '../game.service'
-import { LocaleDateService } from '../locale-date.service'
 
 @Component({
     selector: 'gameboard-info',
@@ -28,9 +27,9 @@ import { LocaleDateService } from '../locale-date.service'
                     classNames="items-center"
                 />
 
-                <gameboard-info-section
-                    [title]="dateBlinker$ | async"
-                    classNames="items-center"
+                <clock-blink 
+                    [time]="currentTime$ | async" 
+                    [blinker]="blinker$ | async"
                 />
                 
             </div>
@@ -43,28 +42,25 @@ import { LocaleDateService } from '../locale-date.service'
 export class GameboardInfoComponent {
 
     gameService = inject(GameService)
-    dateService = inject(LocaleDateService)
 
-    counter$ = timer(0, 2000)
+    counter$ = timer(0, 1000)
+
+    show$ = timer(0, 2000)
     hide$ = timer(1000, 2000)
-
-    dateBlinker$: Observable<string>
     
+    blinker$: Observable<string>
+    currentTime$: Observable<Date>
+
     constructor () {
 
-        this.dateBlinker$ = merge(
-            this.counter$.pipe(map(_ => this.nowHoursMinutes1())),
-            this.hide$.pipe(map(_ => this.nowHoursMinutes2())),
+        this.currentTime$ = this.counter$.pipe(map(_ => new Date()))
+
+
+        this.blinker$ = merge(
+            this.show$.pipe(map(_ => 'show')),
+            this.hide$.pipe(map(_ => 'hide')),
         )
     
-    }
-
-    nowHoursMinutes1 (): string {
-        return this.dateService.transformDateToHoursMinutes(new Date())?.replace(':', ':') || ''
-    }
-
-    nowHoursMinutes2 (): string {
-        return this.dateService.transformDateToHoursMinutes(new Date())?.replace(':', ' ') || ''
     }
 
 }
