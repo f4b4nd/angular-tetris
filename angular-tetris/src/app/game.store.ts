@@ -13,7 +13,7 @@ export const initialGameState: GameState = {
     isGameOver: true,
     isPaused: true,
     score: 0,
-    speed: 1,
+    speed: 1 | 2,
     playerName: null,
 
     grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),

@@ -27,7 +27,6 @@ export class GameService {
     constructor() {
         effect(() => {
             if (!this.isPaused && !this.isGameOver) {
-                console.log('hi')
                 this.gameRoutine()   
             }
             if (this.isPaused) {
@@ -78,8 +77,7 @@ export class GameService {
     }
 
     dropdownTetrimino () {
-        this.store.dispatch(gameActions.setSpeed({speed: 100}))
-        //this.store.dispatch(gameActions.setSpeed({speed: 1}))
+        this.store.dispatch(gameActions.setSpeed({speed: 2}))
     }
 
     resetSpeed () {
@@ -114,8 +112,9 @@ export class GameService {
 
     gameRoutine () {
 
-        const isValidSpeed = this.speed >= 1 && this.speed <= 100
-        const speedInterval = isValidSpeed ? (1000 / this.speed) : 1000
+        const defaultSpeed = 500
+        const maxSpeed = 1 / 1000
+        const speedInterval = this.speed > 1 ? maxSpeed : defaultSpeed
 
         clearInterval(this._interval)
 
