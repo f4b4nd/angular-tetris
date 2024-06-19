@@ -12,7 +12,7 @@ import { Component, Input } from "@angular/core"
             <grid 
                 gridSize="grid-sm" 
                 tileSize="tile-sm" 
-                [grid]="tetrimino?.shape || emptyTetriminoShape"
+                [grid]="tetrimino?.nextShape || emptyTetriminoShape"
             />
                 
         </div>
@@ -24,7 +24,7 @@ export class NextTetriminoSectionComponent {
     @Input() tetrimino: Tetrimino | null | undefined
     @Input() classNames: string = ''
 
-    emptyTetriminoShape = Array(3).fill(Array(3).fill(0))
+    emptyTetriminoShape = Array(2).fill(Array(4).fill(0))
     
 
 }

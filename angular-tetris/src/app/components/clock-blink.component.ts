@@ -10,7 +10,7 @@ import { Component, Input } from "@angular/core";
                 <span class="time-blinker__hour"> {{time | date:'HH'}} </span>
 
                 <span class="time-blinker__separator">
-                    <span class="colon"> {{ blinker === 'show' ? ':' : ''}} </span>
+                    <span *ngIf="blinker === 'show'" class="colon">:</span>
                 </span>
 
                 <span class="time-blinker__minutes"> {{time | date:'mm'}} </span>

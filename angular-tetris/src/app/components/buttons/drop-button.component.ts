@@ -26,7 +26,7 @@ export class DropButtonComponent {
 
     handleClick () {
 
-        this.#gameService.toggleIsPaused()
+        this.#gameService.dropdownTetrimino()
     }
   
 }

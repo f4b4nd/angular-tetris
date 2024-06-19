@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core'
 @Component({
     selector: 'tile',
     styles: `
-        [name='tile__inner'] {
+        [name='tile'] {
 
             &.tile-lg {
                 height: 0.9rem;
@@ -18,10 +18,10 @@ import { Component, Input } from '@angular/core'
         }
     `,
     template: `
-        <div name="tile" class="border border-black">
+        <div name="tile__wrapper" class="border border-black">
 
             <div 
-                name="tile__inner" 
+                name="tile" 
                 [ngClass]="[size, isActive ? 'bg-black' : '' ]"
             >
 

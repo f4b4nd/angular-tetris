@@ -63,7 +63,8 @@ import { GameService } from '../../game.service'
 
                     <drop-button class="self-center" />
 
-                    <div id="directionnal-buttons" 
+                    <div 
+                        id="directionnal-buttons" 
                         class="flex flex-col align-end self-center basis-2/5"
                     >
 
@@ -74,8 +75,17 @@ import { GameService } from '../../game.service'
                         />
 
                         <div class="flex justify-between">
-                            <directionnal-button bgColor="green" direction="left" />
-                            <directionnal-button bgColor="red" direction="right" />
+
+                            <directionnal-button 
+                                bgColor="green" 
+                                direction="left" 
+                            />
+
+                            <directionnal-button 
+                                bgColor="red" 
+                                direction="right" 
+                            />
+                        
                         </div>
 
                         <directionnal-button 

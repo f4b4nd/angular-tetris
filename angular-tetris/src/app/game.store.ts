@@ -10,7 +10,7 @@ import { GRID_SIZE, GRID_WIDTH } from "./utils/constants"
 
 
 export const initialGameState: GameState = {
-    isGameOver: false,
+    isGameOver: true,
     isPaused: true,
     score: 0,
     speed: 1,
@@ -36,6 +36,7 @@ export const gameActions = createActionGroup({
         setScore: props<{score: number}>(),
         setCurrentTetrimino: emptyProps(),
         setIsPaused: props<{isPaused: boolean}>(),
+        setIsGameOver: props<{isGameOver: boolean}>(),
         setSpeed: props<{speed: number}>(),
     }
 })
@@ -64,6 +65,13 @@ export const gameFeature = createFeature({
             return {
                 ...state,
                 isPaused: action.isPaused,
+            }
+        }),
+
+        on(gameActions.setIsGameOver, (state, action) => {
+            return {
+                ...state,
+                isGameOver: action.isGameOver,
             }
         }),
 

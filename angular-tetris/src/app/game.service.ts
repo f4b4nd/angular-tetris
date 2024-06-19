@@ -1,7 +1,5 @@
 import { Injectable, computed, effect, inject } from "@angular/core";
-import { tetriminoModels } from "./tetrimino.model";
-import { toObservable } from '@angular/core/rxjs-interop';
-import { interval, BehaviorSubject } from "rxjs";
+import { tetriminoModels } from "./tetrimino.model"
 import { Store } from "@ngrx/store";
 import { gameFeature, gameActions} from "./game.store";
 
@@ -18,24 +16,24 @@ export class GameService {
     private _nextTetrimino = this.store.selectSignal(gameFeature.selectNextTetrimino)
 
     private _isPaused = this.store.selectSignal(gameFeature.selectIsPaused)
+    private _isGameOver = this.store.selectSignal(gameFeature.selectIsGameOver)
+
     private _score = this.store.selectSignal(gameFeature.selectScore)
     private _playerName = this.store.selectSignal(gameFeature.selectPlayerName)
     private _speed = this.store.selectSignal(gameFeature.selectSpeed)
     
+    private _interval?: number
+
     constructor() {
-        /*effect(() => {
-            if (!this.currentTetrimino && !this.isPaused) {
-                console.log(`effect`)
-                //this.runGame()
+        effect(() => {
+            if (!this.isPaused && !this.isGameOver) {
+                console.log('hi')
+                this.gameRoutine()   
             }
-            /*
-            if (this.currentTetrimino) {
-                while (this.currentTetrimino) {
-                    this.dropdownTetrimino()
-                }
+            if (this.isPaused) {
+                clearInterval(this._interval)
             }
-            
-        })*/
+        })
     }
 
     get grid () {
@@ -50,8 +48,12 @@ export class GameService {
         return this._currentTetrimino()
     }
 
-    get isPaused () {
+    get isPaused () {  
         return this._isPaused()
+    }
+
+    get isGameOver () {
+        return this._isGameOver()
     }
 
     get nextTetrimino () {
@@ -76,8 +78,12 @@ export class GameService {
     }
 
     dropdownTetrimino () {
-        this.store.dispatch(gameActions.setSpeed({speed: 10}))
+        this.store.dispatch(gameActions.setSpeed({speed: 100}))
         //this.store.dispatch(gameActions.setSpeed({speed: 1}))
+    }
+
+    resetSpeed () {
+        this.store.dispatch(gameActions.setSpeed({speed: 1}))
     }
 
     moveDownTetrimino () {
@@ -106,21 +112,33 @@ export class GameService {
         this.store.dispatch(gameActions.setIsPaused({isPaused: !this.isPaused}))
     }
 
+    gameRoutine () {
+
+        const isValidSpeed = this.speed >= 1 && this.speed <= 100
+        const speedInterval = isValidSpeed ? (1000 / this.speed) : 1000
+
+        clearInterval(this._interval)
+
+        this._interval = setInterval(() => {
+
+            if (!this.currentTetrimino) {
+                this.resetSpeed()
+                this.spawnTetrimino()
+            }
+
+            this.moveDownTetrimino()
+
+        }, speedInterval)
+
+    }
 
     startGame () {
 
         this.store.dispatch(gameActions.resetGame())
         this.store.dispatch(gameActions.setIsPaused({isPaused: false}))
+        this.store.dispatch(gameActions.setIsGameOver({isGameOver: false}))
 
-        const speedInterval = this._speed() >= 1 ? 1000 / this._speed() : 1000
-
-        this.spawnTetrimino()
-
-        setInterval(() => {
-            if (!this.isPaused) {
-                this.moveDownTetrimino()
-            }
-        }, 100)
+        this.gameRoutine()
 
     }
 
