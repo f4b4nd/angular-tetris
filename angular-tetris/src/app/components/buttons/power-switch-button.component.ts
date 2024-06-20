@@ -69,17 +69,22 @@ import { GameService } from '../../game.service'
             -ms-transform: translateX(26px);
             transform: translateX(26px);
         }
-
+        .btn-label {
+            font-size: 13px;
+        }
     `,
     template: `
-        <label class="switch">
-            <input 
-                type="checkbox"
-                class="h-4 w-4"
-                (change)="onChange($event)"
-            >
-            <span class="slider round"></span>
-        </label>
+        <div class="power-switch-button__wrapper flex flex-col items-center">
+            <label class="switch">
+                <input 
+                    type="checkbox"
+                    class="h-4 w-4"
+                    (change)="onChange($event)"
+                >
+                <span class="slider round"></span>
+            </label>
+            <span class="btn-label">ON/OFF</span>
+        </div>
     `,
 })
 

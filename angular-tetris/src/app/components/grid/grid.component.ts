@@ -21,7 +21,7 @@ import { Component, OnInit, inject, Inject, Input } from '@angular/core'
             }
 
             .grid__row {
-                gap: 0.25rem;
+                gap: 0.20rem;
             }
         }
         

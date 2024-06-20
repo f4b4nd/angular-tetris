@@ -1,5 +1,4 @@
 import { Injectable, computed, effect, inject } from "@angular/core";
-import { tetriminoModels } from "./tetrimino.model"
 import { Store } from "@ngrx/store";
 import { gameFeature, gameActions} from "./game.store";
 
@@ -12,8 +11,8 @@ export class GameService {
     store = inject(Store)
 
     private grid$$ = this.store.selectSignal(gameFeature.selectGrid)
-    private currentTetrimino$$ = this.store.selectSignal(gameFeature.selectCurrentTetrimino)
-    private nextTetrimino$$ = this.store.selectSignal(gameFeature.selectNextTetrimino)
+    private currentTetromino$$ = this.store.selectSignal(gameFeature.selectCurrentTetromino)
+    private nextTetromino$$ = this.store.selectSignal(gameFeature.selectNextTetromino)
 
     private isPaused$$ = this.store.selectSignal(gameFeature.selectIsPaused)
     private isGameOver$$ = this.store.selectSignal(gameFeature.selectIsGameOver)
@@ -43,8 +42,8 @@ export class GameService {
         return this.speed$$()
     }
 
-    get currentTetrimino () {
-        return this.currentTetrimino$$()
+    get currentTetromino () {
+        return this.currentTetromino$$()
     }
 
     get isPaused () {  
@@ -55,8 +54,8 @@ export class GameService {
         return this.isGameOver$$()
     }
 
-    get nextTetrimino () {
-        return this.nextTetrimino$$()
+    get nextTetromino () {
+        return this.nextTetromino$$()
     }
 
     get playerName () {
@@ -75,9 +74,9 @@ export class GameService {
         this.store.dispatch(gameActions.setPlayerName({playerName}))
     }
 
-    dropdownTetrimino () {
-        while (this.currentTetrimino) {
-            this.moveDownTetrimino()
+    dropdownTetromino () {
+        while (this.currentTetromino) {
+            this.moveDownTetromino()
         }
     }
 
@@ -85,26 +84,26 @@ export class GameService {
         this.store.dispatch(gameActions.setSpeed({speed: 1}))
     }
 
-    moveDownTetrimino () {
-        this.store.dispatch(gameActions.moveDownTetrimino())
+    moveDownTetromino () {
+        this.store.dispatch(gameActions.moveDownTetromino())
     }
 
-    moveHorizontalTetrimino (direction: 'left' | 'right') {
-        this.store.dispatch(gameActions.moveHorizontalTetrimino({direction}))
+    moveHorizontalTetromino (direction: 'left' | 'right') {
+        this.store.dispatch(gameActions.moveHorizontalTetromino({direction}))
     }
 
-    rotateTetrimino () {
-        this.store.dispatch(gameActions.rotateTetrimino())
+    rotateTetromino () {
+        this.store.dispatch(gameActions.rotateTetromino())
     }
 
     resetGame () {
         this.store.dispatch(gameActions.resetGame())
     }
 
-    spawnTetrimino () {
-        this.store.dispatch(gameActions.setRandomNextTetrimino())
-        this.store.dispatch(gameActions.setCurrentTetrimino())
-        this.store.dispatch(gameActions.setRandomNextTetrimino())
+    spawnTetromino () {
+        this.store.dispatch(gameActions.setRandomNextTetromino())
+        this.store.dispatch(gameActions.setCurrentTetromino())
+        this.store.dispatch(gameActions.setRandomNextTetromino())
     }
 
     toggleIsPaused () {
@@ -121,12 +120,12 @@ export class GameService {
 
         this._interval = setInterval(() => {
 
-            if (!this.currentTetrimino) {
+            if (!this.currentTetromino) {
                 this.resetSpeed()
-                this.spawnTetrimino()
+                this.spawnTetromino()
             }
 
-            this.moveDownTetrimino()
+            this.moveDownTetromino()
 
         }, speedInterval)
 

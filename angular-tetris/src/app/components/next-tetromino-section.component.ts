@@ -1,30 +1,30 @@
 import { Component, Input } from "@angular/core"
 
 @Component({
-    selector: 'next-tetrimino-section',
+    selector: 'next-tetromino-section',
     template: `
         <div class="next-box__wrapper" [ngClass]=[classNames]>
 
-            <div class="next-tetrimino-section__title text-center font-bold">
+            <div class="next-tetromino-section__title text-center font-bold">
                 Next
             </div>
     
             <grid 
                 gridSize="grid-sm" 
                 tileSize="tile-sm" 
-                [grid]="tetrimino?.nextShape || emptyTetriminoShape"
+                [grid]="tetromino?.nextShape || emptyTetrominoShape"
             />
                 
         </div>
     `,
 })
 
-export class NextTetriminoSectionComponent {
+export class NextTetrominoSectionComponent {
 
-    @Input() tetrimino: Tetrimino | null | undefined
+    @Input() tetromino: Tetromino | null | undefined
     @Input() classNames: string = ''
 
-    emptyTetriminoShape = Array(2).fill(Array(4).fill(0))
+    emptyTetrominoShape = Array(2).fill(Array(4).fill(0))
     
 
 }

@@ -14,8 +14,8 @@ import { GameService } from '../game.service'
                 classNames="items-center"
             />
             
-            <next-tetrimino-section
-                [tetrimino]="gameService.nextTetrimino"
+            <next-tetromino-section
+                [tetromino]="gameService.nextTetromino"
                 classNames="flex flex-col gap-1"
             />
  

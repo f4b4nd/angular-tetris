@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { GameService } from '../../game.service'
 
 @Component({
     selector: 'game-console',
@@ -71,7 +70,9 @@ import { GameService } from '../../game.service'
                 <power-switch-button />
             </div>
 
-            <game-screen class="py-2 self-center" />
+            <game-screen 
+                class="self-center" 
+            />
     
             <div name="game-controls" >
 
@@ -103,7 +104,9 @@ import { GameService } from '../../game.service'
                                 direction="left" 
                             />
 
-                            <directionnal-cross name="directionnal-cross" />
+                            <directionnal-cross 
+                                name="directionnal-cross" 
+                            />
 
                             <directionnal-button
                                 name='btn-right'

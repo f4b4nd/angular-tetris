@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core'
         [name='tile'] {
 
             &.tile-lg {
-                height: 0.9rem;
-                width: 0.9rem;
+                height: 0.8rem;
+                width: 0.8rem;
             }
 
             &.tile-sm {

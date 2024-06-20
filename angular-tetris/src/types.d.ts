@@ -11,7 +11,7 @@ type OffsetCoordinates = {
 }
 
 
-type Tetrimino = {
+type Tetromino = {
     type: 'I'|'J'|'L'|'O'|'S'|'T'|'Z',
     shape: Matrix,
     nextShape: Matrix,
@@ -26,7 +26,7 @@ type GameState = {
     score: number,
     playerName: string | null,
     grid: Matrix,
-    currentTetrimino: Tetrimino|null,
-    nextTetrimino: Tetrimino | null,
+    currentTetromino: Tetromino|null,
+    nextTetromino: Tetromino | null,
     speed: 1 | 2,
 }

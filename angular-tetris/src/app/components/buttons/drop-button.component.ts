@@ -38,7 +38,7 @@ export class DropButtonComponent {
 
     handleClick () {
 
-        this.#gameService.dropdownTetrimino()
+        this.#gameService.dropdownTetromino()
     }
   
 }

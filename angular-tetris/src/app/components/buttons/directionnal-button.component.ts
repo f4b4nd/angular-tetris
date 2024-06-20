@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core'
+import { Component, HostListener, Input, OnInit, inject } from '@angular/core'
 import { GameService } from '../../game.service'
 
 @Component({
@@ -39,14 +39,6 @@ import { GameService } from '../../game.service'
             position: relative;
         }
 
-        em {
-            position: absolute;
-            display: block;
-            height: 0;
-            width: 0;
-            border: 7px solid;
-            border-color: transparent transparent #111;
-        }
 
         label {
             font-size: 14px;
@@ -74,31 +66,54 @@ export class DirectionnalButtonComponent {
     @Input() direction?: Direction
     @Input() classNames: string = ''
 
+
     #gameService = inject(GameService)
-    
+
+
     handleClickButton (direction: Direction | undefined) {
 
         switch(direction) {
             case 'down':
-                this.#gameService.moveDownTetrimino()
-                console.log(this.#gameService.currentTetrimino)
+                this.#gameService.moveDownTetromino()
                 break
             case 'left':
-                this.#gameService.moveHorizontalTetrimino('left')
-                console.log(this.#gameService.currentTetrimino)
+                this.#gameService.moveHorizontalTetromino('left')
                 break
             case 'right':
-                this.#gameService.moveHorizontalTetrimino('right')
-                console.log(this.#gameService.currentTetrimino)
+                this.#gameService.moveHorizontalTetromino('right')
                 break
             case 'rotation':
-                this.#gameService.rotateTetrimino()
-                console.log(this.#gameService.currentTetrimino)
+                this.#gameService.rotateTetromino()
                 break
             default:
                 return
         }
-    }   
+    }
+
+    @HostListener('document:keydown', ['$event'])
+    keyEvent (event: KeyboardEvent){
+        switch (event.key) {
+            case 'ArrowDown':
+                this.#gameService.moveDownTetromino()
+                event.preventDefault()
+                break
+            case 'ArrowLeft':
+                this.#gameService.moveHorizontalTetromino('left')
+                event.preventDefault();
+                break
+            case 'ArrowRight':
+                this.#gameService.moveHorizontalTetromino('right')
+                event.preventDefault();
+                break
+            case 'ArrowUp':
+                this.#gameService.rotateTetromino()
+                event.preventDefault();
+                break
+            default:
+                return
+        }
+       
+    }
     
 
 }

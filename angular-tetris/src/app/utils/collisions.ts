@@ -34,41 +34,41 @@ export function isLeftCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): bo
 }
 
 
-export function onTryMoveTetrimino (grid: Matrix, tetrimino: Tetrimino, offsetCoordinates: OffsetCoordinates) {
+export function onTryMoveTetromino (grid: Matrix, tetromino: Tetromino, offsetCoordinates: OffsetCoordinates) {
 
-    const newTetriminoCoordinates = {
-        x: tetrimino.coordinates.x + offsetCoordinates.Xoffset,
-        y: tetrimino.coordinates.y + offsetCoordinates.Yoffset,
+    const newTetrominoCoordinates = {
+        x: tetromino.coordinates.x + offsetCoordinates.Xoffset,
+        y: tetromino.coordinates.y + offsetCoordinates.Yoffset,
     }
 
-    const gridWithoutTetrimino = operateMatrixes(grid, tetrimino.shape, tetrimino.coordinates, '-')
-    const newGrid = operateMatrixes(gridWithoutTetrimino, tetrimino.shape, newTetriminoCoordinates, '+')
+    const gridWithoutTetromino = operateMatrixes(grid, tetromino.shape, tetromino.coordinates, '-')
+    const newGrid = operateMatrixes(gridWithoutTetromino, tetromino.shape, newTetrominoCoordinates, '+')
 
     return {
         gridResult: newGrid,
-        tetriminoResult: {...tetrimino, coordinates: newTetriminoCoordinates},
+        tetrominoResult: {...tetromino, coordinates: newTetrominoCoordinates},
         hasCellsCollisions: containsValueGreaterThanOne(newGrid),
-        allowOperate: canOperateMatrixes(newGrid, tetrimino.shape, newTetriminoCoordinates),
+        allowOperate: canOperateMatrixes(newGrid, tetromino.shape, newTetrominoCoordinates),
     }
 
 }
 
 
-export function onTryRotateTetrimino (grid: Matrix, tetrimino: Tetrimino, rotatedShape: Tetrimino['shape']) {
+export function onTryRotateTetromino (grid: Matrix, tetromino: Tetromino, rotatedShape: Tetromino['shape']) {
 
-    const gridWithoutTetrimino = operateMatrixes(grid, tetrimino.shape, tetrimino.coordinates, '-')
+    const gridWithoutTetromino = operateMatrixes(grid, tetromino.shape, tetromino.coordinates, '-')
     
-    const allowOperate = canOperateMatrixes(gridWithoutTetrimino, rotatedShape, tetrimino.coordinates)
+    const allowOperate = canOperateMatrixes(gridWithoutTetromino, rotatedShape, tetromino.coordinates)
 
     let newGrid = grid
 
     if (allowOperate) {
-        newGrid = operateMatrixes(gridWithoutTetrimino, rotatedShape, tetrimino.coordinates, '+')
+        newGrid = operateMatrixes(gridWithoutTetromino, rotatedShape, tetromino.coordinates, '+')
     }
 
     return {
         gridResult: newGrid,
-        tetriminoResult: {...tetrimino, shape: rotatedShape},
+        tetrominoResult: {...tetromino, shape: rotatedShape},
         hasCellsCollisions: containsValueGreaterThanOne(newGrid),
         allowOperate,
     }

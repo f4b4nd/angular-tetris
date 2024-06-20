@@ -6,7 +6,7 @@ import { GameScreenComponent } from './game-screen.component'
 import { GameboardInfoSectionComponent } from '../gameboard-info-section.component'
 import { ToStringPipe } from '../../pipes/to-string.pipe'
 import { CommonModule } from '@angular/common'
-import { NextTetriminoSectionComponent } from '../next-tetrimino-section.component'
+import { NextTetrominoSectionComponent } from '../next-tetromino-section.component'
 import { ClockBlinkComponent } from '../clock-blink.component'
 
 @NgModule({
@@ -15,7 +15,7 @@ import { ClockBlinkComponent } from '../clock-blink.component'
         GameScreenComponent,
         GameboardInfoComponent,
         GameboardInfoSectionComponent,
-        NextTetriminoSectionComponent,
+        NextTetrominoSectionComponent,
         ClockBlinkComponent,
     ],
     imports: [

@@ -22,7 +22,7 @@ const nextShapes = {
     'Z':  [[1, 1, 0, 0], [0, 1, 1, 0]],
 }
 
-export const tetriminoModels: Array<Tetrimino> = [
+export const tetrominoModels: Array<Tetromino> = [
     {
         type: 'I',
         shape: initialShapes['I'],
@@ -68,8 +68,8 @@ export const tetriminoModels: Array<Tetrimino> = [
 ]
 
 
-function getInitialCoordinates(tetriminoShape: Matrix): Coordinates {
-    const numberOfColumns = getNumberOfColumns(tetriminoShape)
+function getInitialCoordinates(tetrominoShape: Matrix): Coordinates {
+    const numberOfColumns = getNumberOfColumns(tetrominoShape)
     const ceil = Math.ceil(GRID_WIDTH / 2)
     const x = numberOfColumns > 1 ? ceil - 1 : ceil
 
