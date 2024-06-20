@@ -34,5 +34,4 @@ export class GameScreenComponent {
 
     gameService = inject(GameService)
 
-
 }

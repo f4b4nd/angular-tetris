@@ -28,5 +28,4 @@ type GameState = {
     grid: Matrix,
     currentTetromino: Tetromino|null,
     nextTetromino: Tetromino | null,
-    speed: 1 | 2,
 }

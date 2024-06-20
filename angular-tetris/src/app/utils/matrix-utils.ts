@@ -28,7 +28,7 @@ function areAllValuesEqualOne (arr: number[]): boolean {
 }
 
 
-export function getMatrixDeleteFullRows (matrix: Matrix): Matrix {
+export function getMatrixCleanFullRows (matrix: Matrix): Matrix {
 
     let cleanMatrix = matrix.filter(row => !areAllValuesEqualOne(row))
     

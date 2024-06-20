@@ -2,7 +2,7 @@ import { Store, createFeature, createReducer, createActionGroup, props, emptyPro
 import { inject } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop';
 import { tetrominoModels } from "./tetromino.model"
-import { getMatrixApplyGravity, getMatrixDeleteFullRows, getNumberOfFullRows, containsValueGreaterThanOne} from "./utils/matrix-utils"
+import { getMatrixApplyGravity, getMatrixCleanFullRows, getNumberOfFullRows, containsValueGreaterThanOne} from "./utils/matrix-utils"
 import { operateMatrixes, canOperateMatrixes } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 import { isBottomCollision, isLeftCollision, isRightCollision, onTryMoveTetromino, onTryRotateTetromino } from "./utils/collisions"
@@ -13,7 +13,6 @@ export const initialGameState: GameState = {
     isGameOver: true,
     isPaused: true,
     score: 0,
-    speed: 1,
     playerName: null,
 
     grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
@@ -28,16 +27,17 @@ export const gameActions = createActionGroup({
         resetGame: emptyProps(),
         spawnTetromino: emptyProps(),
         setRandomNextTetromino: emptyProps(),
+        cleanGridFullRows: emptyProps(),
+
         moveHorizontalTetromino: props<{ direction: 'left' | 'right' }>(),
         moveDownTetromino: emptyProps(),
         rotateTetromino:  emptyProps(),
         setPlayerName: props<{ playerName: string|null }>(),
         setGrid: props<{grid: Matrix}>(),
-        setScore: props<{score: number}>(),
+        raiseScore: emptyProps(),
         setCurrentTetromino: emptyProps(),
         setIsPaused: props<{isPaused: boolean}>(),
         setIsGameOver: props<{isGameOver: boolean}>(),
-        setSpeed: props<{speed: 1 | 2}>(),
     }
 })
 
@@ -52,13 +52,6 @@ export const gameFeature = createFeature({
             return {
                 ...initialGameState,
                 playerName: state.playerName, 
-            }
-        }),
-
-        on(gameActions.setSpeed, (state, action) => {
-            return {
-                ...state,
-                speed: action.speed,
             }
         }),
 
@@ -135,27 +128,19 @@ export const gameFeature = createFeature({
             }
         }),
 
+        on(gameActions.cleanGridFullRows, (state) => {
+            return {
+                ...state,
+                grid: getMatrixCleanFullRows(state.grid),
+            }
+        }),
+
         on(gameActions.moveDownTetromino, (state) => {
             
             if (!state.grid || !state.currentTetromino) return state
 
             const offsetCoordinates = {Xoffset: 0, Yoffset: 1}
-
-            const hasFullRows = getNumberOfFullRows(state.grid) > 0
-
-            if (hasFullRows) {
-                const grid = getMatrixDeleteFullRows(state.grid)
-
-                const score = state.score + 100 * getNumberOfFullRows(state.grid)
-
-                return {
-                    ...state,
-                    grid,
-                    score,
-                    currentTetromino: null,
-                }
-            }
-
+        
             if (isBottomCollision(state.grid, state.currentTetromino.shape, state.currentTetromino.coordinates)) {
                 return {
                     ...state,
@@ -206,7 +191,18 @@ export const gameFeature = createFeature({
                 playerName: action.playerName,
             }
 
-        })
+        }),
+
+
+        on(gameActions.raiseScore, (state) => {
+
+            return {
+                ...state,
+                score: state.score + 1,
+            }
+
+        }),
+
 
     ),
 

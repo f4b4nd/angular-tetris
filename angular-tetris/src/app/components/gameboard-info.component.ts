@@ -8,9 +8,9 @@ import { GameService } from '../game.service'
         <div class="flex flex-col gap-8 h-full w-14">
         
             <gameboard-info-section
-                *ngIf="gameService.score >= 0" 
+                *ngIf="gameService.displayedScore >= 0" 
                 title="Score"
-                [text]="gameService.score | tostring" 
+                [text]="gameService.displayedScore | tostring" 
                 classNames="items-center"
             />
             

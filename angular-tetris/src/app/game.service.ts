@@ -1,6 +1,8 @@
 import { Injectable, computed, effect, inject } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { gameFeature, gameActions} from "./game.store";
+import { getNumberOfFullRows } from "./utils/matrix-utils";
+import { asapScheduler } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -19,27 +21,20 @@ export class GameService {
 
     private score$$ = this.store.selectSignal(gameFeature.selectScore)
     public playerName$$ = this.store.selectSignal(gameFeature.selectPlayerName)
-    private speed$$ = this.store.selectSignal(gameFeature.selectSpeed)
     
     private _interval?: number
 
     constructor() {
         effect(() => {
             if (!this.isPaused && !this.isGameOver) {
-                this.gameRoutine()   
-            }
-            if (this.isPaused) {
-                clearInterval(this._interval)
+                this.gameRoutine()
+                this.watchGrid()
             }
         })
     }
 
     get grid () {
         return this.grid$$()
-    }
-
-    get speed () {
-        return this.speed$$()
     }
 
     get currentTetromino () {
@@ -66,8 +61,31 @@ export class GameService {
         return this.score$$()
     }
 
+    get displayedScore () {
+        return this.score * 100
+    }
+    
+    watchGrid () {
+        const hasFullRows = getNumberOfFullRows(this.grid) > 0
+        if (hasFullRows) {
+            this.cleanGridFullRows()
+            this.raiseScore()
+        }
+    }
+
+    cleanGridFullRows() {
+        // wrap in a scheduler to avoid NG0600
+        asapScheduler.schedule(() => this.store.dispatch(gameActions.cleanGridFullRows()))
+    }
+
+
     logout () {
         this.setPlayerName(null)
+    }
+
+    raiseScore () {
+        // wrap in a scheduler to avoid NG0600
+        asapScheduler.schedule(() => this.store.dispatch(gameActions.raiseScore()))
     }
 
     setPlayerName (playerName: string|null) {
@@ -78,10 +96,6 @@ export class GameService {
         while (this.currentTetromino) {
             this.moveDownTetromino()
         }
-    }
-
-    resetSpeed () {
-        this.store.dispatch(gameActions.setSpeed({speed: 1}))
     }
 
     moveDownTetromino () {
@@ -108,26 +122,24 @@ export class GameService {
 
     toggleIsPaused () {
         this.store.dispatch(gameActions.setIsPaused({isPaused: !this.isPaused}))
+        if (this.isPaused) {
+            clearInterval(this._interval)
+        }
     }
 
     gameRoutine () {
 
-        const defaultSpeed = 800
-        const maxSpeed = 1 / 1000
-        const speedInterval = this.speed > 1 ? maxSpeed : defaultSpeed
+        const defaultIntervalSpeed = 800
 
         clearInterval(this._interval)
 
         this._interval = setInterval(() => {
 
-            if (!this.currentTetromino) {
-                this.resetSpeed()
-                this.spawnTetromino()
-            }
+            !this.currentTetromino && this.spawnTetromino();
 
-            this.moveDownTetromino()
+            this.moveDownTetromino();
 
-        }, speedInterval)
+        }, defaultIntervalSpeed)
 
     }
 
