@@ -4,6 +4,7 @@ import { DirectionnalButtonComponent, DropButtonComponent, PauseButtonComponent,
 import { GameConsoleComponent } from './game-console.component'
 
 import { CommonModule } from '@angular/common'
+import { DirectionnalCrossComponent } from '../directionnal-cross.component'
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common'
     imports: [
         GameScreenModule,
         CommonModule,
+        DirectionnalCrossComponent,
     ],
     providers: [
     ],

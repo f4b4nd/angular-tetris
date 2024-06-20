@@ -19,14 +19,20 @@ import { GameService } from '../../game.service'
             transform: rotate(-15deg);            
         }
 
+        label {
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+
     `,
     template: `
-        <div class="button-wrapper">
+        <div class="button-wrapper flex flex-col items-center">
             <button 
                 class="pause-button rounded-lg" 
                 (click)="handleClick()"
             >
             </button>
+            <label>Pause</label>
         </div>
     `,
 })

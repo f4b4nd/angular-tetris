@@ -18,7 +18,7 @@ type Tetrimino = {
     coordinates: Coordinates,
 }
 
-type Direction = 'up' | 'down' | 'left' | 'right'
+type Direction = 'rotation' | 'down' | 'left' | 'right'
 
 type GameState = {
     isGameOver: boolean,

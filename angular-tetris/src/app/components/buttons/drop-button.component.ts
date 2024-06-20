@@ -14,14 +14,19 @@ import { GameService } from '../../game.service';
                 transform: rotate(180deg);
             }
         }
+
+        label {
+            font-size: 14px;
+        }
     `,
     template: `
-        <div class="button-wrapper">
+        <div class="button-wrapper flex flex-col">
             <button 
-            class="drop-button h-20 w-20 rounded-full"
+            class="drop-button rounded-full"
             (click)="handleClick()"
             >
             </button>
+            <label>Drop (Space)</label>
         </div>
     `,
 })

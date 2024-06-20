@@ -24,13 +24,43 @@ import { GameService } from '../../game.service'
             justify-content: space-evenly;
         }
 
+        
+        [name='directionnal-cross'] {
+            margin-top: 3%;
+        }
+
+        [name='drop-button'] ::ng-deep button {
+            height: 4.5rem;
+            width: 4.5rem;
+        }
+        
         #directionnal-buttons ::ng-deep {
 
             button {
-                height: 40px;
-                width: 40px;
+                height: 2.6rem;
+                width: 2.6rem;
             }
-           
+
+            [name='btn-up'] {
+                
+                label {
+                    position: absolute;
+                    right: -57px;
+                    top: 0%;
+                }
+          
+            }
+
+            [name='btn-down'] {
+                
+                label {
+                    position: absolute;
+                    right: -40px;
+                    bottom: 0%;
+                }
+          
+            }
+
         }
 
     `,
@@ -41,40 +71,50 @@ import { GameService } from '../../game.service'
                 <power-switch-button />
             </div>
 
-            <game-screen class="py-4 self-center" />
+            <game-screen class="py-2 self-center" />
     
             <div name="game-controls" >
 
-                <div name="commands" class="flex justify-between px-4 ">
+                <div name="commands" class="flex black justify-between px-4 ">
 
-                    <drop-button class="self-center" />
+                    <drop-button 
+                        name="drop-button" 
+                        class="self-center" 
+                    />
 
                     <div 
                         id="directionnal-buttons" 
                         class="flex flex-col align-end self-center basis-2/5"
                     >
 
-                        <directionnal-button 
+
+                        <directionnal-button
+                            name='btn-up'
                             classNames="blue" 
                             class="self-center" 
-                            direction="up" 
+                            direction="rotation" 
                         />
 
                         <div class="flex justify-between">
 
                             <directionnal-button 
-                            classNames="green" 
+                                name='btn-left'
+                                classNames="green" 
                                 direction="left" 
                             />
 
-                            <directionnal-button 
+                            <directionnal-cross name="directionnal-cross" />
+
+                            <directionnal-button
+                                name='btn-right'
                                 classNames="red" 
                                 direction="right" 
                             />
                         
                         </div>
 
-                        <directionnal-button 
+                        <directionnal-button
+                            name='btn-down'
                             classNames="yellow" 
                             class="self-center" 
                             direction="down" 

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home'
 import { LoginComponent } from './pages/login'
 import { isAuthenticatedGuard } from './is-authenticated.guard';
-import { Signal, inject, computed, effect } from "@angular/core"
 
 
 export const routes: Routes = [ 

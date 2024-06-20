@@ -17,6 +17,6 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state): Observable<bo
         }
     })
 
-    return isAuthenticated$$() ? true : router.createUrlTree(['/login'])
+    return isAuthenticated$$() ? true : true // router.createUrlTree(['/login'])
    
 }

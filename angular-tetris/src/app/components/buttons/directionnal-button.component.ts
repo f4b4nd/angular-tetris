@@ -35,16 +35,36 @@ import { GameService } from '../../game.service'
             }
         }
 
+        .directionnal-button__wrapper {
+            position: relative;
+        }
+
+        em {
+            position: absolute;
+            display: block;
+            height: 0;
+            width: 0;
+            border: 7px solid;
+            border-color: transparent transparent #111;
+        }
+
+        label {
+            font-size: 14px;
+            text-transform: capitalize;
+        }
 
       
     `,
     template: `
-        <button
-            class="directionnal-button rounded-full"  
-            [ngClass]="[classNames]"
-            (click)="handleClickButton(direction)"
-        >
-        </button>
+        <div class="directionnal-button__wrapper flex flex-col items-center">
+            <button
+                class="directionnal-button rounded-full"  
+                [ngClass]="[classNames]"
+                (click)="handleClickButton(direction)"
+            >
+            </button>
+            <label class="text">{{direction}}</label>
+        </div>
     `,
 })
 
@@ -71,7 +91,7 @@ export class DirectionnalButtonComponent {
                 this.#gameService.moveHorizontalTetrimino('right')
                 console.log(this.#gameService.currentTetrimino)
                 break
-            case 'up':
+            case 'rotation':
                 this.#gameService.rotateTetrimino()
                 console.log(this.#gameService.currentTetrimino)
                 break
