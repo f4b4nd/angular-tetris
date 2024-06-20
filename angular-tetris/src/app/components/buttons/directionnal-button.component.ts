@@ -5,13 +5,43 @@ import { GameService } from '../../game.service'
     selector: 'directionnal-button',
     styles: 
         `
-        $grey: #513d39;
+        $red: red;
+        $yellow: #D4AC0D;
+        $blue: blue;
+        $green: green;
+
+        .directionnal-button {
+
+            box-shadow: 0 -3px 6px #fff9 inset;
+
+            &:active {
+                transform: rotate(180deg);
+            }
+
+            &.red {
+                background-color: $red;
+            }
+
+            &.blue {
+                background-color: $blue;
+            }
+
+            &.yellow {
+                background-color: $yellow;
+            }
+
+            &.green {
+                background-color: $green;
+            }
+        }
+
 
       
     `,
     template: `
         <button
-            [ngClass]="['directionnal-button', 'rounded-full', bgColor ?? '']"
+            class="directionnal-button rounded-full"  
+            [ngClass]="[classNames]"
             (click)="handleClickButton(direction)"
         >
         </button>
@@ -22,7 +52,7 @@ import { GameService } from '../../game.service'
 export class DirectionnalButtonComponent {
 
     @Input() direction?: Direction
-    @Input() bgColor?: string
+    @Input() classNames: string = ''
 
     #gameService = inject(GameService)
     

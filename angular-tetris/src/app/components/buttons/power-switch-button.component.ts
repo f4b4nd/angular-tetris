@@ -95,6 +95,7 @@ export class PowerSwitchButtonComponent {
         if (!isChecked) {
             if (confirm("You're having a good time. Are you sure you want to turn-off ?")) {
                 this.#gameService.resetGame()
+                this.#gameService.logout()
             }
             return
         }

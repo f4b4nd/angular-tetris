@@ -8,8 +8,7 @@ import { GameService } from '../../game.service'
     },
     styles: 
         `
-        $grey: #b4b6ba;
-        $yellow: #efcc19;
+        $grey: #A6ACAF;
 
         .game-console {
             width: 100%;
@@ -31,20 +30,7 @@ import { GameService } from '../../game.service'
                 height: 40px;
                 width: 40px;
             }
-
-            button.red {
-                background-color: red;
-            }
-
-            button.blue {
-                background-color: blue;
-            }
-            button.yellow {
-                background-color: yellow;
-            }
-            button.green {
-                background-color: green;
-            }
+           
         }
 
     `,
@@ -69,7 +55,7 @@ import { GameService } from '../../game.service'
                     >
 
                         <directionnal-button 
-                            bgColor="blue" 
+                            classNames="blue" 
                             class="self-center" 
                             direction="up" 
                         />
@@ -77,19 +63,19 @@ import { GameService } from '../../game.service'
                         <div class="flex justify-between">
 
                             <directionnal-button 
-                                bgColor="green" 
+                            classNames="green" 
                                 direction="left" 
                             />
 
                             <directionnal-button 
-                                bgColor="red" 
+                                classNames="red" 
                                 direction="right" 
                             />
                         
                         </div>
 
                         <directionnal-button 
-                            bgColor="yellow" 
+                            classNames="yellow" 
                             class="self-center" 
                             direction="down" 
                         />

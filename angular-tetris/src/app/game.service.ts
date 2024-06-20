@@ -11,16 +11,16 @@ export class GameService {
 
     store = inject(Store)
 
-    private _grid = this.store.selectSignal(gameFeature.selectGrid)
-    private _currentTetrimino = this.store.selectSignal(gameFeature.selectCurrentTetrimino)
-    private _nextTetrimino = this.store.selectSignal(gameFeature.selectNextTetrimino)
+    private grid$$ = this.store.selectSignal(gameFeature.selectGrid)
+    private currentTetrimino$$ = this.store.selectSignal(gameFeature.selectCurrentTetrimino)
+    private nextTetrimino$$ = this.store.selectSignal(gameFeature.selectNextTetrimino)
 
-    private _isPaused = this.store.selectSignal(gameFeature.selectIsPaused)
-    private _isGameOver = this.store.selectSignal(gameFeature.selectIsGameOver)
+    private isPaused$$ = this.store.selectSignal(gameFeature.selectIsPaused)
+    private isGameOver$$ = this.store.selectSignal(gameFeature.selectIsGameOver)
 
-    private _score = this.store.selectSignal(gameFeature.selectScore)
-    private _playerName = this.store.selectSignal(gameFeature.selectPlayerName)
-    private _speed = this.store.selectSignal(gameFeature.selectSpeed)
+    private score$$ = this.store.selectSignal(gameFeature.selectScore)
+    public playerName$$ = this.store.selectSignal(gameFeature.selectPlayerName)
+    private speed$$ = this.store.selectSignal(gameFeature.selectSpeed)
     
     private _interval?: number
 
@@ -36,48 +36,49 @@ export class GameService {
     }
 
     get grid () {
-        return this._grid()
+        return this.grid$$()
     }
 
     get speed () {
-        return this._speed()
+        return this.speed$$()
     }
 
     get currentTetrimino () {
-        return this._currentTetrimino()
+        return this.currentTetrimino$$()
     }
 
     get isPaused () {  
-        return this._isPaused()
+        return this.isPaused$$()
     }
 
     get isGameOver () {
-        return this._isGameOver()
+        return this.isGameOver$$()
     }
 
     get nextTetrimino () {
-        return this._nextTetrimino()
+        return this.nextTetrimino$$()
     }
 
     get playerName () {
-        return this._playerName()
+        return this.playerName$$()
     }
 
     get score () {
-        return this._score()
+        return this.score$$()
     }
 
+    logout () {
+        this.setPlayerName(null)
+    }
 
-    setPlayerName (playerName: string) {
+    setPlayerName (playerName: string|null) {
         this.store.dispatch(gameActions.setPlayerName({playerName}))
     }
 
-    set score (score: number) {
-        this.store.dispatch(gameActions.setScore({score}))
-    }
-
     dropdownTetrimino () {
-        this.store.dispatch(gameActions.setSpeed({speed: 2}))
+        while (this.currentTetrimino) {
+            this.moveDownTetrimino()
+        }
     }
 
     resetSpeed () {
@@ -112,7 +113,7 @@ export class GameService {
 
     gameRoutine () {
 
-        const defaultSpeed = 500
+        const defaultSpeed = 800
         const maxSpeed = 1 / 1000
         const speedInterval = this.speed > 1 ? maxSpeed : defaultSpeed
 

@@ -5,17 +5,24 @@ import { GameService } from '../../game.service';
 
 @Component({
     selector: 'drop-button',
-      styles: `
-      .drop-button {
-          background-color: grey;
-      }
+    styles: `
+        .drop-button {
+            background-color: grey;
+            box-shadow: 0 -3px 6px #fff9 inset;
+
+            &:active {
+                transform: rotate(180deg);
+            }
+        }
     `,
     template: `
-        <button 
-          class="drop-button h-20 w-20 rounded-full"
-          (click)="handleClick()"
-        >
-        </button>
+        <div class="button-wrapper">
+            <button 
+            class="drop-button h-20 w-20 rounded-full"
+            (click)="handleClick()"
+            >
+            </button>
+        </div>
     `,
 })
 

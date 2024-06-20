@@ -1,4 +1,4 @@
-import { Injectable, inject } from "@angular/core"
+import { Injectable, Signal, computed, effect, inject } from "@angular/core"
 import { GameService } from "./game.service"
 
 @Injectable({
@@ -6,10 +6,10 @@ import { GameService } from "./game.service"
 })
 export class AuthService {
 
-    GameService = inject(GameService)
+    gameService = inject(GameService)
 
-    isAuthenticated (): boolean {
-        return this.GameService.playerName !== null
+    isAuthenticated (): Signal<boolean>  {
+        return computed(() => this.gameService.playerName$$() !== null)
     }
 
 }

@@ -13,7 +13,7 @@ export const initialGameState: GameState = {
     isGameOver: true,
     isPaused: true,
     score: 0,
-    speed: 1 | 2,
+    speed: 1,
     playerName: null,
 
     grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
@@ -31,13 +31,13 @@ export const gameActions = createActionGroup({
         moveHorizontalTetrimino: props<{ direction: 'left' | 'right' }>(),
         moveDownTetrimino: emptyProps(),
         rotateTetrimino:  emptyProps(),
-        setPlayerName: props<{ playerName: string }>(),
+        setPlayerName: props<{ playerName: string|null }>(),
         setGrid: props<{grid: Matrix}>(),
         setScore: props<{score: number}>(),
         setCurrentTetrimino: emptyProps(),
         setIsPaused: props<{isPaused: boolean}>(),
         setIsGameOver: props<{isGameOver: boolean}>(),
-        setSpeed: props<{speed: number}>(),
+        setSpeed: props<{speed: 1 | 2}>(),
     }
 })
 
@@ -48,9 +48,10 @@ export const gameFeature = createFeature({
 
         initialGameState,
 
-        on(gameActions.resetGame, () => {
+        on(gameActions.resetGame, (state) => {
             return {
                 ...initialGameState,
+                playerName: state.playerName, 
             }
         }),
 

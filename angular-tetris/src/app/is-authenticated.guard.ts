@@ -1,13 +1,22 @@
-import { CanActivateFn, Router } from "@angular/router"
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from "@angular/router"
 import { AuthService } from "./auth.service"
-import { inject } from "@angular/core"
+import { Signal, inject, computed, effect, signal } from "@angular/core"
+import { toObservable } from "@angular/core/rxjs-interop"
+import { map, take, skipWhile, finalize, switchMap, of, Observable } from "rxjs"
 
 
-export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
+
+export const isAuthenticatedGuard: CanActivateFn = (route, state): Observable<boolean|UrlTree> | Promise<boolean|UrlTree> | boolean | UrlTree => {
     
     const router: Router = inject(Router)
-    const isAuthenticated: boolean = inject(AuthService).isAuthenticated()
+    const isAuthenticated$$: Signal<boolean> = inject(AuthService).isAuthenticated()
+   
+    effect(() => {
+        if (!isAuthenticated$$()) {
+            router.navigate(['/login'])
+        }
+    })
 
-    return isAuthenticated || router.navigate(['login'])
-
+    return isAuthenticated$$() ? true : router.createUrlTree(['/login'])
+   
 }
