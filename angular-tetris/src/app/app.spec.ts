@@ -1,3 +1,4 @@
+import { isVerticalFull } from "./utils/matrix-utils";
 import { operateMatrixes } from "./utils/operateMatrixes";
 import { getTransposedMatrix, getReversedColumnsMatrix, getReversedRowsMatrix } from "./utils/rotateMatrix";
 
@@ -30,7 +31,7 @@ describe('Pure function', () => {
       [0, 0, 0, 0],
     ]
 
-    expect((operateMatrixes(M, T, Tcoords, '+') as any).toEqual(res))
+    expect(operateMatrixes(M, T, Tcoords, '+') as any).toEqual(res)
 
   });
 
@@ -45,8 +46,8 @@ describe('Pure function', () => {
       [2, 4, 6],
     ]
 
-    expect((getTransposedMatrix(M) as any).toEqual(T))
-    expect((getTransposedMatrix(T) as any).toEqual(M))
+    expect(getTransposedMatrix(M) as any).toEqual(T)
+    expect(getTransposedMatrix(T) as any).toEqual(M)
 
   });
 
@@ -62,7 +63,7 @@ describe('Pure function', () => {
       [6, 5],
     ]
 
-    expect((getReversedColumnsMatrix(M) as any).toEqual(T))
+    expect(getReversedColumnsMatrix(M) as any).toEqual(T)
 
   });
 
@@ -78,7 +79,24 @@ describe('Pure function', () => {
       [1, 2],
     ]
 
-    expect((getReversedRowsMatrix(M) as any).toEqual(T))
+    expect(getReversedRowsMatrix(M) as any).toEqual(T)
+
+  });
+  
+  it('should return if the matrix is has at least 1 column full', () => {
+    const M1 = [
+      [1, 0, 1, 1],
+      [1, 0, 1, 1],
+      [1, 1, 0, 0],
+    ]
+    const M2 = [
+      [0, 0, 1, 1],
+      [0, 0, 1, 1],
+      [0, 1, 0, 0],
+    ]
+
+    expect(isVerticalFull(M1) as any).toEqual(true)
+    expect(isVerticalFull(M2) as any).toEqual(true)
 
   });
 

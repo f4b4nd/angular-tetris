@@ -1,4 +1,4 @@
-import { checkMatrixesDimensions, getNumberOfRows, getNumberOfColumns, containsValueGreaterThanOne } from "./matrix-utils"
+import { checkMatrixesDimensions, getNumberOfRows, getNumberOfColumns, containsValueGreaterThanOne, isVerticalFull } from "./matrix-utils"
 import { canOperateMatrixes, operateMatrixes } from "./operateMatrixes"
 
 export function isBottomCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
@@ -49,6 +49,7 @@ export function onTryMoveTetromino (grid: Matrix, tetromino: Tetromino, offsetCo
         tetrominoResult: {...tetromino, coordinates: newTetrominoCoordinates},
         hasCellsCollisions: containsValueGreaterThanOne(newGrid),
         allowOperate: canOperateMatrixes(newGrid, tetromino.shape, newTetrominoCoordinates),
+        isVerticalFull: isVerticalFull(newGrid),
     }
 
 }

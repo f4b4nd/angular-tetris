@@ -34,7 +34,7 @@ export const gameActions = createActionGroup({
         rotateTetromino:  emptyProps(),
         setPlayerName: props<{ playerName: string|null }>(),
         setGrid: props<{grid: Matrix}>(),
-        raiseScore: emptyProps(),
+        raiseScore: props<{lines: number}>(),
         setCurrentTetromino: emptyProps(),
         setIsPaused: props<{isPaused: boolean}>(),
         setIsGameOver: props<{isGameOver: boolean}>(),
@@ -115,10 +115,7 @@ export const gameFeature = createFeature({
             const onTryMoveT = onTryMoveTetromino(state.grid, state.currentTetromino, offsetCoordinates)
             
             if (onTryMoveT.hasCellsCollisions) {
-                return {
-                    ...state,
-                    currentTetromino: null,
-                }
+                return state
             }
 
             return {
@@ -149,6 +146,12 @@ export const gameFeature = createFeature({
             }
     
             const onTryMoveT = onTryMoveTetromino(state.grid, state.currentTetromino, offsetCoordinates)
+
+            if (onTryMoveT.isVerticalFull) {
+                console.log('store-isverticalfull')
+                return {...state, isGameOver: true}
+            }
+
             if (onTryMoveT.hasCellsCollisions) {
                 return {
                     ...state,
@@ -194,11 +197,11 @@ export const gameFeature = createFeature({
         }),
 
 
-        on(gameActions.raiseScore, (state) => {
+        on(gameActions.raiseScore, (state, action) => {
 
             return {
                 ...state,
-                score: state.score + 1,
+                score: state.score + action.lines,
             }
 
         }),

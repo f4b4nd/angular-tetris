@@ -1,8 +1,8 @@
 #!/bin/sh
 
 
-IMAGE_NAME=angular:node20
-CONTAINER_NAME=angular-node20-tetris
+IMAGE_NAME=angular17:node20
+CONTAINER_NAME=angular17-node20-tetris
 WORKDIR=/usr/src/app/
 
 docker run --rm \

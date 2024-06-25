@@ -1,7 +1,7 @@
 import { Injectable, computed, effect, inject } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { gameFeature, gameActions} from "./game.store";
-import { getNumberOfFullRows } from "./utils/matrix-utils";
+import { getNumberOfFullRows, isVerticalFull } from "./utils/matrix-utils";
 import { asapScheduler } from 'rxjs';
 
 @Injectable({
@@ -22,11 +22,13 @@ export class GameService {
     private score$$ = this.store.selectSignal(gameFeature.selectScore)
     public playerName$$ = this.store.selectSignal(gameFeature.selectPlayerName)
     
-    private _interval?: number
+    private isLocked$$ = computed(() => this.isPaused$$() === true || this.isGameOver$$() === true)
 
+    private _interval?: number
+    
     constructor() {
         effect(() => {
-            if (!this.isPaused && !this.isGameOver) {
+            if (!this.isLocked) {
                 this.gameRoutine()
                 this.watchGrid()
             }
@@ -49,6 +51,10 @@ export class GameService {
         return this.isGameOver$$()
     }
 
+    get isLocked () {
+        return this.isLocked$$()
+    }
+
     get nextTetromino () {
         return this.nextTetromino$$()
     }
@@ -66,11 +72,15 @@ export class GameService {
     }
     
     watchGrid () {
-        const hasFullRows = getNumberOfFullRows(this.grid) > 0
-        if (hasFullRows) {
+        const hasReachedBottom = this.currentTetromino === null
+
+        const fullRowsCounter = getNumberOfFullRows(this.grid)
+
+        if (hasReachedBottom && fullRowsCounter > 0) {
             this.cleanGridFullRows()
-            this.raiseScore()
+            this.raiseScore(fullRowsCounter)
         }
+
     }
 
     cleanGridFullRows() {
@@ -83,9 +93,9 @@ export class GameService {
         this.setPlayerName(null)
     }
 
-    raiseScore () {
+    raiseScore (lines: number) {
         // wrap in a scheduler to avoid NG0600
-        asapScheduler.schedule(() => this.store.dispatch(gameActions.raiseScore()))
+        asapScheduler.schedule(() => this.store.dispatch(gameActions.raiseScore({lines})))
     }
 
     setPlayerName (playerName: string|null) {
@@ -93,21 +103,27 @@ export class GameService {
     }
 
     dropdownTetromino () {
-        while (this.currentTetromino) {
+        while (!this.isLocked && this.currentTetromino) {
             this.moveDownTetromino()
         }
     }
 
     moveDownTetromino () {
-        this.store.dispatch(gameActions.moveDownTetromino())
+        if (!this.isLocked) {
+            this.store.dispatch(gameActions.moveDownTetromino())
+        }
     }
 
     moveHorizontalTetromino (direction: 'left' | 'right') {
-        this.store.dispatch(gameActions.moveHorizontalTetromino({direction}))
+        if (!this.isLocked) {
+            this.store.dispatch(gameActions.moveHorizontalTetromino({direction}))
+        }
     }
 
     rotateTetromino () {
-        this.store.dispatch(gameActions.rotateTetromino())
+        if (!this.isLocked) {
+            this.store.dispatch(gameActions.rotateTetromino())
+        }
     }
 
     resetGame () {
@@ -121,10 +137,8 @@ export class GameService {
     }
 
     toggleIsPaused () {
-        this.store.dispatch(gameActions.setIsPaused({isPaused: !this.isPaused}))
-        if (this.isPaused) {
-            clearInterval(this._interval)
-        }
+        this.store.dispatch(gameActions.setIsPaused({isPaused: !this.isPaused}));
+        this.isPaused && clearInterval(this._interval);
     }
 
     gameRoutine () {
@@ -135,12 +149,18 @@ export class GameService {
 
         this._interval = setInterval(() => {
 
-            !this.currentTetromino && this.spawnTetromino();
-
             this.moveDownTetromino();
+
+            !this.currentTetromino && this.spawnTetromino();
 
         }, defaultIntervalSpeed)
 
+    }
+
+    onGameOver () {
+        this.resetGame()
+        this.store.dispatch(gameActions.setIsPaused({isPaused: true}))
+        this.store.dispatch(gameActions.setIsGameOver({isGameOver: true}))
     }
 
     startGame () {

@@ -50,6 +50,13 @@ Note: Since angular 17, `ng build` create the bundle files in a subfolder named 
 
 On the repository, go to `settings > github pages > branches`, then set selectors to "main" and "/docs"
 
+### 3. Unit tests
+
+Run the command  `npm run test-headless --watch=false --include='**/app.spec.ts'`
+
+Then karma interface is available on the browser at url `localhost:9876`.
+
+
 ---
 ### Notes
 

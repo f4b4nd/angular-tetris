@@ -12,6 +12,7 @@ import { GameService } from '../../game.service';
 
             &:active {
                 transform: rotate(180deg);
+                transition: transform 0s;
             }
         }
 
