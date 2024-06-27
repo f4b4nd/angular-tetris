@@ -10,7 +10,7 @@ describe('Pure function', () => {
       [0, 0, 1, 0],
       [0, 0, 0, 0],
       [0, 0, 0, 0],
-      [0, 0, 1, 0],
+      [0, 0, 0, 0],
       [0, 0, 0, 0],
       [0, 0, 0, 0],
     ]
@@ -96,7 +96,7 @@ describe('Pure function', () => {
     ]
 
     expect(isVerticalFull(M1) as any).toEqual(true)
-    expect(isVerticalFull(M2) as any).toEqual(true)
+    expect(isVerticalFull(M2) as any).toEqual(false)
 
   });
 

@@ -50,15 +50,19 @@ Note: Since angular 17, `ng build` create the bundle files in a subfolder named 
 
 On the repository, go to `settings > github pages > branches`, then set selectors to "main" and "/docs"
 
-### 3. Unit tests
+## 3. Unit tests
 
-Run the command  `npm run test-headless --watch=false --include='**/app.spec.ts'`
+This project uses karma as test interface.
 
-Then karma interface is available on the browser at url `localhost:9876`.
+Chromium browser is installed in the docker image, and is used as an headless browser.
+
+Once in the container, run the command  `npm run test-headless`
+
+Then karma interface is available on the browser at url `localhost:9876`
 
 
 ---
-### Notes
+## Notes
 
 For playground purpose, you might need to manually run `.ts` scripts.
 

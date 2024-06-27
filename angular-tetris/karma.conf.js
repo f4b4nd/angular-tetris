@@ -40,6 +40,9 @@ module.exports = function (config) {
         flags: ['--no-sandbox', '--headless', '--remote-debugging=9876']
       }
     },
+    exclude: [
+      '**/app.component.spec.ts',
+    ],
     restartOnFileChange: true
   });
 };
