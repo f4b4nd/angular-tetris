@@ -13,6 +13,13 @@ export function canOperateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates): 
 
 }
 
+function getIndexesFromCoords (coords: {x: number, y: number})  {
+    return {
+        colIndex: coords.x,
+        rowIndex: coords.y,
+    }
+}
+
 export function operateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates, operation: '+' | '-'): Matrix {
 
     const allowOperate = canOperateMatrixes(M, T, Tcoords)
@@ -22,37 +29,28 @@ export function operateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates, oper
     }
 
 
-    function isWithinRows(x: number) {
-        return (x >= 0) && (x < T.length) 
-    }
-
-    function isWithinColumns(x: number, y: number) {
-        return (y >= 0) && (y < T[x].length)
-    }
-
     return M.map((row, i) => (
         row.map((_, j) => {
-
-            const relativeCoords = {
-                x: i - Tcoords.y,
-                y: j - Tcoords.x,
-            }
-
-            const coordinatesAreMatching = isWithinRows(relativeCoords.x) && isWithinColumns(relativeCoords.x, relativeCoords.y) 
             
-            if (coordinatesAreMatching) {
-                switch(operation) {
-                    case '+':
-                        return M[i][j] + T[relativeCoords.x][relativeCoords.y]
-                    case '-':
-                        return M[i][j] - T[relativeCoords.x][relativeCoords.y]
-                    default:
-                        throw Error('operation is not defined')
-                }
+            const tetriminoIndexes = getIndexesFromCoords ({x: j - Tcoords.x, y: i - Tcoords.y})
+
+            const isWithinRows = tetriminoIndexes.rowIndex >= 0 && tetriminoIndexes.rowIndex < T.length
+
+            const isWithinColumns = tetriminoIndexes.colIndex >= 0 && tetriminoIndexes.colIndex < T[tetriminoIndexes.rowIndex]?.length
+
+            const coordinatesAreMatching = isWithinRows && isWithinColumns 
+            
+            if (!coordinatesAreMatching) return M[i][j]
+            
+            switch(operation) {
+                case '+':
+                    return M[i][j] + T[tetriminoIndexes.rowIndex][tetriminoIndexes.colIndex]
+                case '-':
+                    return M[i][j] - T[tetriminoIndexes.rowIndex][tetriminoIndexes.colIndex]
+                default:
+                    throw Error('operation is not defined')
             }
-            else {
-                return M[i][j]
-            }
+           
         })
     ))
 
