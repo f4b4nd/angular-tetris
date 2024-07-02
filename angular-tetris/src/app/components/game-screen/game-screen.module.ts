@@ -29,7 +29,6 @@ import { ClockBlinkComponent } from '../clock-blink.component'
         GameboardInfoSectionComponent,
         GameboardInfoComponent,
     ]
-    
 })
 
 export class GameScreenModule {}

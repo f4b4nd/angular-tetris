@@ -1,4 +1,3 @@
-// user-list.component.ts
 import { Component, inject } from '@angular/core';
 import { GameService } from '../../game.service';
 
@@ -23,8 +22,8 @@ import { GameService } from '../../game.service';
     template: `
         <div class="button-wrapper flex flex-col">
             <button 
-            class="drop-button rounded-full"
-            (click)="handleClick()"
+                class="drop-button rounded-full"
+                (click)="handleClick()"
             >
             </button>
             <label>Drop (Space)</label>

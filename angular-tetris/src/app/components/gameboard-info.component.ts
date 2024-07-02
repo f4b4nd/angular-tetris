@@ -28,8 +28,6 @@ import { GameService } from '../game.service'
                 />
 
                 <clock-blink 
-                    [time]="currentTime$ | async" 
-                    [blinker]="blinker$ | async"
                     class="font-bold"
                 />
                 
@@ -43,23 +41,5 @@ import { GameService } from '../game.service'
 export class GameboardInfoComponent {
 
     gameService = inject(GameService)
-
-    counter$ = timer(0, 1000)
-    currentTime$: Observable<Date>
-
-    show$ = timer(0, 2000)
-    hide$ = timer(1000, 2000)
-    blinker$: Observable<string>
-
-    constructor () {
-
-        this.currentTime$ = this.counter$.pipe(map(_ => new Date()))
-
-        this.blinker$ = merge(
-            this.show$.pipe(map(_ => 'show')),
-            this.hide$.pipe(map(_ => 'hide')),
-        )
-    
-    }
 
 }

@@ -74,7 +74,7 @@ import { Component, OnInit, inject } from '@angular/core'
                 class="self-center" 
             />
     
-            <div name="game-controls" >
+            <div name="game-controls">
 
                 <div name="commands" class="flex black justify-between px-4 ">
 
