@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, inject } from '@angular/core'
+import { Component, HostListener, Input, inject } from '@angular/core'
 import { GameService } from '../../game.service'
 
 @Component({

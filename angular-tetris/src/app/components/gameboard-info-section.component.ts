@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common'
 import { Component, Input } from '@angular/core'
 
 @Component({
     selector: 'gameboard-info-section',
+    standalone: true,
+    imports: [CommonModule],
     template: `
         <div class="gameboard-info-section__wrapper flex flex-col" [ngClass]=[classNames]>
 

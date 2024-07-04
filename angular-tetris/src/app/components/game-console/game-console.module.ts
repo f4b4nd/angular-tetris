@@ -16,8 +16,8 @@ import { DirectionnalCrossComponent } from '../directionnal-cross.component'
     ],
     imports: [
         GameScreenModule,
-        CommonModule,
         DirectionnalCrossComponent,
+        CommonModule,
     ],
     providers: [
     ],

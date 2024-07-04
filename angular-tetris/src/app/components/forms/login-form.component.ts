@@ -1,12 +1,17 @@
 import { Component, Input, inject} from '@angular/core'
 
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms'
 import { Router } from '@angular/router'
 import { GameService } from '../../game.service'
+import { CommonModule } from '@angular/common'
 
 @Component({
     selector: 'login-form',
-
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+    ],
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit()" [ngClass]=[classNames]>
 

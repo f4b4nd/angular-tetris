@@ -54,16 +54,6 @@ export function checkMatrixesDimensions (M: Matrix, T: Matrix) : boolean {
 
 
 
-export function getMatrixApplyGravity (M: Matrix): Matrix {
-    // Move down "floating" non-empty cells to the bottom of the matrix. 
-
-    let transposedMatrix = getTransposedMatrix(M)
-
-    transposedMatrix = transposedMatrix.map(row => row.sort((a, b) => a <= b ? -1 : 1))
-
-    return getTransposedMatrix(transposedMatrix)
-    
-}
 
 export function containsValueGreaterThanOne(matrix: Matrix): boolean {
     for (let row of matrix) {

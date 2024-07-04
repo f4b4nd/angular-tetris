@@ -27,7 +27,7 @@ import { GameService } from '../game.service'
                     classNames="items-center"
                 />
 
-                <clock-blink 
+                <clock 
                     class="font-bold"
                 />
                 

@@ -1,7 +1,10 @@
+import { NgClass } from '@angular/common'
 import { Component, Input } from '@angular/core'
 
 @Component({
     selector: 'tile',
+    standalone: true,
+    imports: [NgClass],
     styles: `
         [name='tile'] {
 

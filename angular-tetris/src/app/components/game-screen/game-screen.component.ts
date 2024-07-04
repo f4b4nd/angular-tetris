@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { GameService } from '../../game.service'
 
 @Component({

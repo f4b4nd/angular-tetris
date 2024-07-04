@@ -2,7 +2,7 @@ import { Store, createFeature, createReducer, createActionGroup, props, emptyPro
 import { inject } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop';
 import { tetrominoModels } from "./tetromino.model"
-import { getMatrixApplyGravity, getMatrixCleanFullRows, getNumberOfFullRows, containsValueGreaterThanOne} from "./utils/matrix-utils"
+import { getMatrixCleanFullRows, getNumberOfFullRows, containsValueGreaterThanOne} from "./utils/matrix-utils"
 import { operateMatrixes, canOperateMatrixes } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 import { isBottomCollision, isLeftCollision, isRightCollision, onTryMoveTetromino, onTryRotateTetromino } from "./utils/collisions"
@@ -147,9 +147,12 @@ export const gameFeature = createFeature({
     
             const onTryMoveT = onTryMoveTetromino(state.grid, state.currentTetromino, offsetCoordinates)
 
-            if (onTryMoveT.isVerticalFull) {
-                console.log('store-isverticalfull')
-                return {...state, isGameOver: true}
+            if (onTryMoveT.isTopCollision || onTryMoveT.hasCellsCollisionsOnTop) {
+                console.log('isTopCollision')
+                return {
+                    ...state, 
+                    isGameOver: true,
+                }
             }
 
             if (onTryMoveT.hasCellsCollisions) {

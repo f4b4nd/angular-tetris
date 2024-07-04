@@ -33,6 +33,28 @@ export function isLeftCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): bo
 
 }
 
+export function isTopCollision (M: Matrix, tetrominoShape: Matrix, Tcoords: Coordinates): boolean {
+
+    const tetriminoBottom =  tetrominoShape[getNumberOfRows(tetrominoShape) - 1]
+    const matrixTopRow = M[getNumberOfRows(tetrominoShape)]
+    const matrixTop = matrixTopRow.filter((_, idx) => idx >= Tcoords.x && idx < Tcoords.x + getNumberOfColumns(tetrominoShape))
+    
+    const sumRows = matrixTop.map((m, idx) => m + tetriminoBottom[idx])
+
+
+    const isCollision = Tcoords.y <= 0 && sumRows.some(v => v > 1)
+
+    return isCollision
+
+
+}
+
+const a = [[
+    0, 0, 1, 0,
+    0, 0, 1, 0,
+    0, 1, 1, 0,
+    0, 1, 0, 0,
+]]
 
 export function onTryMoveTetromino (grid: Matrix, tetromino: Tetromino, offsetCoordinates: OffsetCoordinates) {
 
@@ -47,9 +69,10 @@ export function onTryMoveTetromino (grid: Matrix, tetromino: Tetromino, offsetCo
     return {
         gridResult: newGrid,
         tetrominoResult: {...tetromino, coordinates: newTetrominoCoordinates},
-        hasCellsCollisions: containsValueGreaterThanOne(newGrid),
+        hasCellsCollisions: newTetrominoCoordinates.y >= 0 && containsValueGreaterThanOne(newGrid),
         allowOperate: canOperateMatrixes(newGrid, tetromino.shape, newTetrominoCoordinates),
-        isVerticalFull: isVerticalFull(newGrid),
+        isTopCollision: isTopCollision(grid, tetromino.shape, tetromino.coordinates),
+        hasCellsCollisionsOnTop:  tetromino.coordinates.y === 0 && containsValueGreaterThanOne(grid),
     }
 
 }

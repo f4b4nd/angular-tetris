@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 
 import { LoginComponent } from './login.component'
-import { LoginFormModule } from '../../components/forms/login-form.module'
+import { LoginFormComponent } from '../../components/forms/login-form.component'
 
 
 
@@ -10,7 +10,7 @@ import { LoginFormModule } from '../../components/forms/login-form.module'
         LoginComponent,
     ],
     imports: [
-        LoginFormModule,
+        LoginFormComponent,
     ],
     providers: [
     ],

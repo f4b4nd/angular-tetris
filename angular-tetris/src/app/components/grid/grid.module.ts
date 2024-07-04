@@ -7,9 +7,9 @@ import { TileComponent } from '../tile.component'
 @NgModule({
     declarations: [
         GridComponent,
-        TileComponent,
     ],
     imports: [
+        TileComponent,
         CommonModule,
     ],
     providers: [],

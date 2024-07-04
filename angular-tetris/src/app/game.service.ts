@@ -32,6 +32,9 @@ export class GameService {
                 this.gameRoutine()
                 this.watchGrid()
             }
+            else {
+                clearInterval(this._interval)
+            }
         })
     }
 
@@ -72,6 +75,7 @@ export class GameService {
     }
     
     watchGrid () {
+
         const hasReachedBottom = this.currentTetromino === null
 
         const fullRowsCounter = getNumberOfFullRows(this.grid)

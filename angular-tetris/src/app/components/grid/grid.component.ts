@@ -36,7 +36,11 @@ import { Component, OnInit, inject, Inject, Input } from '@angular/core'
                     <div class="grid__row flex">
 
                         @for (cell of row; track cell) {
-                            <tile *ngIf="gridSize" [size]="tileSize" [isActive]="cell === 1" />
+                            <tile 
+                                *ngIf="gridSize" 
+                                [size]="tileSize" 
+                                [isActive]="cell === 1" 
+                            />
                         }
 
                     </div>

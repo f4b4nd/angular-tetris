@@ -7,18 +7,18 @@ import { GameboardInfoSectionComponent } from '../gameboard-info-section.compone
 import { ToStringPipe } from '../../pipes/to-string.pipe'
 import { CommonModule } from '@angular/common'
 import { NextTetrominoSectionComponent } from '../next-tetromino-section.component'
-import { ClockBlinkComponent } from '../clock-blink.component'
+import { ClockComponent } from '../clock.component'
 
 @NgModule({
     declarations: [
         ToStringPipe,
         GameScreenComponent,
         GameboardInfoComponent,
-        GameboardInfoSectionComponent,
         NextTetrominoSectionComponent,
-        ClockBlinkComponent,
     ],
     imports: [
+        ClockComponent,
+        GameboardInfoSectionComponent,
         GridModule,
         CommonModule,
     ],

@@ -1,20 +1,23 @@
+import { CommonModule } from "@angular/common";
 import { Component, Input } from "@angular/core";
 import { timer, Observable, map, merge } from "rxjs";
 
 @Component({
-    selector: 'clock-blink',
+    selector: 'clock',
+    standalone: true,
+    imports: [CommonModule], 
     template: `
-        <div class="time-blinker flex justify-center">
+        <div class="clock flex justify-center">
 
-            <div class="time-blinker__body flex justify-between w-11">
+            <div class="clock__body flex justify-between w-11">
 
-                <span class="time-blinker__hour"> {{currentTime$ | async | date:'HH'}} </span>
+                <span class="clock__hour"> {{currentTime$ | async | date:'HH'}} </span>
 
-                <span class="time-blinker__separator">
+                <span class="clock__colon">
                     <span *ngIf="(blinker$ | async) === 'show'" class="colon">:</span>
                 </span>
 
-                <span class="time-blinker__minutes"> {{currentTime$ | async  | date:'mm'}} </span>
+                <span class="clock__minutes"> {{currentTime$ | async  | date:'mm'}} </span>
 
             </div>
 
@@ -22,7 +25,7 @@ import { timer, Observable, map, merge } from "rxjs";
     `,
 })
 
-export class ClockBlinkComponent {
+export class ClockComponent {
  
     counter$ = timer(0, 1000)
     currentTime$: Observable<Date>
