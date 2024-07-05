@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { HomeComponent } from '.'
-import { GameConsoleModule } from '../../components/game-console/game-console.module'
+import { GameConsoleComponent } from '../../components/game-console/game-console.component'
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import { GameConsoleModule } from '../../components/game-console/game-console.mo
     ],
     imports: [
         CommonModule,
-        GameConsoleModule,
+        GameConsoleComponent,
     ],
     providers: [],
       

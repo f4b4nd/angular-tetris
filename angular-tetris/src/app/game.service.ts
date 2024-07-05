@@ -136,7 +136,7 @@ export class GameService {
 
     spawnTetromino () {
         this.store.dispatch(gameActions.setRandomNextTetromino())
-        this.store.dispatch(gameActions.setCurrentTetromino())
+        this.store.dispatch(gameActions.spawnTetrominoOnGrid())
         this.store.dispatch(gameActions.setRandomNextTetromino())
     }
 

@@ -3,7 +3,7 @@ import { inject } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop';
 import { tetrominoModels } from "./tetromino.model"
 import { getMatrixCleanFullRows, getNumberOfFullRows, containsValueGreaterThanOne} from "./utils/matrix-utils"
-import { canOperateMatrixes, addTetrominoToGrid } from "./utils/operateMatrixes"
+import { addTetrominoToGrid } from "./utils/operateMatrixes"
 import { getRotatedMatrix } from "./utils/rotateMatrix"
 import { isBottomCollision, isLeftCollision, isRightCollision, onTryMoveTetromino, onTryRotateTetromino } from "./utils/collisions"
 import { GRID_SIZE, GRID_WIDTH } from "./utils/constants"
@@ -35,7 +35,7 @@ export const gameActions = createActionGroup({
         setPlayerName: props<{ playerName: string|null }>(),
         setGrid: props<{grid: Matrix}>(),
         raiseScore: props<{lines: number}>(),
-        setCurrentTetromino: emptyProps(),
+        spawnTetrominoOnGrid: emptyProps(),
         setIsPaused: props<{isPaused: boolean}>(),
         setIsGameOver: props<{isGameOver: boolean}>(),
     }
@@ -82,7 +82,7 @@ export const gameFeature = createFeature({
             }
         }),
 
-        on(gameActions.setCurrentTetromino, (state) => {
+        on(gameActions.spawnTetrominoOnGrid, (state) => {
 
             if (!state.grid || state.currentTetromino || !state.nextTetromino) return state
 

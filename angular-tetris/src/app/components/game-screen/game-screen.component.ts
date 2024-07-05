@@ -1,8 +1,12 @@
 import { Component, inject } from '@angular/core'
 import { GameService } from '../../game.service'
+import { GridComponent } from '../grid/grid.component'
+import { GameboardInfoComponent } from '../gameboard-info.component'
 
 @Component({
     selector: 'game-screen',
+    standalone: true,
+    imports: [GridComponent, GameboardInfoComponent],
     styles: `
         .game-screen {
             background-color: #9ead86;

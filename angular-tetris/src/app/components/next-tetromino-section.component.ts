@@ -1,7 +1,11 @@
+import { NgClass } from "@angular/common"
 import { Component, Input } from "@angular/core"
+import { GridComponent } from "./grid/grid.component"
 
 @Component({
     selector: 'next-tetromino-section',
+    standalone: true,
+    imports: [GridComponent, NgClass],
     template: `
         <div class="next-box__wrapper" [ngClass]=[classNames]>
 

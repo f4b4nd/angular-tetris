@@ -1,4 +1,3 @@
-import { getTransposedMatrix } from "./rotateMatrix"
 import { getNumberOfColumns, getNumberOfRows } from "./matrix-utils"
 
 export function canOperateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
@@ -6,7 +5,7 @@ export function canOperateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates): 
     const relativeNumberOfRows = getNumberOfRows(T) + Tcoords.y
     const relativeNumberOfColumns = getNumberOfColumns(T) + Tcoords.x
 
-    const canOperateVertical = relativeNumberOfRows >= 0 && relativeNumberOfRows <= getNumberOfRows(M)
+    const canOperateVertical =  relativeNumberOfRows <= getNumberOfRows(M)
     const canOperateHorizontal = relativeNumberOfColumns >= 0 && relativeNumberOfColumns <= getNumberOfColumns(M)
 
     return canOperateVertical && canOperateHorizontal
@@ -22,18 +21,17 @@ export function addTetrominoToGrid (grid: Matrix, tetrominoShape: Tetromino['sha
         throw Error("cannot operate matrixes")
     }
 
-
-    let grid2 = grid.map(row => [...row]);
+    const gridCopy = grid.map(row => [...row]) // deep-copy level 2
 
     tetrominoShape.forEach((row, rowIdx) => {
         row.forEach((cell, colIdx) => {
             const i = tetrominoCoordinates.y + rowIdx
             const j = tetrominoCoordinates.x + colIdx
-            grid2[i][j] = grid[i][j] + cell
+            gridCopy[i][j] += cell
         })
     })
 
-    return grid2
+    return gridCopy
 }
 
 export function removeTetrominoFromGrid (grid: Matrix, tetrominoShape: Tetromino['shape'], tetrominoCoordinates: Tetromino['coordinates']): Matrix {
@@ -44,16 +42,15 @@ export function removeTetrominoFromGrid (grid: Matrix, tetrominoShape: Tetromino
         throw Error("cannot operate matrixes")
     }
 
-
-    let grid2 = grid.map(row => [...row])
+    const gridCopy = grid.map(row => [...row]) // deep-copy level 2
 
     tetrominoShape.forEach((row, rowIdx) => {
         row.forEach((cell, colIdx) => {
             const i = tetrominoCoordinates.y + rowIdx
             const j = tetrominoCoordinates.x + colIdx
-            grid2[i][j] = grid[i][j] - cell
+            gridCopy[i][j] -= cell
         })
     })
 
-    return grid2
+    return gridCopy
 }

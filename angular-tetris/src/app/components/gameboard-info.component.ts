@@ -1,9 +1,16 @@
 import { Component, inject } from '@angular/core'
 import { Observable, map, timer, merge } from 'rxjs'
 import { GameService } from '../game.service'
+import { ClockComponent } from './clock.component'
+import { CommonModule } from '@angular/common'
+import { GameboardInfoSectionComponent } from './gameboard-info-section.component'
+import { NextTetrominoSectionComponent } from './next-tetromino-section.component'
+import { ToStringPipe } from '../pipes/to-string.pipe'
 
 @Component({
     selector: 'gameboard-info',
+    standalone: true,
+    imports: [ClockComponent, GameboardInfoSectionComponent, NextTetrominoSectionComponent, ToStringPipe, CommonModule],
     template: `
         <div class="flex flex-col gap-8 h-full w-14">
         

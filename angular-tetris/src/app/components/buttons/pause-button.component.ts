@@ -3,6 +3,7 @@ import { GameService } from '../../game.service'
 
 @Component({
     selector: 'pause-button',
+    standalone: true,
     styles: `
         .pause-button {
             background-color: black;

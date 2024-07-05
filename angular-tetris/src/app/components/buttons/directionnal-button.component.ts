@@ -1,8 +1,11 @@
 import { Component, HostListener, Input, inject } from '@angular/core'
 import { GameService } from '../../game.service'
+import { NgClass } from '@angular/common'
 
 @Component({
     selector: 'directionnal-button',
+    standalone: true,
+    imports: [NgClass],
     styles: 
         `
         $red: red;

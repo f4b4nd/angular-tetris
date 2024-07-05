@@ -3,6 +3,7 @@ import { GameService } from '../../game.service'
 
 @Component({
     selector: 'power-switch-button',
+    standalone: true,
     styles: 
         `
         $grey: #696969;

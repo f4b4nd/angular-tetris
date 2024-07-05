@@ -1,7 +1,23 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component } from '@angular/core'
+
+import { PowerSwitchButtonComponent } from '../buttons/power-switch-button.component';
+import { PauseButtonComponent } from '../buttons/pause-button.component';
+import { DropButtonComponent } from '../buttons/drop-button.component';
+import { DirectionnalButtonComponent } from '../buttons/directionnal-button.component';
+import { DirectionnalCrossComponent } from '../directionnal-cross.component';
+import { GameScreenComponent } from '../game-screen/game-screen.component';
 
 @Component({
     selector: 'game-console',
+    standalone: true,
+    imports: [
+        GameScreenComponent,
+        DirectionnalCrossComponent,
+        DirectionnalButtonComponent, 
+        DropButtonComponent, 
+        PauseButtonComponent,
+        PowerSwitchButtonComponent,
+    ],
     host: {
         class: 'basis-full',
     },

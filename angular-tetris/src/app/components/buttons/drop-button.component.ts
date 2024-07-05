@@ -4,6 +4,7 @@ import { GameService } from '../../game.service';
 
 @Component({
     selector: 'drop-button',
+    standalone: true,
     styles: `
         .drop-button {
             background-color: grey;
