@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+import { LoginFormComponent } from '../components/forms/login-form.component';
 
 
 @Component({
+    standalone: true,
+    imports: [LoginFormComponent],
     template: `
         <div class="flex items-center h-full">
 
