@@ -1,10 +1,9 @@
-import { NgClass, NgIf } from '@angular/common'
 import { Component, Input } from '@angular/core'
 
 @Component({
     selector: 'screen-info-title',
     standalone: true,
-    imports: [NgIf, NgClass],
+    imports: [],
     template: `
         <div class="screen-info__title font-bold">  {{title}}  </div>
     `,

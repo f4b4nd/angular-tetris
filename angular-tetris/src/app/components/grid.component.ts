@@ -47,7 +47,8 @@ import { NgClass, NgIf } from '@angular/common'
                             <tile 
                                 *ngIf="gridSize" 
                                 [size]="tileSize" 
-                                [isActive]="cell === 1" 
+                                [isActive]="cell === 1"
+                                [opacity]="tileOpacity"
                             />
                         }
 
@@ -66,6 +67,7 @@ export class GridComponent {
     @Input() grid?: Matrix
     @Input() gridSize?: 'grid-sm' | 'grid-lg'
     @Input() tileSize?: 'tile-sm' | 'tile-lg'
+    @Input() tileOpacity?: string
     @Input() classNames: string = ''
 
 }

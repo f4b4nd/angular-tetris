@@ -21,7 +21,7 @@ import { Component, Input } from '@angular/core'
         }
     `,
     template: `
-        <div name="tile__wrapper" class="border border-black">
+        <div name="tile__wrapper" [ngClass]="opacity" class="border border-black">
 
             <div 
                 name="tile" 
@@ -39,5 +39,6 @@ export class TileComponent {
     
     @Input() isActive?: boolean
     @Input() size?: 'tile-sm' | 'tile-lg'
+    @Input() opacity?: string
 
 }

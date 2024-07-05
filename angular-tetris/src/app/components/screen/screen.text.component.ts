@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core'
 
 @Component({
-    selector: 'screen-info-text',
+    selector: 'screen-grid-text',
     standalone: true,
     imports: [],
     template: `
-        <div class="screen-info__text"> {{text}} </div>
+        <div class="screen__text font-bold" > {{text}} </div>
     `,
 })
 
 
-export class ScreenInfoTextComponent {
+export class ScreenGridTextComponent {
     @Input() text?: string
 }
