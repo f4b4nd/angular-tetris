@@ -13,45 +13,47 @@ export function canOperateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates): 
 
 }
 
-function getIndexesFromCoords (coords: {x: number, y: number})  {
-    return {
-        colIndex: coords.x,
-        rowIndex: coords.y,
-    }
-}
 
-export function operateMatrixes(M: Matrix, T: Matrix, Tcoords: Coordinates, operation: '+' | '-'): Matrix {
-
-    const allowOperate = canOperateMatrixes(M, T, Tcoords)
+export function addTetrominoToGrid (grid: Matrix, tetrominoShape: Tetromino['shape'], tetrominoCoordinates: Tetromino['coordinates']): Matrix {
+    
+    const allowOperate = canOperateMatrixes(grid, tetrominoShape, tetrominoCoordinates)
 
     if (!allowOperate) {
         throw Error("cannot operate matrixes")
     }
 
 
-    return M.map((row, i) => (
-        row.map((_, j) => {
-            
-            const tetriminoIndexes = getIndexesFromCoords ({x: j - Tcoords.x, y: i - Tcoords.y})
+    let grid2 = grid.map(row => [...row]);
 
-            const isWithinRows = tetriminoIndexes.rowIndex >= 0 && tetriminoIndexes.rowIndex < T.length
-
-            const isWithinColumns = tetriminoIndexes.colIndex >= 0 && tetriminoIndexes.colIndex < T[tetriminoIndexes.rowIndex]?.length
-
-            const coordinatesAreMatching = isWithinRows && isWithinColumns 
-            
-            if (!coordinatesAreMatching) return M[i][j]
-            
-            switch(operation) {
-                case '+':
-                    return M[i][j] + T[tetriminoIndexes.rowIndex][tetriminoIndexes.colIndex]
-                case '-':
-                    return M[i][j] - T[tetriminoIndexes.rowIndex][tetriminoIndexes.colIndex]
-                default:
-                    throw Error('operation is not defined')
-            }
-           
+    tetrominoShape.forEach((row, rowIdx) => {
+        row.forEach((cell, colIdx) => {
+            const i = tetrominoCoordinates.y + rowIdx
+            const j = tetrominoCoordinates.x + colIdx
+            grid2[i][j] = grid[i][j] + cell
         })
-    ))
+    })
 
+    return grid2
+}
+
+export function removeTetrominoFromGrid (grid: Matrix, tetrominoShape: Tetromino['shape'], tetrominoCoordinates: Tetromino['coordinates']): Matrix {
+
+    const allowOperate = canOperateMatrixes(grid, tetrominoShape, tetrominoCoordinates)
+
+    if (!allowOperate) {
+        throw Error("cannot operate matrixes")
+    }
+
+
+    let grid2 = grid.map(row => [...row])
+
+    tetrominoShape.forEach((row, rowIdx) => {
+        row.forEach((cell, colIdx) => {
+            const i = tetrominoCoordinates.y + rowIdx
+            const j = tetrominoCoordinates.x + colIdx
+            grid2[i][j] = grid[i][j] - cell
+        })
+    })
+
+    return grid2
 }

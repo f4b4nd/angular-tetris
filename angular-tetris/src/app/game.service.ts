@@ -1,7 +1,7 @@
 import { Injectable, computed, effect, inject } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { gameFeature, gameActions} from "./game.store";
-import { getNumberOfFullRows, isVerticalFull } from "./utils/matrix-utils";
+import { getNumberOfFullRows } from "./utils/matrix-utils";
 import { asapScheduler } from 'rxjs';
 
 @Injectable({

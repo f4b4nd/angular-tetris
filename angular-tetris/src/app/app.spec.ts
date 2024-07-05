@@ -1,39 +1,8 @@
 import { isVerticalFull } from "./utils/matrix-utils";
-import { operateMatrixes } from "./utils/operateMatrixes";
+import { addTetrominoToGrid, removeTetrominoFromGrid } from "./utils/operateMatrixes";
 import { getTransposedMatrix, getReversedColumnsMatrix, getReversedRowsMatrix } from "./utils/rotateMatrix";
 
 describe('Pure function', () => {
-
-  it('should sum two matrices M and T from a Tcoords origin, with expected result', () => {
-    const M: Matrix = [
-      [0, 0, 1, 0],
-      [0, 0, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ]
-    const T: Matrix = [
-      [1, 0],
-      [1, 0],
-      [1, 1],
-    ]
-    const Tcoords = { x: 1, y: 2 }
-
-    const res: Matrix = [
-      [0, 0, 1, 0],
-      [0, 0, 1, 0],
-      [0, 1, 0, 0],
-      [0, 1, 0, 0],
-      [0, 1, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ]
-
-    expect(operateMatrixes(M, T, Tcoords, '+') as any).toEqual(res)
-
-  });
 
   it('transpose matrix M with expected result', () => {
     const M = [
@@ -97,6 +66,84 @@ describe('Pure function', () => {
 
     expect(isVerticalFull(M1) as any).toEqual(true)
     expect(isVerticalFull(M2) as any).toEqual(false)
+
+  });
+
+
+  it('should add tetromino to the grid taking account of tetromino position', () => {
+    const grid1 = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [1, 0, 0, 0],
+      [0, 1, 0, 0],
+    ]
+    const shape1 = [
+      [1, 0],
+      [1, 0],
+      [1, 1],
+    ]
+    const coords1 = {x: 2, y: 1}
+    const res1 = [
+      [0, 0, 0, 0],
+      [0, 0, 1, 0],
+      [1, 0, 1, 0],
+      [0, 1, 1, 1],
+    ]
+    /*------------*/
+    const grid2 = [
+      [0, 0, 1, 0],
+      [0, 0, 1, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ]
+    const shape2 = [
+      [1, 0],
+      [1, 0],
+      [1, 1],
+    ]
+    const coords2 = { x: 1, y: 2 }
+
+    const res2 = [
+      [0, 0, 1, 0],
+      [0, 0, 1, 0],
+      [0, 1, 0, 0],
+      [0, 1, 0, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ]
+
+    expect(addTetrominoToGrid(grid1, shape1, coords1)).toEqual(res1);
+    expect(addTetrominoToGrid(grid2, shape2, coords2)).toEqual(res2);
+
+
+  });
+
+
+  it('should remove tetromino to the grid taking account of tetromino position', () => {
+    const grid1 = [
+      [0, 0, 0, 0],
+      [0, 0, 1, 0],
+      [1, 0, 1, 0],
+      [0, 1, 1, 1],
+    ]
+    const shape1 = [
+      [1, 0],
+      [1, 0],
+      [1, 1],
+    ]
+    const coords1 = {x: 2, y: 1}
+    const res1 = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [1, 0, 0, 0],
+      [0, 1, 0, 0],
+    ]
+
+    expect(removeTetrominoFromGrid(grid1, shape1, coords1)).toEqual(res1);
 
   });
 

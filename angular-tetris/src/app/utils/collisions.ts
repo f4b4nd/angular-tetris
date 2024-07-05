@@ -1,6 +1,5 @@
 import { checkMatrixesDimensions, getNumberOfRows, getNumberOfColumns, containsValueGreaterThanOne, isVerticalFull } from "./matrix-utils"
-import { canOperateMatrixes, operateMatrixes } from "./operateMatrixes"
-
+import { canOperateMatrixes, addTetrominoToGrid, removeTetrominoFromGrid } from "./operateMatrixes"
 export function isBottomCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
 
     if (!checkMatrixesDimensions(M, T)) return true
@@ -41,7 +40,6 @@ export function isTopCollision (M: Matrix, tetrominoShape: Matrix, Tcoords: Coor
     
     const sumRows = matrixTop.map((m, idx) => m + tetriminoBottom[idx])
 
-
     const isCollision = Tcoords.y <= 0 && sumRows.some(v => v > 1)
 
     return isCollision
@@ -63,13 +61,13 @@ export function onTryMoveTetromino (grid: Matrix, tetromino: Tetromino, offsetCo
         y: tetromino.coordinates.y + offsetCoordinates.Yoffset,
     }
 
-    const gridWithoutTetromino = operateMatrixes(grid, tetromino.shape, tetromino.coordinates, '-')
-    const newGrid = operateMatrixes(gridWithoutTetromino, tetromino.shape, newTetrominoCoordinates, '+')
+    const gridWithoutTetromino = removeTetrominoFromGrid(grid, tetromino.shape, tetromino.coordinates)
+    const newGrid = addTetrominoToGrid(gridWithoutTetromino, tetromino.shape, newTetrominoCoordinates)
 
     return {
         gridResult: newGrid,
         tetrominoResult: {...tetromino, coordinates: newTetrominoCoordinates},
-        hasCellsCollisions: newTetrominoCoordinates.y >= 0 && containsValueGreaterThanOne(newGrid),
+        hasCellsCollisions: newTetrominoCoordinates.y > 0 && containsValueGreaterThanOne(newGrid),
         allowOperate: canOperateMatrixes(newGrid, tetromino.shape, newTetrominoCoordinates),
         isTopCollision: isTopCollision(grid, tetromino.shape, tetromino.coordinates),
         hasCellsCollisionsOnTop:  tetromino.coordinates.y === 0 && containsValueGreaterThanOne(grid),
@@ -80,14 +78,14 @@ export function onTryMoveTetromino (grid: Matrix, tetromino: Tetromino, offsetCo
 
 export function onTryRotateTetromino (grid: Matrix, tetromino: Tetromino, rotatedShape: Tetromino['shape']) {
 
-    const gridWithoutTetromino = operateMatrixes(grid, tetromino.shape, tetromino.coordinates, '-')
+    const gridWithoutTetromino = removeTetrominoFromGrid(grid, tetromino.shape, tetromino.coordinates)
     
     const allowOperate = canOperateMatrixes(gridWithoutTetromino, rotatedShape, tetromino.coordinates)
 
     let newGrid = grid
 
     if (allowOperate) {
-        newGrid = operateMatrixes(gridWithoutTetromino, rotatedShape, tetromino.coordinates, '+')
+        newGrid = addTetrominoToGrid(gridWithoutTetromino, rotatedShape, tetromino.coordinates)
     }
 
     return {
