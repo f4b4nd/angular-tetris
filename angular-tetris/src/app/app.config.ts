@@ -6,7 +6,7 @@ import { DatePipe, registerLocaleData } from '@angular/common'
 import { provideState, provideStore } from '@ngrx/store'
 
 import { routes } from './app.routes'
-import { gameFeature } from './game.store'
+import { gameFeature } from './state/game.store'
 
 
 registerLocaleData(fr)

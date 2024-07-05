@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core'
 import { Observable, map, timer, merge } from 'rxjs'
-import { GameService } from '../game.service'
+import { GameService } from '../state/game.service'
 import { ClockComponent } from './clock.component'
 import { CommonModule } from '@angular/common'
 import { GameboardInfoSectionComponent } from './gameboard-info-section.component'

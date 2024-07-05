@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, inject } from '@angular/core'
-import { GameService } from '../../game.service'
+import { GameService } from '../../state/game.service'
 import { NgClass } from '@angular/common'
 
 @Component({

@@ -1,8 +1,8 @@
-import { Injectable, computed, effect, inject } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { gameFeature, gameActions} from "./game.store";
-import { getNumberOfFullRows } from "./utils/matrix-utils";
-import { asapScheduler } from 'rxjs';
+import { Injectable, computed, effect, inject } from "@angular/core"
+import { Store } from "@ngrx/store"
+import { asapScheduler } from 'rxjs'
+import { gameFeature, gameActions} from "./game.store"
+import { getNumberOfFullRows } from "../utils/matrix-utils"
 
 @Injectable({
     providedIn: 'root'

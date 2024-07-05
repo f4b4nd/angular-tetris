@@ -1,5 +1,5 @@
 import { Injectable, Signal, computed, effect, inject } from "@angular/core"
-import { GameService } from "./game.service"
+import { GameService } from "../state/game.service"
 
 @Injectable({
     providedIn: 'root',

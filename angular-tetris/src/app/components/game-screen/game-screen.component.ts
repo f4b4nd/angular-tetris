@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core'
-import { GameService } from '../../game.service'
+import { GameService } from '../../state/game.service'
 import { GridComponent } from '../grid/grid.component'
 import { GameboardInfoComponent } from '../gameboard-info.component'
 

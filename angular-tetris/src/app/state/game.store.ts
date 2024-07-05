@@ -1,12 +1,10 @@
-import { Store, createFeature, createReducer, createActionGroup, props, emptyProps, on } from "@ngrx/store"
-import { inject } from '@angular/core'
-import { toObservable } from '@angular/core/rxjs-interop';
-import { tetrominoModels } from "./tetromino.model"
-import { getMatrixCleanFullRows, getNumberOfFullRows, containsValueGreaterThanOne} from "./utils/matrix-utils"
-import { addTetrominoToGrid } from "./utils/operateMatrixes"
-import { getRotatedMatrix } from "./utils/rotateMatrix"
-import { isBottomCollision, isLeftCollision, isRightCollision, onTryMoveTetromino, onTryRotateTetromino } from "./utils/collisions"
-import { GRID_SIZE, GRID_WIDTH } from "./utils/constants"
+import { createFeature, createReducer, createActionGroup, props, emptyProps, on } from "@ngrx/store"
+import { tetrominoModels } from "../models/tetromino.model"
+import { getMatrixCleanFullRows, getNumberOfFullRows, containsValueGreaterThanOne} from "../utils/matrix-utils"
+import { addTetrominoToGrid } from "../utils/operateMatrixes"
+import { getRotatedMatrix } from "../utils/rotateMatrix"
+import { isBottomCollision, isLeftCollision, isRightCollision, onTryMoveTetromino, onTryRotateTetromino } from "../utils/collisions"
+import { GRID_SIZE, GRID_WIDTH } from "../utils/constants"
 
 
 export const initialGameState: GameState = {
