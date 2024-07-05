@@ -1,20 +1,20 @@
 import { Component, inject } from '@angular/core'
 import { GameService } from '../../state/game.service'
-import { GridComponent } from '../grid/grid.component'
-import { GameboardInfoComponent } from '../gameboard-info.component'
+import { GridComponent } from '../grid.component'
+import { ScreenInfoComponent } from './screen.info.component'
 
 @Component({
-    selector: 'game-screen',
+    selector: 'screen',
     standalone: true,
-    imports: [GridComponent, GameboardInfoComponent],
+    imports: [GridComponent, ScreenInfoComponent],
     styles: `
-        .game-screen {
+        .screen {
             background-color: #9ead86;
         }
     `,
     template: `
         <div 
-            class="game-screen border border-black inline-flex mx-auto justify-between h-full"
+            class="screen border border-black inline-flex mx-auto justify-between h-full"
         >
 
             <grid
@@ -25,7 +25,7 @@ import { GameboardInfoComponent } from '../gameboard-info.component'
                 classNames="border-2 border-black p-0.5"
             />
 
-            <gameboard-info 
+            <screen-info 
                 class="p-2"
             />
 
@@ -34,7 +34,7 @@ import { GameboardInfoComponent } from '../gameboard-info.component'
 })
 
 
-export class GameScreenComponent {
+export class ScreenComponent {
 
     gameService = inject(GameService)
 

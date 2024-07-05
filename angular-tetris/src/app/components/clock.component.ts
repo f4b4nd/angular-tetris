@@ -1,11 +1,11 @@
-import { CommonModule } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import { AsyncPipe, DatePipe, NgIf } from "@angular/common";
+import { Component } from "@angular/core";
 import { timer, Observable, map, merge } from "rxjs";
 
 @Component({
     selector: 'clock',
     standalone: true,
-    imports: [CommonModule], 
+    imports: [AsyncPipe, DatePipe, NgIf], 
     template: `
         <div class="clock flex justify-center">
 

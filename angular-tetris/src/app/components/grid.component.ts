@@ -1,13 +1,14 @@
-import { Component, OnInit, inject, Inject, Input } from '@angular/core'
-import { TileComponent } from '../tile.component'
-import { CommonModule } from '@angular/common'
+import { Component, Input } from '@angular/core'
+import { TileComponent } from './tile.component'
+import { NgClass, NgIf } from '@angular/common'
 
 @Component({
     selector: 'grid',
     standalone: true,
     imports: [
         TileComponent,
-        CommonModule,
+        NgClass, 
+        NgIf,
     ],
     styles: `
         .grid-sm {

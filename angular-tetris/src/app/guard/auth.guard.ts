@@ -15,7 +15,6 @@ export const AuthGuard: CanActivateFn = (route, state): Observable<boolean|UrlTr
             setTimeout(() => {
                 router.navigate(['/login'])
             }, 800)
-            
         }
     })
 

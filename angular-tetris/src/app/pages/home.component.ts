@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
-import { GameConsoleComponent } from '../components/game-console/game-console.component'
+import { GameConsoleComponent } from '../components/game-console.component'
 
 
 @Component({
