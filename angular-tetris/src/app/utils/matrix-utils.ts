@@ -65,14 +65,3 @@ export function containsValueGreaterThanOne(matrix: Matrix): boolean {
 }
 
 
-export function isVerticalFull (M: Matrix): boolean {
-
-    const transposedMatrix = getTransposedMatrix(M)
-
-    const numberOfFullColumns = transposedMatrix.reduce((acc, curr) => (
-        areAllValuesEqualOne(curr) ? acc+1 : acc
-    ), 0)
-
-    return numberOfFullColumns > 0
-}
-

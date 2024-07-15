@@ -1,4 +1,4 @@
-import { checkMatrixesDimensions, getNumberOfRows, getNumberOfColumns, containsValueGreaterThanOne, isVerticalFull } from "./matrix-utils"
+import { checkMatrixesDimensions, getNumberOfRows, getNumberOfColumns, containsValueGreaterThanOne } from "./matrix-utils"
 import { canOperateMatrixes, addTetrominoToGrid, removeTetrominoFromGrid } from "./operateMatrixes"
 export function isBottomCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
 
@@ -47,12 +47,6 @@ export function isTopCollision (M: Matrix, tetrominoShape: Matrix, Tcoords: Coor
 
 }
 
-const a = [[
-    0, 0, 1, 0,
-    0, 0, 1, 0,
-    0, 1, 1, 0,
-    0, 1, 0, 0,
-]]
 
 export function onTryMoveTetromino (grid: Matrix, tetromino: Tetromino, offsetCoordinates: OffsetCoordinates) {
 

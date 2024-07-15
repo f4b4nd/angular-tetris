@@ -1,4 +1,3 @@
-import { isVerticalFull } from "./utils/matrix-utils";
 import { addTetrominoToGrid, removeTetrominoFromGrid } from "./utils/operateMatrixes";
 import { getTransposedMatrix, getReversedColumnsMatrix, getReversedRowsMatrix } from "./utils/rotateMatrix";
 
@@ -52,22 +51,6 @@ describe('Pure function', () => {
 
   });
   
-  it('should return if the matrix is has at least 1 column full', () => {
-    const M1 = [
-      [1, 0, 1, 1],
-      [1, 0, 1, 1],
-      [1, 1, 0, 0],
-    ]
-    const M2 = [
-      [0, 0, 1, 1],
-      [0, 0, 1, 1],
-      [0, 1, 0, 0],
-    ]
-
-    expect(isVerticalFull(M1) as any).toEqual(true)
-    expect(isVerticalFull(M2) as any).toEqual(false)
-
-  });
 
 
   it('should add tetromino to the grid taking account of tetromino position', () => {

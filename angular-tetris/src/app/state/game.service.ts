@@ -147,7 +147,7 @@ export class GameService {
 
     gameRoutine () {
 
-        const defaultIntervalSpeed = 800
+        const defaultIntervalSpeed = 700
 
         clearInterval(this._interval)
 

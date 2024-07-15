@@ -26,7 +26,7 @@ App is now locally running on  [http://localhost:4200](http://localhost:4200)
 
 ## 2. Hosting: github pages
 
-This application is deployed and is available here : [angular-tetris](https://f4b4nd.github.io/angular-tetris/)
+This application is deployed and is available here : [f4b4nd/angular-tetris](https://f4b4nd.github.io/angular-tetris/)
 
 
 How is it deployed ?

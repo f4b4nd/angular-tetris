@@ -39,9 +39,9 @@ export function getReversedRowsMatrix (matrix: Matrix): Matrix {
 
     if (!(matrix.length > 0)) return matrix
 
-    return matrix.map((_, i, T) => {
-        return T[T.length - 1 - i]
-    })
+    return matrix.map((_, i, T) => (
+        T[T.length - 1 - i]
+    ))
 }
 
 export function getReversedColumnsMatrix (matrix: Matrix): Matrix {
