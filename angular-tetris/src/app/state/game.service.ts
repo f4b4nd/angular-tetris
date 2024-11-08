@@ -20,7 +20,6 @@ export class GameService {
     private isGameOver$$ = this.store.selectSignal(gameFeature.selectIsGameOver)
 
     private score$$ = this.store.selectSignal(gameFeature.selectScore)
-    public playerName$$ = this.store.selectSignal(gameFeature.selectPlayerName)
     
     private isLocked$$ = computed(() => this.isPaused$$() === true || this.isGameOver$$() === true)
 
@@ -62,10 +61,6 @@ export class GameService {
         return this.nextTetromino$$()
     }
 
-    get playerName () {
-        return this.playerName$$()
-    }
-
     get score () {
         return this.score$$()
     }
@@ -93,17 +88,9 @@ export class GameService {
     }
 
 
-    logout () {
-        this.setPlayerName(null)
-    }
-
     raiseScore (lines: number) {
         // wrap in a scheduler to avoid NG0600
         asapScheduler.schedule(() => this.store.dispatch(gameActions.raiseScore({lines})))
-    }
-
-    setPlayerName (playerName: string|null) {
-        this.store.dispatch(gameActions.setPlayerName({playerName}))
     }
 
     dropdownTetromino () {

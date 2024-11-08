@@ -39,11 +39,6 @@ import { GridComponent } from '../grid.component'
             
 
             <div class="align-self-end mt-auto">
-
-                <screen-info-group>
-                    <screen-info-title [title]="(gameService.playerName | uppercase) || ''" />
-                </screen-info-group>
-
  
                 <clock 
                     class="font-bold"

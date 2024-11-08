@@ -24,7 +24,6 @@ type GameState = {
     isGameOver: boolean,
     isPaused: boolean,
     score: number,
-    playerName: string | null,
     grid: Matrix,
     currentTetromino: Tetromino|null,
     nextTetromino: Tetromino | null,
