@@ -33,7 +33,7 @@ import { GridComponent } from '../grid.component'
                 <grid 
                     gridSize="grid-sm" 
                     tileSize="tile-sm" 
-                    [grid]="gameService.nextTetromino?.baseShape || emptyTetrominoShape"
+                    [grid]="gameService.nextTetromino?.previewShape || emptyTetrominoShape"
                 />
             </screen-info-group>
             

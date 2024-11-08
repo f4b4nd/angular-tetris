@@ -12,7 +12,7 @@ const initialShapes = {
     'Z':  [[0, 1], [1, 1], [1, 0]],
 }
 
-const baseShapes = {
+const previewShapes = {
     'I':  [[0, 0, 0, 0], [1, 1, 1, 1]],
     'J':  [[1, 1, 1, 0], [0, 0, 1, 0]],
     'L':  [[0, 0, 1, 0], [1, 1, 1, 0]],
@@ -26,43 +26,43 @@ export const tetrominoModels: Array<Tetromino> = [
     {
         type: 'I',
         shape: initialShapes['I'],
-        baseShape: baseShapes['I'],
+        previewShape: previewShapes['I'],
         coordinates: getInitialCoordinates(initialShapes['I']),
     },
     {
         type: 'J',
         shape: initialShapes['J'],
-        baseShape: baseShapes['J'],
+        previewShape: previewShapes['J'],
         coordinates: getInitialCoordinates(initialShapes['J']),
     },
     {
         type: 'L',
         shape: initialShapes['L'],
-        baseShape: baseShapes['L'],
+        previewShape: previewShapes['L'],
         coordinates: getInitialCoordinates(initialShapes['L']),
     },
     {
         type: 'O',
         shape: initialShapes['O'],
-        baseShape: baseShapes['O'],
+        previewShape: previewShapes['O'],
         coordinates: getInitialCoordinates(initialShapes['O']),
     },
     {
         type: 'S',
         shape: initialShapes['S'],
-        baseShape: baseShapes['S'],
+        previewShape: previewShapes['S'],
         coordinates: getInitialCoordinates(initialShapes['S']),
     },
     {
         type: 'T',
         shape: initialShapes['T'],
-        baseShape: baseShapes['T'],
+        previewShape: previewShapes['T'],
         coordinates: getInitialCoordinates(initialShapes['T']),
     },
     {
         type: 'Z',
         shape: initialShapes['Z'],
-        baseShape: baseShapes['Z'],
+        previewShape: previewShapes['Z'],
         coordinates: getInitialCoordinates(initialShapes['Z']),
     },
 ]

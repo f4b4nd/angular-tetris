@@ -1,5 +1,6 @@
 import { checkMatrixesDimensions, getNumberOfRows, getNumberOfColumns, containsValueGreaterThanOne } from "./matrix-utils"
 import { canOperateMatrixes, addTetrominoToGrid, removeTetrominoFromGrid } from "./operateMatrixes"
+
 export function isBottomCollision (M: Matrix, T: Matrix, Tcoords: Coordinates): boolean {
 
     if (!checkMatrixesDimensions(M, T)) return true

@@ -8,8 +8,6 @@ RUN apk update && apk upgrade --no-cache
 
 RUN apk add chromium
 
-RUN npm install -g @angular/cli@17.3.8
-
 RUN mkdir -p $WORKDIR
 
 WORKDIR $WORKDIR

@@ -35,6 +35,7 @@ import { NgIf } from '@angular/common'
                 class="absolute top-[44%] left-[23%] text-2xl "
                 text="PAUSE" 
             />
+
             <screen-grid-text 
                 *ngIf="gameService.isGameOver" 
                 class="absolute top-[44%] left-[10%] text-xl"

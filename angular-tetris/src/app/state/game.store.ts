@@ -4,7 +4,7 @@ import { getMatrixCleanFullRows, getNumberOfFullRows, containsValueGreaterThanOn
 import { addTetrominoToGrid } from "../utils/operateMatrixes"
 import { getRotatedMatrix } from "../utils/rotateMatrix"
 import { isBottomCollision, isLeftCollision, isRightCollision, onTryMoveTetromino, onTryRotateTetromino } from "../utils/collisions"
-import { GRID_SIZE, GRID_WIDTH } from "../utils/constants"
+import { GRID_HEIGHT, GRID_WIDTH } from "../utils/constants"
 
 
 export const initialGameState: GameState = {
@@ -13,7 +13,7 @@ export const initialGameState: GameState = {
     score: 0,
     playerName: null,
 
-    grid: Array(GRID_SIZE).fill(Array(GRID_WIDTH).fill(0)),
+    grid: Array(GRID_HEIGHT).fill(Array(GRID_WIDTH).fill(0)),
     currentTetromino: null,
     nextTetromino: null,
 }

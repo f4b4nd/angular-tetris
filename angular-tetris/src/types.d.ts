@@ -14,7 +14,7 @@ type OffsetCoordinates = {
 type Tetromino = {
     type: 'I'|'J'|'L'|'O'|'S'|'T'|'Z',
     shape: Matrix,
-    baseShape: Matrix,
+    previewShape: Matrix,
     coordinates: Coordinates,
 }
 

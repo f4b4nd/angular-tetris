@@ -8,6 +8,6 @@ cd $WORKDIR
 
 if [ ! -d "${app_name}" ]; then 
     echo "creating angular application ${app_name}..."
-    ng new ${app_name}
+    npx ng new ${app_name}
 fi
 

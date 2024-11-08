@@ -13,5 +13,5 @@ if [ ! -d "node_modules" ]; then
 fi
 
 
-ng serve --host 0.0.0.0
+npx ng serve --host 0.0.0.0
 

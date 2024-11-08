@@ -1,4 +1,3 @@
-import { getTransposedMatrix } from "./rotateMatrix"
 import { GRID_WIDTH } from "./constants"
 
 export function getNumberOfRows (matrix: Matrix): number {
@@ -18,8 +17,8 @@ export function getNumberOfColumns (matrix: Matrix): number {
 }
 
 export function getNumberOfFullRows (matrix: Matrix): number {
-    return matrix.reduce((acc, curr) => {
-        return areAllValuesEqualOne(curr) ? acc +=1 : acc
+    return matrix.reduce((acc, currentRow) => {
+        return areAllValuesEqualOne(currentRow) ? acc + 1 : acc
     }, 0)
 }
 
